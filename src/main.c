@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2022/12/29 17:16:27 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:26:55 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int32_t	main(void)
 	mlx_t	*mlx;
 
 	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	
 	if (!mlx)
 		exit(EXIT_FAILURE);
 	g_img = mlx_new_image(mlx, 128, 128);
