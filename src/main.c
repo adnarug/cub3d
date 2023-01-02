@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 15:09:11 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:38:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 
 	if (args_check(&game, argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	init_all(&game);
+	init_map(&game);
 	// launch(&game, argv);
 	// mlx_hook(game.window, 2, 0, input, &game);
 	// mlx_loop_hook(game.mlx, update, &game);

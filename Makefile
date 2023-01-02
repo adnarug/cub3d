@@ -1,7 +1,7 @@
 NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
-FLAGS = -Wall -Wextra -fsanitize=address #-Werror //Werror to uncomment
+FLAGS = -Wall -Wextra #-fsanitize=address #-Werror //Werror to uncomment
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -framework OpenGL -framework AppKit
 LIBFT = libft/
@@ -11,7 +11,9 @@ SRC_FILES = utils/args_check \
 			utils/get_next_line_utils \
 			utils/errors \
 			utils/tools \
-			initializer/initializer \
+			map_parse/init_map \
+			map_parse/extract_tex\
+			map_parse/extract_map \
 			main
 DEF_COLOR = \033[0;80m
 GREEN = \033[0;92m
