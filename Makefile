@@ -1,7 +1,7 @@
 NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
-FLAGS = -Wall -Wextra #-fsanitize=address #-Werror //Werror to uncomment
+FLAGS = -Wall -Wextra -g -fsanitize=address #-Werror 
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -framework OpenGL -framework AppKit
 LIBFT = libft/
@@ -14,6 +14,7 @@ SRC_FILES = utils/args_check \
 			map_parse/init_map \
 			map_parse/extract_tex\
 			map_parse/extract_map \
+			map_parse/check_map \
 			main
 DEF_COLOR = \033[0;80m
 GREEN = \033[0;92m
@@ -48,6 +49,10 @@ fclean: clean
 	@rm -rf make $(NAME)
 	@rm -rf cub3D
 	@make fclean -C $(LIBFT)
+
+run:
+	@make
+	@./cub3D maps/basic.cub
 
 re: fclean all
 

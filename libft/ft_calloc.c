@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnieves <fnieves@42heilbronn.de>           +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:19:34 by pguranda          #+#    #+#             */
-/*   Updated: 2022/10/19 19:08:30 by fnieves          ###   ########.fr       */
+/*   Updated: 2023/01/04 17:36:58 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"libft.h"
-
-/* He cambiad esta fincion para no
-tener problemas desde casa*/
 
 void	*ft_calloc(size_t count, size_t size)
 {

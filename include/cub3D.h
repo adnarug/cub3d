@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 17:04:17 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:44:04 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int		init_all(t_game *game);
 void	print_2d_array(char **array);
 int		init_map(t_game *game);
 char	*extract_tex(t_game *game);
+int		map_isvalid(t_game *game);
 
 //Misc
 void	error(char *str);
+int		ft_line_count(char **array);
 
 #endif 

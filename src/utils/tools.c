@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 16:47:44 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:43:51 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,19 @@ void	print_2d_array(char **array)
 	i = 0;
 	while (array[i])
 	{
-		printf("%s", array[i]);
+		printf("%s\n", array[i]);
 		i++;
 	}
+}
+
+int	ft_line_count(char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		i++;
+	}
+	return (i);
 }

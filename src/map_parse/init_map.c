@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 17:33:06 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:44:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**read_map(char *file, int *line_count)
 	while (num_lines > 0)
 	{
 		map[i] = get_next_line(fd);
-		if (map[i] == NULL || **map == ' ')
+		if (map[i] == NULL)
 			error("Invalid map - extra newline\n");
 		num_lines--;
 		i++;
@@ -87,10 +87,49 @@ static char	**read_map(char *file, int *line_count)
 	return (map);
 }
 
+int	ft_ismapline(char *s)
+{
+	int	i;
+	char c;
+	char *trimmed;
+
+	i = 0;
+	if (s == NULL || *s == '\n')
+		return (0);
+	while (s[i] != '\0' && s[i] != '\n')
+	{
+		c = s[i];
+		if (s[i] == '1' || s[i] == ' ')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	find_map_start(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i] != NULL)
+	{
+		if (ft_ismapline(map[i]) == 1)
+		{
+			printf("check\n");
+			return (i);
+		}
+		else
+			i++;
+	}
+	return (0);
+}
+
 int	init_map(t_game *game)
 {
 	char	**map;
 	int		line_count;
+	int		map_start_line;
 
 	line_count = 1;
 	map = read_map(game->map_path, &line_count);
@@ -98,8 +137,21 @@ int	init_map(t_game *game)
 		return (EXIT_FAILURE);
 	game->map = map;
 	game->tex = malloc(sizeof(t_textures));
-	print_2d_array(game->map);
-	printf("%s\n", extract_tex(game));
+	if (game->tex == NULL)
+		return (NULL);
+	// print_2d_array(game->map);
+	map_start_line = find_map_start(game->map);
+	extract_tex(game);
+
+	game->only_map = game->map + map_start_line;
+	game->only_map_lines = ft_line_count(game->only_map);
+	printf("line count: %d\n", game->only_map_lines);
 	// system("leaks cub3D");
+	if (map_isvalid(game) == EXIT_FAILURE)
+	{
+		printf("Map is valid\n");
+	}
+	
+	print_2d_array(game->only_map);
 	return (EXIT_SUCCESS);
 }
