@@ -6,20 +6,19 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/04 14:19:19 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:03:59 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# define DEBUG 0
 #include "../../include/cub3D.h"
 
-static char	**extract_tex_rgb_helper(t_game *game, char *str, char *tex_id)
+static char	**extract_tex_rgb_helper(char *str, char *tex_id)
 {
-	char *tex;
-	char *start;
 	char	**rgb;
-	int	len;
-	int i;
-	int j;
+	int		len;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -29,11 +28,10 @@ static char	**extract_tex_rgb_helper(t_game *game, char *str, char *tex_id)
 		return (NULL);
 	while (ft_isdigit(*str) == 0)
 		str++;
-	printf("string: %s\n", str);
 	rgb = ft_split(str, ',');
-	print_2d_array(rgb);
 	return (rgb);
 }
+
 /*-Space after NO*/
 char *extract_tex_helper(char *str, char *tex_id)
 {
@@ -84,7 +82,7 @@ void	extract_rgb(t_game *game, char c)
 	}
 }
 
-int	*init_tex(t_game *game)
+int	init_tex(t_game *game)
 {
 	game->tex->no = NULL;
 	game->tex->so = NULL;
@@ -102,43 +100,44 @@ int	*init_tex(t_game *game)
 char *extract_tex(t_game *game)
 {
 	int		i;
-	char	*start;
 
 	i = 0;
 	if (init_tex(game) == EXIT_FAILURE)
 		return (NULL);
 	while (i < 4)
 	{
-		printf("\nstring to search: %s\n", game->map[i]);
-		if ((ft_strnstr(game->map[i], "NO ", ft_strlen(game->map[i]))) != NULL)
-			game->tex->no = extract_tex_helper(game->map[i], "NO");
-		if (ft_strnstr(game->map[i], "SO ",  ft_strlen(game->map[i])) != NULL)
-			game->tex->so = extract_tex_helper(game->map[i], "SO");
-		if (ft_strnstr(game->map[i], "WE ",  ft_strlen(game->map[i])) != NULL)
-			game->tex->we = extract_tex_helper(game->map[i], "WE");
-		if (ft_strnstr(game->map[i], "EA ",  ft_strlen(game->map[i])) != NULL)
-			game->tex->ea = extract_tex_helper(game->map[i], "EA");
-		if (ft_strnstr(game->map[i], "F ",  ft_strlen(game->map[i])) != NULL)
+		if ((ft_strnstr(game->map->map_raw[i], "NO ", ft_strlen(game->map->map_raw[i]))) != NULL)
+			game->tex->no = extract_tex_helper(game->map->map_raw[i], "NO");
+		if (ft_strnstr(game->map->map_raw[i], "SO ",  ft_strlen(game->map->map_raw[i])) != NULL)
+			game->tex->so = extract_tex_helper(game->map->map_raw[i], "SO");
+		if (ft_strnstr(game->map->map_raw[i], "WE ",  ft_strlen(game->map->map_raw[i])) != NULL)
+			game->tex->we = extract_tex_helper(game->map->map_raw[i], "WE");
+		if (ft_strnstr(game->map->map_raw[i], "EA ",  ft_strlen(game->map->map_raw[i])) != NULL)
+			game->tex->ea = extract_tex_helper(game->map->map_raw[i], "EA");
+		if (ft_strnstr(game->map->map_raw[i], "F ",  ft_strlen(game->map->map_raw[i])) != NULL)
 		{
-			game->tex->f->rgb = extract_tex_rgb_helper(game, game->map[i], "F");
+			game->tex->f->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "F");
 			extract_rgb(game, 'F');
 		}
-		if (ft_strnstr(game->map[i], "C ",  ft_strlen(game->map[i])) != NULL)
+		if (ft_strnstr(game->map->map_raw[i], "C ",  ft_strlen(game->map->map_raw[i])) != NULL)
 		{
-			game->tex->c->rgb = extract_tex_rgb_helper(game, game->map[i], "C");
+			game->tex->c->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "C");
 			extract_rgb(game, 'C');
 		}
 		i++;;
 	}
-	// printf("\nno: %s\n", game->tex->no);
-	// printf("so: %s\n", game->tex->so);
-	// printf("we: %s\n", game->tex->we);
-	// printf("ea: %s\n", game->tex->ea);
-	// printf("f - r: %d\n", game->tex->f->r);
-	// printf("f - g: %d\n", game->tex->f->g);
-	// printf("f - b: %d\n", game->tex->f->b);
-	// printf("c - r: %d\n", game->tex->c->r);
-	// printf("c - g: %d\n", game->tex->c->g);
-	// printf("c - b: %d\n", game->tex->c->b);
+	if (DEBUG == 1)
+	{
+		printf("\nno: %s\n", game->tex->no);
+		printf("so: %s\n", game->tex->so);
+		printf("we: %s\n", game->tex->we);
+		printf("ea: %s\n", game->tex->ea);
+		printf("f - r: %d\n", game->tex->f->r);
+		printf("f - g: %d\n", game->tex->f->g);
+		printf("f - b: %d\n", game->tex->f->b);
+		printf("c - r: %d\n", game->tex->c->r);
+		printf("c - g: %d\n", game->tex->c->g);
+		printf("c - b: %d\n", game->tex->c->b);
+	}
 	return (NULL);
 }

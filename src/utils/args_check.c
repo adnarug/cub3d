@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:44:29 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 16:00:36 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:56:09 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	args_check(t_game *data, int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (check_file_extension(argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	data->map_path = argv[1];
+	data->map->path = argv[1];
 	return (EXIT_SUCCESS);
 }

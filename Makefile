@@ -1,7 +1,7 @@
 NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
-FLAGS = -Wall -Wextra -g -fsanitize=address #-Werror 
+FLAGS = -Wall -Wextra -g #-fsanitize=address #-Werror 
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -framework OpenGL -framework AppKit
 LIBFT = libft/
