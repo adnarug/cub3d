@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 10:35:27 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:22:49 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,17 @@
 #include "structs.h"
 #include "../libft/libft.h"
 #include "get_next_line.h"
-#define WIDTH 256
-#define HEIGHT 256
-#define VALID_CHAR "10 NEWS-\n"
+#include "math.h"
+
+
+# define NAVY	0x0000FF55
+//WINDOW SIZE
+# define WIDTH		1080
+# define HEIGHT		720
+
+# define VALID_CHAR "10 NEWS-\n"
+# define MINIMAP_FACTOR	5
+# define MINIMAP_SCOPE	10
 
 int		args_check(t_game *data, int argc, char **argv);
 int		init_all(t_game *game);
@@ -42,5 +50,7 @@ int		check_valid_chars(char **map);
 void	error(char *str);
 int		ft_line_count(char **array);
 void	free_2d(char **matrix);
+void	create_minimap(t_game *game);
+void	update_minimap(t_game *game);
 
 #endif 

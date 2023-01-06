@@ -6,27 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 14:50:16 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:35:18 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
-
-//TODO: mapinit to fix the extra step
-// static void	launch(t_game *game, char **argv)
-// {
-// 	game->collects = 0;
-// 	game->moves = 0;
-// 	game->tilemap = map_init(argv, game);
-// 	if (game->tilemap == NULL)
-// 		error("Map initialization error");
-// 	game->og_collects = game->collects;
-// 	game->player.idle_frames = 20;
-// 	game->enemy_imgs.basic_anim = 17;
-// 	game_init(game);
-// 	return ;
-// }
 
 int		init_game(t_game *game)
 {
@@ -78,9 +62,23 @@ int		free_game(t_game *game)
 	free(game->tex);
 	free_2d(game->map->map_raw);
 	free_2d(game->map->map_filled);
-	// nJWfree(game->map->path);
 	free(game->map);
 	return (EXIT_SUCCESS);
+}
+
+void init_mlx(t_game *game)
+{
+	mlx_t			mlx;
+	mlx_image_t		img;
+
+	game->mlx = &mlx;
+	game->img = &img;
+	mlx_set_setting(MLX_MAXIMIZED, true);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
+	if (game->mlx == NULL)
+		exit(1);
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
 int	main(int argc, char **argv)
@@ -88,14 +86,17 @@ int	main(int argc, char **argv)
 	t_game	game;
 	
 	init_game(&game);
+	init_mlx(&game);
 	if (args_check(&game, argc, argv) == EXIT_FAILURE)
 		exit(1);
 	init_map(&game);
+	create_minimap(&game);
+	update_minimap(&game);
 	// launch(&game, argv);
 	// mlx_hook(game.window, 2, 0, input, &game);
 	// mlx_loop_hook(game.mlx, update, &game);
-	// mlx_loop(game.mlx);
+	mlx_loop(game.mlx);
 	free_game(&game);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	return (0);
 }

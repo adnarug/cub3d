@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 11:47:31 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:34:43 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define DEBUG 0
+# define DEBUG 1
 #include "../../include/cub3D.h"
 
 int	check_holes(char *s)
@@ -74,7 +74,7 @@ char	*flip_col_to_row(char **map, int col, int last)
 		return (NULL);
 	while (last > 0)
 	{
-		// printf("i:%d col:%d\n", i, col);
+		//printf("i:%d col:%d\n", i, col);
 		flipped[i] = map[i][col];//TODO:seg here
 		i++;
 		last--;
@@ -98,6 +98,7 @@ int	ver_check(t_game *game, char **map, int last)
 		{
 			if (DEBUG == 1)
 				printf("Failed flipped: %s\n", flipped);
+			free(flipped);
 			return (EXIT_FAILURE);
 		}
 		else

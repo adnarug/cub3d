@@ -2,7 +2,7 @@ NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
 #-fsanitize=address
-FLAGS = -Wall -Wextra -g -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
+FLAGS = -Wall -Wextra -g #-Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -framework OpenGL -framework AppKit
 LIBFT = libft/
@@ -16,6 +16,8 @@ SRC_FILES = utils/args_check \
 			map_parse/extract_tex\
 			map_parse/extract_map \
 			map_parse/check_map \
+			mini_map/init_minimap \
+			mini_map/upd_minimap \
 			main
 DEF_COLOR = \033[0;80m
 GREEN = \033[0;92m
@@ -41,6 +43,7 @@ $(OBJF):
 	@mkdir -p obj/utils/
 	@mkdir -p obj/map_parse/
 	@mkdir -p obj/initializer/
+	@mkdir -p obj/mini_map/
 
 clean:
 	@rm -r $(OBJ_DIR)

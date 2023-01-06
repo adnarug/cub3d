@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 14:51:07 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:37:05 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DEBUG 0
+#define DEBUG 1
 #include "../../include/cub3D.h"
 
 /* Counting the newlines */

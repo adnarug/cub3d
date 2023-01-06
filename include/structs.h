@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/05 16:13:35 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:18:19 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,21 @@ typedef struct s_textures
 	t_tex_rgb		*c;
 }	t_textures;
 
+typedef struct s_mini
+{
+	mlx_image_t *img;
+	int			size;
+	int			x_offset;
+	int			y_offset;
+}	t_mini;
+
 typedef struct s_game
 {
 	t_map		*map;
 	t_textures	*tex;
+	t_mini		*mini;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 }	t_game;
 
 #endif
