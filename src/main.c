@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 10:30:02 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:50:16 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void free_2d(char **matrix)
 	{
 		free(matrix[i]);
 		matrix[i] = NULL;
+		i++;
 	}
 	free(matrix);
 	matrix = NULL;
@@ -66,12 +67,18 @@ void free_2d(char **matrix)
 int		free_game(t_game *game)
 {
 	
+	free_2d(game->tex->f->rgb);
+	free_2d(game->tex->c->rgb);
 	free(game->tex->f);
 	free(game->tex->c);
+	free(game->tex->no);
+	free(game->tex->so);
+	free(game->tex->we);
+	free(game->tex->ea);
 	free(game->tex);
-	// free_2d(game->map->map_clean);
 	free_2d(game->map->map_raw);
-	// free_2d(game->map->map_filled);
+	free_2d(game->map->map_filled);
+	// nJWfree(game->map->path);
 	free(game->map);
 	return (EXIT_SUCCESS);
 }
@@ -82,13 +89,13 @@ int	main(int argc, char **argv)
 	
 	init_game(&game);
 	if (args_check(&game, argc, argv) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		exit(1);
 	init_map(&game);
 	// launch(&game, argv);
 	// mlx_hook(game.window, 2, 0, input, &game);
 	// mlx_loop_hook(game.mlx, update, &game);
 	// mlx_loop(game.mlx);
 	free_game(&game);
-	// system("leaks cub3D");
+	system("leaks cub3D");
 	return (0);
 }

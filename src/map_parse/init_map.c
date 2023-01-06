@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 10:35:19 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:51:07 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DEBUG 1
+#define DEBUG 0
 #include "../../include/cub3D.h"
 
 /* Counting the newlines */
@@ -40,7 +40,7 @@ static int	file_linecount(char *file)
 }
 
 /* Allocates memory for a string array with the same lines as the file */
-static char	**malloc_columns(char *file, int *line_count)
+static char	**malloc_rows(char *file, int *line_count)
 {
 	char	**map;
 
@@ -83,7 +83,7 @@ static char	**read_map(char *file, int *line_count)
 		error("Error\nFile does not exist\n");
 		return (NULL);
 	}
-	map = malloc_columns(file, line_count);
+	map = malloc_rows(file, line_count);
 	num_lines = *line_count;
 	if (map == NULL)
 		return (NULL);
@@ -120,15 +120,24 @@ int	ft_ismapline(char *s)
 
 int	find_map_start(char **map)
 {
-	int	i;
+	int		i;
+	char	*trimmed;
 
 	i = 0;
+	trimmed = NULL;
 	while (map[i] != NULL)
 	{
-		if (ft_ismapline(map[i]) == 1)
+		trimmed = ft_strtrim(map[i], " ");
+		if (ft_ismapline(trimmed) == 1)
+		{
+			free(trimmed);
+			trimmed = NULL;
 			return (i);
+		}
 		else
 			i++;
+		free(trimmed);
+		trimmed = NULL;
 	}
 	return (0);
 }
@@ -153,7 +162,7 @@ char **fill_spaces(t_game *game, char **map)
 	}
 	return (map);
 }
-
+/*TODO: Handling the \n */
 char	**dup_matrix(t_game *game)
 {
 	char	**new_map;
@@ -173,11 +182,10 @@ char	**dup_matrix(t_game *game)
 		if (new_map[i] == NULL)
 			return (NULL);
 		written_len = ft_strlcpy(new_map[i], game->map->map_clean[i], game->map->max_len);
-
 		if (written_len < game->map->max_len)
 		{
 			written_len--;
-			while (written_len < game->map->max_len - 1)
+			while (written_len < game->map->max_len)
 			{
 				new_map[i][written_len] = '-';
 				written_len++;
@@ -216,12 +224,16 @@ int	check_valid_chars(char **map)
 	}
 	return (EXIT_SUCCESS);
 }
+
+
 int	init_map(t_game *game)
 {
 	char	**map;
 	int		line_count;
+	char	**clean_map;
 
 	line_count = 1;
+	clean_map = NULL;
 	map = read_map(game->map->path, &line_count);
 	if (map == NULL)
 		return (EXIT_FAILURE);
@@ -235,7 +247,8 @@ int	init_map(t_game *game)
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
 	if (map_isvalid(game) == EXIT_FAILURE)
 		error("Error\nMap is invalid\n");
-	print_2d_array(game->map->map_filled);
+	if (DEBUG == 1)
+		print_2d_array(game->map->map_filled);
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }

@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 10:38:00 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:47:31 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define DEBUG 1
+# define DEBUG 0
 #include "../../include/cub3D.h"
 
 int	check_holes(char *s)
@@ -116,8 +116,6 @@ int	perimeter_isvalid(t_game *game)
 		return (EXIT_FAILURE);
 	if (horiz_check(game->map->map_filled) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	// if (check_holes(game->map->map_filled) == EXIT_FAILURE)
-	// 	return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

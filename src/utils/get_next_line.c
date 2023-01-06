@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:45:34 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 15:15:46 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:03:42 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ char	*split_next_line(char *unsorted_line)
 		i++;
 	}
 	if (unsorted_line[i] == '\n')
-		new_line[i++] = '\n';
+	{
+		new_line[i] = '\n';
+		i++;
+	}
 	new_line[i] = '\0';
 	return (new_line);
 }
