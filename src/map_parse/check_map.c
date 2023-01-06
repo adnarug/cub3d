@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 09:50:59 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:38:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define DEBUG 0
+# define DEBUG 1
 #include "../../include/cub3D.h"
 
 int	check_holes(char *s)
@@ -43,15 +43,12 @@ int	horiz_check(char **map)
 	int	i;
 	int	j;
 	int	len;
-	char *trimmed;
 
 	i = 0;
 	j = 0;
 	len = 0;
 	while (map[i] != NULL)
 	{
-		// trimmed = ft_strtrim(map[i], "-");
-		// len = ft_strlen(trimmed);
 		if (check_holes(map[i]) == EXIT_FAILURE)
 		{
 			if (DEBUG == 1)
@@ -60,7 +57,6 @@ int	horiz_check(char **map)
 		}
 		else
 			i++;
-		// free(trimmed);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -87,43 +83,17 @@ char	*flip_col_to_row(char **map, int col, int last)
 	return (flipped);
 }
 
-// int check_wall_integrity(char *s)
-// {
-// 	int	i;
-// 	int	flag_open_wall;
-// 	int	flag_close_wall;
-	
-// 	i = 0;
-// 	flag_open_wall = 0;
-// 	flag_close_wall = 0;
-// 	while (s[i] != '\0')
-// 	{
-// 		if (s[i] == '1')
-// 		{
-// 			if (flag_open_wall == 1)
-// 				flag_close_wall == 0;
-// 			else
-// 				flag_open_wall = 1;
-// 		}
-// 		i++;
-// 	}
-// }
-
 int	ver_check(t_game *game, char **map, int last)
 {
 	int		col_num;
 	int		col;
 	char	*flipped;
-	char 	*trimmed;
-	int		len;
 
 	col = 0;
-	col_num = game->map->max_len;//TODO: ned to find the longest line first
+	col_num = game->map->max_len;
 	while (col <= col_num)
 	{
 		flipped = flip_col_to_row(map, col, last);
-		// trimmed = ft_strtrim(flipped, "-");
-		// len = ft_strlen(trimmed);
 		if (check_holes(flipped) == EXIT_FAILURE)
 		{
 			if (DEBUG == 1)
@@ -132,21 +102,7 @@ int	ver_check(t_game *game, char **map, int last)
 		}
 		else
 			col++;
-		// if (trimmed[0] == '1' && trimmed[len - 1] == '1')
-		// {
-		// 	printf("Flipped string - OK flipped : %s trimmed: %s\n", flipped, trimmed);
-		// 	col++;
-		// }
-		// else
-		// {
-		// 	if (DEBUG == 1)
-		// 		printf("Flipped string - BAD flipped : %s trimmed: %s\n", flipped, trimmed);
-		// 	free(flipped);
-		// 	free(trimmed);
-		// 	return (EXIT_FAILURE);
-		// }
 		free(flipped);
-		// free(trimmed);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -167,6 +123,12 @@ int	perimeter_isvalid(t_game *game)
 
 int	map_isvalid(t_game *game)
 {
+	if (check_valid_chars(game->map->map_clean) == EXIT_FAILURE)
+	{
+		if (DEBUG == 1)
+			error("Invalid chars\n");
+		return (EXIT_FAILURE);
+	}
 	if (perimeter_isvalid(game) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	// system("leaks cub3D");

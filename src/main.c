@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 09:10:26 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:30:02 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,31 @@ int		init_game(t_game *game)
 	return (EXIT_SUCCESS);
 }
 
+void free_2d(char **matrix)
+{
+	int i;
+
+	i = 0;
+	while (matrix[i] != NULL)
+	{
+		free(matrix[i]);
+		matrix[i] = NULL;
+	}
+	free(matrix);
+	matrix = NULL;
+}
+
 int		free_game(t_game *game)
 {
+	
 	free(game->tex->f);
 	free(game->tex->c);
 	free(game->tex);
-	game->tex = NULL;
+	// free_2d(game->map->map_clean);
+	free_2d(game->map->map_raw);
+	// free_2d(game->map->map_filled);
 	free(game->map);
-	game->map = NULL;
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
@@ -72,5 +89,6 @@ int	main(int argc, char **argv)
 	// mlx_loop_hook(game.mlx, update, &game);
 	// mlx_loop(game.mlx);
 	free_game(&game);
+	// system("leaks cub3D");
 	return (0);
 }

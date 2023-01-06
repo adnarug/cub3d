@@ -6,10 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 09:57:44 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:35:19 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define DEBUG 1
 #include "../../include/cub3D.h"
 
 /* Counting the newlines */
@@ -191,6 +192,30 @@ char	**dup_matrix(t_game *game)
 	return (new_map);
 }
 
+int	check_valid_chars(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while(map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (ft_strchr(VALID_CHAR, map[i][j]) == NULL)
+			{
+				if (DEBUG == 1)
+					printf("Invalid chars found in: %s it is: %c\n", map[i], map[i][j]);
+				return (EXIT_FAILURE);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
 int	init_map(t_game *game)
 {
 	char	**map;
@@ -202,8 +227,8 @@ int	init_map(t_game *game)
 		return (EXIT_FAILURE);
 	game->map->map_raw = map;
 	game->map->map_clean_start = find_map_start(game->map->map_raw);
-	extract_tex(game);
 	game->map->map_clean = game->map->map_raw + game->map->map_clean_start;
+	extract_tex(game);
 	game->map->max_len = find_longest(game->map->map_clean);
 	game->map->map_clean_lines = ft_line_count(game->map->map_clean);
 	game->map->map_filled = dup_matrix(game); 
