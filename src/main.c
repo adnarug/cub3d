@@ -6,12 +6,14 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/05 17:47:20 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:10:26 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+
+//TODO: mapinit to fix the extra step
 // static void	launch(t_game *game, char **argv)
 // {
 // 	game->collects = 0;
@@ -44,7 +46,9 @@ int		init_game(t_game *game)
 	game->tex->c = malloc(sizeof(t_tex_rgb));
 	if (game->tex->c == NULL)
 		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
+
 int		free_game(t_game *game)
 {
 	free(game->tex->f);

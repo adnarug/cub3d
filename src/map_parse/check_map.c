@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/05 18:16:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:50:59 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ int	check_holes(char *s)
 	int	i;
 
 	i = 0;
-	if (DEBUG == 1)
-	 printf("stirng to check %s\n", s);
+	// if (DEBUG == 1)
+	//  printf("stirng to check %s\n", s);
 	if (s[0] == '0')
 		return (EXIT_FAILURE);
 	while (s[i] != '\0')
 	{
 		if (s[i] == '0')
 		{
-			if (i > 0 && ((s[i - 1] == '-') || (s[i + 1] == '-')))
+			if (i > 0 && (s[i - 1] == '-' || s[i + 1] == '-'))
 			{
 				if (DEBUG == 1)
 					printf("Failed trimmed: %s\n", s);
@@ -50,17 +50,17 @@ int	horiz_check(char **map)
 	len = 0;
 	while (map[i] != NULL)
 	{
-		trimmed = ft_strtrim(map[i], "-");
-		len = ft_strlen(trimmed);
-		if (check_holes(trimmed) == EXIT_FAILURE)
+		// trimmed = ft_strtrim(map[i], "-");
+		// len = ft_strlen(trimmed);
+		if (check_holes(map[i]) == EXIT_FAILURE)
 		{
 			if (DEBUG == 1)
-				printf("Failed trimmed: %s\n", trimmed);
+				printf("Failed trimmed: %s\n", map[i]);
 			return (EXIT_FAILURE);
 		}
 		else
 			i++;
-		free(trimmed);
+		// free(trimmed);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -78,7 +78,7 @@ char	*flip_col_to_row(char **map, int col, int last)
 		return (NULL);
 	while (last > 0)
 	{
-		printf("i:%d col:%d\n", i, col);
+		// printf("i:%d col:%d\n", i, col);
 		flipped[i] = map[i][col];//TODO:seg here
 		i++;
 		last--;
@@ -122,12 +122,12 @@ int	ver_check(t_game *game, char **map, int last)
 	while (col <= col_num)
 	{
 		flipped = flip_col_to_row(map, col, last);
-		trimmed = ft_strtrim(flipped, "-");
-		len = ft_strlen(trimmed);
-		if (check_holes(trimmed) == EXIT_FAILURE)
+		// trimmed = ft_strtrim(flipped, "-");
+		// len = ft_strlen(trimmed);
+		if (check_holes(flipped) == EXIT_FAILURE)
 		{
 			if (DEBUG == 1)
-				printf("Failed flipped: %s\n", trimmed);
+				printf("Failed flipped: %s\n", flipped);
 			return (EXIT_FAILURE);
 		}
 		else
@@ -146,7 +146,7 @@ int	ver_check(t_game *game, char **map, int last)
 		// 	return (EXIT_FAILURE);
 		// }
 		free(flipped);
-		free(trimmed);
+		// free(trimmed);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -154,9 +154,8 @@ int	ver_check(t_game *game, char **map, int last)
 
 int	perimeter_isvalid(t_game *game)
 {
-	// if (ft_strchr(game->map->map_filled[0], '0') != NULL \
-	// || ft_strchr(game->map->map_filled[game->map->map_clean_lines], '0') != NULL)
-	// 	return (EXIT_FAILURE);
+	if (ft_strchr(game->map->map_filled[game->map->map_clean_lines - 1], '0') != NULL)
+		return (EXIT_FAILURE);
 	if (ver_check(game, game->map->map_filled, game->map->map_clean_lines) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (horiz_check(game->map->map_filled) == EXIT_FAILURE)
