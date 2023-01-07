@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 17:22:49 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:34:39 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,24 @@
 #include "get_next_line.h"
 #include "math.h"
 
+/* ************************************************************************** */
+/* DEFINES                                                                    */
+/* ************************************************************************** */
+
+# define X	0
+# define Y	1
+# define I	0
+# define J	1
 
 # define NAVY	0x0000FF55
+
+# define GREEN	0x00FF00FF
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
 
 # define VALID_CHAR "10 NEWS-\n"
+# define PLAYER_POS "NEWS"
 # define MINIMAP_FACTOR	5
 # define MINIMAP_SCOPE	10
 

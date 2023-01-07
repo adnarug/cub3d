@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/07 11:53:55 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:38:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,32 @@ bool	check_wall(t_game *game, int x, int y, double step)
 	return (false);
 }
 
+void	draw_player(t_game *game, double step)
+{
+	double	cam[2];
+	int		pos[2];
+	double	r;
+	double	x_sqr;
+	double	y_sqr;
+
+	r = (double) game->mini->size / 80;
+	cam[X] = (game->player->x_pos - game->mini->x_offset) * step;
+	cam[Y] = (game->player->y_pos - game->mini->y_offset) * step;
+	pos[Y] = (int)(cam[Y] - r);
+	while (pos[Y] < (cam[Y] + r))
+	{
+		pos[X] = (int)(cam[X] - r);
+		while (pos[X] < (cam[X] + r))
+		{
+			x_sqr = (pos[X] - cam[X]) * (pos[X] - cam[X]);
+			y_sqr = (pos[Y] - cam[Y]) * (pos[Y] - cam[Y]);
+			if (x_sqr + y_sqr < (r * r))
+				mlx_put_pixel(game->mini->img, pos[X], (pos[Y]), GREEN);
+			pos[X]++;
+		}
+		pos[Y]++;
+	}
+}
 
 static void	draw_minimap(t_game *game)
 {
@@ -68,7 +94,6 @@ static void	draw_minimap(t_game *game)
 	step = (double)game->mini->size / MINIMAP_SCOPE;
 	set_offset(game);
 	y = 0;
-	printf("SIZE: %d\n", game->mini->size);
 	while (y < game->mini->size)
 	{
 		x = 0;
@@ -82,7 +107,7 @@ static void	draw_minimap(t_game *game)
 		}
 		y++;
 	}
-	// draw_player(data, step);
+	// draw_player(game, step);
 	// cast_rays(data, step);
 }
 
