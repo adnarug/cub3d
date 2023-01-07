@@ -6,11 +6,36 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 17:24:17 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:53:55 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+
+static void	set_offset_x_pos(t_game *game)
+{
+	if (game->mini->x_offset + MINIMAP_SCOPE > game->map->max_len)
+		game->mini->x_offset = game->map->max_len - MINIMAP_SCOPE;
+	if (game->mini->x_offset < 0)
+		game->mini->x_offset = 0;
+}
+
+static void	set_offset_y_pos(t_game *game)
+{
+	if (game->mini->y_offset + MINIMAP_SCOPE > game->map->map_clean_lines)
+		game->mini->y_offset = game->map->map_clean_lines - MINIMAP_SCOPE;
+	if (game->mini->y_offset < 0)
+		game->mini->y_offset = 0;
+}
+
+void	set_offset(t_game *game)
+{
+	game->mini->x_offset = (int)game->player->x_pos - MINIMAP_SCOPE / 2;
+	game->mini->y_offset = (int)game->player->y_pos  - MINIMAP_SCOPE / 2;
+	set_offset_x_pos(game);
+	set_offset_y_pos(game);
+}
 
 bool	check_wall(t_game *game, int x, int y, double step)
 {
@@ -41,7 +66,7 @@ static void	draw_minimap(t_game *game)
 
 	// game->mini->size = WIDTH / MINIMAP_FACTOR;
 	step = (double)game->mini->size / MINIMAP_SCOPE;
-	// set_offset(data);
+	set_offset(game);
 	y = 0;
 	printf("SIZE: %d\n", game->mini->size);
 	while (y < game->mini->size)
@@ -63,7 +88,6 @@ static void	draw_minimap(t_game *game)
 
 void	update_minimap(t_game *game)
 {
-	printf("check\n");
 	draw_minimap(game);
 	mlx_image_to_window(game->mlx, game->mini->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 17:37:05 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:41:16 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,53 @@ static char	**malloc_rows(char *file, int *line_count)
 	return (map);
 }
 
+int	ft_strlen_nl(const char *c)
+{
+	size_t				i;
+
+	i = 0;
+	while (c[i] != '\0' && c[i] != '\n')
+		i++;
+	return (i);
+}
+
 int	find_longest(char **map)
 {
 	int	i;
 	int	max;
+	int pos_max;
 
 	i = 0;
+	pos_max = 0;
 	max = ft_strlen(map[i]);
 	while (map[i] != NULL)
 	{
-		if (max < ft_strlen(map[i]))
-			max = ft_strlen(map[i]);
+		if (max < ft_strlen_nl(map[i]))
+		{
+			max = ft_strlen_nl(map[i]);
+			pos_max = i;
+		}
 		i++;
 	}
-	return (max);
+	return (max + 1);
+}
+
+
+void	replace_nl(t_game *game, char **map)
+{
+	int	i;
+	int	max;
+	char	*string;
+
+	max = game->map->max_len;
+	i = 0;
+	while (map[i] != NULL)
+	{
+		if (ft_strlen(map[i]) == max)
+			map[i][max - 1] = '-';
+		string = map[i];
+		i++;
+	}
 }
 
 /* Creating with malloc 2d array based on the map */
@@ -182,15 +215,16 @@ char	**dup_matrix(t_game *game)
 		if (new_map[i] == NULL)
 			return (NULL);
 		written_len = ft_strlcpy(new_map[i], game->map->map_clean[i], game->map->max_len);
+		if (DEBUG == 1)
+			printf("max len %d written len %d last char %c \n", game->map->max_len, written_len, new_map[i][written_len - 1]);
 		if (written_len < game->map->max_len)
 		{
 			written_len--;
-			while (written_len < game->map->max_len)
+			while (written_len < game->map->max_len - 1)
 			{
 				new_map[i][written_len] = '-';
 				written_len++;
 		 	}
-			written_len++;
 			new_map[i][written_len] = '\0';
 		}
 		written_len = 0;
@@ -242,8 +276,9 @@ int	init_map(t_game *game)
 	game->map->map_clean = game->map->map_raw + game->map->map_clean_start;
 	extract_tex(game);
 	game->map->max_len = find_longest(game->map->map_clean);
+	// replace_nl(game, game->map->map_clean);
 	game->map->map_clean_lines = ft_line_count(game->map->map_clean);
-	game->map->map_filled = dup_matrix(game); 
+	game->map->map_filled = dup_matrix(game);
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
 	if (map_isvalid(game) == EXIT_FAILURE)
 		error("Error\nMap is invalid\n");

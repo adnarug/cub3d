@@ -6,12 +6,18 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 16:18:19 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:52:29 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef struct s_player
+{
+	double	x_pos;
+	double	y_pos;
+}	t_player;
 
 typedef struct s_map
 {
@@ -57,6 +63,7 @@ typedef struct s_game
 	t_mini		*mini;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_player	*player;
 }	t_game;
 
 #endif

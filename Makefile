@@ -2,7 +2,7 @@ NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
 #-fsanitize=address
-FLAGS = -Wall -Wextra -g #-Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
+FLAGS = -Wall -Wextra -g #-fsanitize=address #-Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -framework OpenGL -framework AppKit
 LIBFT = libft/

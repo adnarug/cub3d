@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"name": "cub_wip",
+			"path": ".."
+		},
+		{
+			"name": "GNL",
+			"path": "../../GNL"
+		},
+		{
+			"name": "so_long_git",
+			"path": "../../so_long_git"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cub3d.h": "c",
+			"mlx42.h": "c",
+			"__config": "c",
+			"__errc": "c",
+			"__hash_table": "c",
+			"__locale": "c",
+			"__tuple": "c",
+			"bitset": "c",
+			"ios": "c",
+			"locale": "c",
+			"sstream": "c",
+			"__tree": "c",
+			"map": "c"
+		}
+	}
+}
