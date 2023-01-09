@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/07 13:49:32 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:47:41 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,11 @@ int	init_map(t_game *game)
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
 	if (map_isvalid(game) == EXIT_FAILURE)
 		error("Error\nMap is invalid\n");
-	find_player(game);
+	if (find_player(game) == EXIT_FAILURE)
+	{
+		error("Error\nPlayer not found\n");
+		exit(1);
+	}
 	if (DEBUG == 1)
 		print_2d_array(game->map->map_filled);
 	// system("leaks cub3D");
