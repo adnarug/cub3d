@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/07 12:16:10 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:59:54 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ typedef struct s_player
 {
 	double	x_pos;
 	double	y_pos;
+	double	x_scalar;
+	double	y_scalar;
 	char	dir;
 }	t_player;
 

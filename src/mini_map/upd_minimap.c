@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 12:47:31 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:19:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	set_offset_y_pos(t_game *game)
 void	set_offset(t_game *game)
 {
 	game->mini->x_offset = (int)game->player->x_pos - MINIMAP_SCOPE / 2;
-	game->mini->y_offset = (int)game->player->y_pos - MINIMAP_SCOPE / 2;
+	game->mini->y_offset = (int)game->player->y_pos  - MINIMAP_SCOPE / 2;
 	set_offset_x_pos(game);
 	set_offset_y_pos(game);
 }
@@ -42,8 +42,8 @@ bool	check_wall(t_game *game, int x, int y, double step)
 	double	x_on_map;
 	double	y_on_map;
 
-	y_on_map = game->mini->x_offset + (((double) x) / step);
-	x_on_map = game->mini->y_offset + (((double) y) / step);
+	x_on_map = game->mini->x_offset + (((double) x) / step);
+	y_on_map = game->mini->y_offset + (((double) y) / step);
 	if ((x_on_map - round(x_on_map) < 0.03 && x_on_map - \
 		round(x_on_map) > -0.03))
 		return (false);

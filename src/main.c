@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/07 13:48:32 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:28:22 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,67 @@ void init_mlx(t_game *game)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
+static void	check_esc_key(t_game *game, mlx_key_data_t keycode)
+{
+	if (keycode.key == MLX_KEY_ESCAPE && keycode.action == MLX_PRESS)
+	{
+		exit(EXIT_SUCCESS);
+	}
+}
+
+// static void	check_mouse_keys(t_game *game, mlx_key_game_t keycode)
+// {
+// 	if (keycode.key == MLX_KEY_H && keycode.action == MLX_PRESS)
+// 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+// 	else if (keycode.key == MLX_KEY_M && keycode.action == MLX_PRESS)
+// 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
+// }
+
+
+
+static void	move(t_game *game, double angle)
+{
+	double	new_v[2];
+	double	new_v_world[2];
+
+	// new_v[X] = STEP * game->player->x_scalar;
+	// // new_v[Y] = STEP * game->player->y_scalar;
+	// // rotate_vector(new_v, angle);
+	// new_v_world[X] = game->player->x_pos + new_v[X];
+	// new_v_world[Y] = game->player->y_pos + new_v[Y];
+	// if (check_collisions(game, new_v_world) == true)
+	// 	return ;
+	game->player->x_pos += angle;
+	// game->player->y_pos = new_v_world[Y];
+	// game->player->x_pos = new_v_world[X];
+	// game->player->y_pos = new_v_world[Y];
+	// render(game);
+	update_minimap(game);
+}
+
+void	check_move_keys(t_game *game, mlx_key_data_t keycode)
+{
+	if (keycode.key == MLX_KEY_W && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+		move(game, 0.5);
+	else if (keycode.key == MLX_KEY_S && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+		move(game, -0.5);
+	else if (keycode.key == MLX_KEY_A && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+		move(game, 1.5 * M_PI);
+	else if (keycode.key == MLX_KEY_D && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+		move(game, 0.5 * M_PI);
+}
+
+void	key_pressed(mlx_key_data_t keycode, void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	check_move_keys(game, keycode);
+	// check_rotation_keys(game, keycode);
+	// check_mouse_keys(game, keycode);
+	check_esc_key(game, keycode);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -95,6 +156,7 @@ int	main(int argc, char **argv)
 	init_map(&game);
 	create_minimap(&game);
 	update_minimap(&game);
+	mlx_key_hook(game.mlx, &key_pressed, (void *)&game);
 	// launch(&game, argv);
 	// mlx_hook(game.window, 2, 0, input, &game);
 	// mlx_loop_hook(game.mlx, update, &game);

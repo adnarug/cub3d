@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 12:47:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:19:01 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ char **fill_spaces(t_game *game, char **map)
 	}
 	return (map);
 }
-/*TODO: Handling the \n */
+
 char	**dup_matrix(t_game *game)
 {
 	char	**new_map;

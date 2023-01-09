@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/07 13:34:39 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:01:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
+#define STEP 0.15
+
 
 # define VALID_CHAR "10 NEWS-\n"
 # define PLAYER_POS "NEWS"
