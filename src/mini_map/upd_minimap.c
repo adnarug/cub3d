@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 13:19:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:05:04 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ bool	check_wall(t_game *game, int x, int y, double step)
 		return (false);
 	if (x_on_map >= game->map->max_len)
 		return (false);
-	if (game->map->map_filled[(int)x_on_map][(int)y_on_map] == '1')
-		return (true);
+	if (game->map->map_filled[(int)y_on_map][(int)x_on_map] == '1')
+	{
+				return (true);
+	}
 	return (false);
 }
 

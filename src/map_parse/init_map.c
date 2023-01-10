@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 13:19:01 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:03:04 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,10 @@ int	init_map(t_game *game)
 		exit(1);
 	}
 	if (DEBUG == 1)
+	{
 		print_2d_array(game->map->map_filled);
+		printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
+	}
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }

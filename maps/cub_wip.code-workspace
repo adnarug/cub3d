@@ -11,6 +11,9 @@
 		{
 			"name": "so_long_git",
 			"path": "../../so_long_git"
+		},
+		{
+			"path": "../../Evaluations/philo_luca"
 		}
 	],
 	"settings": {

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 13:28:22 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:08:56 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +122,45 @@ static void	move(t_game *game, double angle)
 	update_minimap(game);
 }
 
+int	check_step(t_game *game, int new_x, int new_y)
+{
+	if(game->map->map_filled[new_y][new_x] == '1')
+	{
+		printf("Hits the wall\n");
+		return (EXIT_FAILURE);
+	}
+	if(game->map->map_filled[new_y][new_x] != '1')
+		return (EXIT_SUCCESS);
+	
+}
 void	check_move_keys(t_game *game, mlx_key_data_t keycode)
 {
 	if (keycode.key == MLX_KEY_W && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-		move(game, 0.5);
+	{
+		printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
+		if (check_step(game, game->player->x_pos, game->player->y_pos - 0.5) == EXIT_SUCCESS)
+			game->player->y_pos -= 0.5;
+	}
 	else if (keycode.key == MLX_KEY_S && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-		move(game, -0.5);
+	{
+		printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
+		if (check_step(game, game->player->x_pos, game->player->y_pos + 0.5) == EXIT_SUCCESS)
+			game->player->y_pos += 0.5;
+	}
 	else if (keycode.key == MLX_KEY_A && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-		move(game, 1.5 * M_PI);
+	{
+		printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
+		if (check_step(game, game->player->x_pos - 0.5, game->player->y_pos) == EXIT_SUCCESS)
+			game->player->x_pos -= 0.5;
+	}
 	else if (keycode.key == MLX_KEY_D && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-		move(game, 0.5 * M_PI);
+	{
+		printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
+		if (check_step(game, game->player->x_pos + 0.5, game->player->y_pos) == EXIT_SUCCESS)
+			game->player->x_pos += 0.5;
+	}
+	update_minimap(game);
+
 }
 
 void	key_pressed(mlx_key_data_t keycode, void *param)
