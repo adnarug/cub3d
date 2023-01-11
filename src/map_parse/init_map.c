@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/10 15:03:04 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:45:35 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,28 @@ int	check_valid_chars(char **map)
 	}
 	return (EXIT_SUCCESS);
 }
+//INIT
+static void	init_camera_plane(t_game *data)
+{
+	data->player->camplane[X] = 0.5 * data->player->x_scalar;
+	data->player->camplane[Y] = 0.5 * data->player->y_scalar;
+	rotate_vector(data->player->camplane, 0.5 * M_PI);
+}
 
+void	init_player_angle(t_game *game)
+{
+	if (game->player->dir == 'N')
+		game->player->angle = 0;
+	else if (game->player->dir == 'S')
+		game->player->angle = 0.5 * M_PI;
+	else if (game->player->dir == 'W')
+		game->player->angle = M_PI;
+	else if (game->player->dir == 'E')
+		game->player->angle = 1.5 * M_PI;
+	game->player->x_scalar = sin(game->player->angle);
+	game->player->y_scalar = -1 * cos(game->player->angle);
+	init_camera_plane(game);
+}
 
 int	find_player(t_game *game)
 {
@@ -276,9 +297,10 @@ int	find_player(t_game *game)
 		{
 			if (ft_strchr(PLAYER_POS, map[i][j]) != NULL)
 			{
-				game->player->x_pos = j;
-				game->player->y_pos = i;
+				game->player->x_pos = i;
+				game->player->y_pos = j;
 				game->player->dir = map[i][j];
+				init_player_angle(game);
 				return (EXIT_SUCCESS);
 			}
 			j++;
@@ -318,7 +340,7 @@ int	init_map(t_game *game)
 	if (DEBUG == 1)
 	{
 		print_2d_array(game->map->map_filled);
-		printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
+		// printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
 	}
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);

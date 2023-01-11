@@ -30,7 +30,11 @@
 			"locale": "c",
 			"sstream": "c",
 			"__tree": "c",
-			"map": "c"
+			"map": "c",
+			"__bit_reference": "c",
+			"__string": "c",
+			"algorithm": "c",
+			"type_traits": "c"
 		}
 	}
 }

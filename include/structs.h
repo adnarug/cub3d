@@ -6,20 +6,31 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 12:59:54 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/11 09:05:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+
+typedef struct s_vector
+{
+	double x;
+	double y;
+} t_vector;
+
 typedef struct s_player
 {
-	double	x_pos;
-	double	y_pos;
-	double	x_scalar;
-	double	y_scalar;
-	char	dir;
+	double		x_pos;
+	double		y_pos;
+	double		x_scalar;
+	double		y_scalar;
+	double		camplane[2];
+	t_vector	*direction;
+	double		angle;
+	double		angle_rad;
+	char		dir;
 }	t_player;
 
 typedef struct s_map

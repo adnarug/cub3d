@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 19:28:25 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:55:19 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,16 @@
 # define NAVY	0x0000FF55
 
 # define GREEN	0x00FF00FF
+# define NAVY	0x0000FF55
+# define RED	0xFF0000FF
+# define GREY   0xCCCCCC
+# define ROTATION_RADIANS 0.1
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
-#define STEP 0.1
-
+#define STEP        0.1
+# define ROTATE_RIGHT 1
+# define ROTATE_LEFT  -1
 
 # define VALID_CHAR "10 NEWS-\n"
 # define PLAYER_POS "NEWS"
@@ -58,12 +63,27 @@ int		init_map(t_game *game);
 char	*extract_tex(t_game *game);
 int		map_isvalid(t_game *game);
 int		check_valid_chars(char **map);
-
+void	rotate_vector(double v[2], double angle);
+int		init_game(t_game *game);
+void    
+init_mlx(t_game *game);
 //Misc
 void	error(char *str);
+int		free_game(t_game *game);
 int		ft_line_count(char **array);
 void	free_2d(char **matrix);
 void	create_minimap(t_game *game);
 void	update_minimap(t_game *game);
+
+//Minimap - BONUS
+void	launch_minimap(t_game *game);
+//RE
+void	cast_rays(t_game *data, double step);
+void	move(t_game *game, double angle);
+void	rotate_vector(double v[2], double angle);
+void	rotate(t_game *data, int direction);
+bool	check_collisions(t_game	*data, double new_v[2]);
+void	read_keys(mlx_key_data_t keycode, void *param);
+bool	check_collisions(t_game	*data, double new_v[2]);
 
 #endif 
