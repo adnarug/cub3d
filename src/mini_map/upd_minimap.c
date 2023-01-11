@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/11 16:24:53 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:05:06 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	draw_player(t_game *game, double step)
 			if (x_sqr + y_sqr < (r * r))
 			{
 				mlx_put_pixel(game->mini->img, pos[X], (pos[Y]), GREEN);
-				// draw_line(game, pos[X] + 1, pos[Y] + 1);
 			}
 			pos[X]++;
 		}
@@ -117,7 +116,7 @@ void	cast_rays(t_game *data, double step)
 	cam[X] = data->player->x_pos;
 	cam[Y] = data->player->y_pos;
 	factor = 0.01;
-	while (factor < 0.3)
+	while (factor < 10)
 	{
 		ray[X] = cam[X] + (data->player->x_scalar * factor);
 		ray[Y] = cam[Y] + (data->player->y_scalar * factor);
