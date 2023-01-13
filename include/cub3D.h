@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/11 16:55:19 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:24:16 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 
 # define VALID_CHAR "10 NEWS-\n"
 # define PLAYER_POS "NEWS"
-# define MINIMAP_FACTOR	5
+# define MINIMAP_SCALE	5
 # define MINIMAP_SCOPE	10
 
 int		args_check(t_game *data, int argc, char **argv);

@@ -6,35 +6,24 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/11 17:05:06 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:56:05 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-
-static void	set_offset_x_pos(t_game *game)
-{
-	if (game->mini->x_offset + MINIMAP_SCOPE > game->map->map_clean_lines)
-		game->mini->x_offset = game->map->map_clean_lines - MINIMAP_SCOPE;
-	if (game->mini->x_offset < 0)
-		game->mini->x_offset = 0;
-}
-
-static void	set_offset_y_pos(t_game *game)
-{
-	if (game->mini->y_offset + MINIMAP_SCOPE > game->map->max_len)
-		game->mini->y_offset = game->map->max_len - MINIMAP_SCOPE;
-	if (game->mini->y_offset < 0)
-		game->mini->y_offset = 0;
-}
-
 void	set_offset(t_game *game)
 {
 	game->mini->x_offset = (int)game->player->x_pos - MINIMAP_SCOPE / 2;
 	game->mini->y_offset = (int)game->player->y_pos  - MINIMAP_SCOPE / 2;
-	set_offset_x_pos(game);
-	set_offset_y_pos(game);
+	if (game->mini->x_offset + MINIMAP_SCOPE > game->map->map_clean_lines)
+		game->mini->x_offset = game->map->map_clean_lines - MINIMAP_SCOPE;
+	if (game->mini->x_offset < 0)
+		game->mini->x_offset = 0;
+	if (game->mini->y_offset + MINIMAP_SCOPE > game->map->max_len)
+		game->mini->y_offset = game->map->max_len - MINIMAP_SCOPE;
+	if (game->mini->y_offset < 0)
+		game->mini->y_offset = 0;
 }
 
 bool	check_wall(t_game *game, int x, int y, double step)
@@ -112,13 +101,46 @@ void	cast_rays(t_game *data, double step)
 	double	factor;
 	double	ray[2];
 	int		pixel[2];
+	double	i;
+
+	cam[X] = data->player->x_pos;
+	cam[Y] = data->player->y_pos;
+	factor = 0.01;
+	i = -0.5;
+	while (factor < 14)
+	{
+		i = -0.5;
+		while (i < 0.5)
+		{
+			ray[X] = cam[X] + ((data->player->x_scalar + i) * factor);
+			ray[Y] = cam[Y] + ((data->player->y_scalar )* factor);
+			if (data->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
+				break ;
+			pixel[X] = cast_ray_world_to_map(data->mini->x_offset, ray[X] , step);
+			pixel[Y] = cast_ray_world_to_map(data->mini->y_offset, ray[Y], step);
+			if (pixel[X] >= HEIGHT|| pixel[Y] >= WIDTH
+				|| pixel[X] < 1 || pixel[Y] < 1)
+				break ;
+			mlx_put_pixel(data->mini->img, pixel[X], pixel[Y], RED);
+			i += 0.001;
+		}
+			factor += 0.01;
+	}
+}
+
+void	cast_rays_max(t_game *data, double step)
+{
+	double	cam[2];
+	double	factor;
+	double	ray[2];
+	int		pixel[2];
 
 	cam[X] = data->player->x_pos;
 	cam[Y] = data->player->y_pos;
 	factor = 0.01;
 	while (factor < 10)
 	{
-		ray[X] = cam[X] + (data->player->x_scalar * factor);
+		ray[X] = cam[X] + ((data->player->x_scalar + 0.5) * factor);
 		ray[Y] = cam[Y] + (data->player->y_scalar * factor);
 		if (data->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
 			break ;
@@ -132,6 +154,31 @@ void	cast_rays(t_game *data, double step)
 	}
 }
 
+// void	cast_rays_min(t_game *data, double step)
+// {
+// 	double	cam[2];
+// 	double	factor;
+// 	double	ray[2];
+// 	int		pixel[2];
+
+// 	cam[X] = data->player->x_pos;
+// 	cam[Y] = data->player->y_pos;
+// 	factor = 0.01;
+// 	while (factor < 10)
+// 	{
+// 		ray[X] = cam[X] + ((data->player->x_scalar - 0.5) * factor);
+// 		ray[Y] = cam[Y] + (data->player->y_scalar * factor);
+// 		if (data->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
+// 			break ;
+// 		pixel[X] = cast_ray_world_to_map(data->mini->x_offset, ray[X], step);
+// 		pixel[Y] = cast_ray_world_to_map(data->mini->y_offset, ray[Y], step);
+// 		if (pixel[X] >= data->mini->size || pixel[Y] >= data->mini->size
+// 			|| pixel[X] < 1 || pixel[Y] < 1)
+// 			break ;
+// 		mlx_put_pixel(data->mini->img, pixel[X], pixel[Y], RED);
+// 		factor += 0.01;
+// 	}
+// }
 
 static void	draw_minimap(t_game *game)
 {
@@ -139,7 +186,7 @@ static void	draw_minimap(t_game *game)
 	int		y;
 	double	step;
 
-	// game->mini->size = WIDTH / MINIMAP_FACTOR;
+	// game->mini->size = WIDTH / MINIMAP_SCALE;
 	step = (double)game->mini->size / MINIMAP_SCOPE;
 	set_offset(game);
 	y = 0;
@@ -158,6 +205,8 @@ static void	draw_minimap(t_game *game)
 	}
 	draw_player(game, step);
 	cast_rays(game, step);
+	// cast_rays_max(game, step);
+	// cast_rays_min(game, step);
 }
 
 void	update_minimap(t_game *game)
