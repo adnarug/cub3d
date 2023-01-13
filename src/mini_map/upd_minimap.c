@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/13 16:56:05 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:29:28 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,24 +107,34 @@ void	cast_rays(t_game *data, double step)
 	cam[Y] = data->player->y_pos;
 	factor = 0.01;
 	i = -0.5;
-	while (factor < 14)
+	while ( i < 0.5)
 	{
-		i = -0.5;
-		while (i < 0.5)
+		factor = 0.01;
+		while (factor <  data->mini->size)
 		{
-			ray[X] = cam[X] + ((data->player->x_scalar + i) * factor);
-			ray[Y] = cam[Y] + ((data->player->y_scalar )* factor);
-			if (data->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
-				break ;
-			pixel[X] = cast_ray_world_to_map(data->mini->x_offset, ray[X] , step);
-			pixel[Y] = cast_ray_world_to_map(data->mini->y_offset, ray[Y], step);
-			if (pixel[X] >= HEIGHT|| pixel[Y] >= WIDTH
-				|| pixel[X] < 1 || pixel[Y] < 1)
-				break ;
-			mlx_put_pixel(data->mini->img, pixel[X], pixel[Y], RED);
-			i += 0.001;
+		
+			// while (i < 0.5)
+			// {
+				ray[X] = cam[X] + ((data->player->x_scalar + i) * factor);
+				ray[Y] = cam[Y] + ((data->player->y_scalar)* factor);
+				// printf("ray x %f ray y %f\n", ray[X], ray[Y]);
+				if (ray[X] >= data->mini->size || ray[Y] >= data->mini->size
+					|| ray[X] < 0 || ray[Y] < 0)
+					break ;
+				if (data->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
+					break ;
+				pixel[X] = cast_ray_world_to_map(data->mini->x_offset, ray[X] , step);
+				pixel[Y] = cast_ray_world_to_map(data->mini->y_offset, ray[Y], step);
+				if (pixel[X] >= data->mini->size || pixel[Y] >= data->mini->size
+					|| pixel[X] < 1 || pixel[Y] < 1)
+					break ;
+				mlx_put_pixel(data->mini->img, pixel[X], pixel[Y], RED);
+			// 	i += 0.001;
+			// }
+				factor += 0.01;
 		}
-			factor += 0.01;
+		i += 0.001;
+
 	}
 }
 
