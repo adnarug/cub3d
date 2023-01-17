@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/13 17:34:48 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:59:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,15 @@ void	cast_rays(t_game *data, double step)
 	double	factor;
 	double	ray[2];
 	int		pixel[2];
-	double	i;
+	double	start;
+	double end;
 
 	cam[X] = data->player->x_pos;
 	cam[Y] = data->player->y_pos;
 	factor = 0.01;
-	i = -0.5;
-	while ( i < 0.5)
+	start = -0.3;
+	end = 0.3;
+	while ( start < end)
 	{
 		factor = 0.01;
 		while (factor <  data->mini->size)
@@ -115,8 +117,8 @@ void	cast_rays(t_game *data, double step)
 		
 			// while (i < 0.5)
 			// {
-				ray[X] = cam[X] + ((data->player->x_scalar + i) * factor);
-				ray[Y] = cam[Y] + ((data->player->y_scalar)* factor);
+				ray[X] = cam[X] + ((data->player->x_scalar + start) * factor);
+				ray[Y] = cam[Y] + ((data->player->y_scalar + start)* factor);
 				// printf("ray x %f ray y %f\n", ray[X], ray[Y]);
 				if (ray[X] >= data->mini->size || ray[Y] >= data->mini->size
 					|| ray[X] < 0 || ray[Y] < 0)
@@ -133,7 +135,7 @@ void	cast_rays(t_game *data, double step)
 			// }
 				factor += 0.01;
 		}
-		i += 0.001;
+		start += 0.001;
 
 	}
 }
