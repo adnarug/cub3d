@@ -6,23 +6,23 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:42:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/16 11:57:47 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:03:47 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-bool	check_collisions(t_game	*data, double new_v[2])
+bool	check_collisions(t_game	*game, double new_v[2])
 {
 	int	old_xmap;
 	int	old_ymap;
 
-	old_xmap = data->player->x_pos;
-	old_ymap = data->player->y_pos;
-	if (data->map->map_filled[(int)new_v[X]][(int)new_v[Y]] == '1')
+	old_xmap = game->player->x_pos;
+	old_ymap = game->player->y_pos;
+	if (game->map->map_filled[(int)new_v[X]][(int)new_v[Y]] == '1')
 		return (true);
-	if (data->map->map_filled[(int)new_v[X]][old_ymap] == '1'
-		&& data->map->map_filled[old_xmap][(int)new_v[Y]] == '1')
+	if (game->map->map_filled[(int)new_v[X]][old_ymap] == '1'
+		&& game->map->map_filled[old_xmap][(int)new_v[Y]] == '1')
 		return (true);
 	return (false);
 }
@@ -47,23 +47,23 @@ void	move(t_game *game, double angle)
 }
 
 
-void	rotate(t_game *data, int direction)
+void	rotate(t_game *game, int direction)
 {
 	double	new_angle;
 
-	new_angle = data->player->angle + direction * ROTATION_RADIANS;
+	new_angle = game->player->angle + direction * ROTATION_RADIANS;
 	if (new_angle < 0)
-		data->player->angle = 2 * M_PI + new_angle;
+		game->player->angle = 2 * M_PI + new_angle;
 	else if (new_angle >= 2 * M_PI)
-		data->player->angle = new_angle - 2 * M_PI;
+		game->player->angle = new_angle - 2 * M_PI;
 	else
-		data->player->angle = new_angle;
-	data->player->x_scalar = sin(data->player->angle);
-	data->player->y_scalar = -1 * cos(data->player->angle);
-	data->player->camplane[X] = data->player->x_scalar;
-	data->player->camplane[Y] = data->player->y_scalar;
-	rotate_vector(data->player->camplane, 0.5 * M_PI);
-	update_minimap(data);
+		game->player->angle = new_angle;
+	game->player->x_scalar = sin(game->player->angle);
+	game->player->y_scalar = -1 * cos(game->player->angle);
+	game->player->camplane[X] = game->player->x_scalar;
+	game->player->camplane[Y] = game->player->y_scalar;
+	rotate_vector(game->player->camplane, 0.5 * M_PI);
+	update_minimap(game);
 
 }
 

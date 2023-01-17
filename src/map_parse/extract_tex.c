@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 17:17:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:06:41 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define DEBUG 0
+
 #include "../../include/cub3D.h"
 
 static char	**extract_tex_rgb_helper(char *str, char *tex_id)

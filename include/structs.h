@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/11 09:05:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:01:18 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_player
 	double		x_scalar;
 	double		y_scalar;
 	double		camplane[2];
+	double		direc[2];
 	t_vector	*direction;
 	double		angle;
 	double		angle_rad;

@@ -6,12 +6,16 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/13 15:24:16 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:07:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef cub3D_H
 # define cub3D_H
+
+// MENU
+#define VIS_RAYS 0 //turn on the cone of rays in Field of View in minimap, by default a line
+#define DEBUG 1 //if 1 debug mode for the map
 
 # include "../lib/include/MLX42/MLX42.h"
 # include <stdio.h>
@@ -38,16 +42,18 @@
 # define J	1
 
 # define NAVY	0x0000FF55
-
+# define BLACK  0x00000000
 # define GREEN	0x00FF00FF
 # define NAVY	0x0000FF55
-# define RED	0xFF0000FF
-# define GREY   0xCCCCCC
+# define RED	   0xFF0000FF
+#define GREEN_WALL 0x385b66FF
+# define VAMP   0xc0C0C0FF
+# define BACKG   0x8FC9AEFF
 # define ROTATION_RADIANS 0.1
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
-#define STEP        0.1
+#define  STEP        0.1
 # define ROTATE_RIGHT 1
 # define ROTATE_LEFT  -1
 
@@ -78,7 +84,8 @@ void	update_minimap(t_game *game);
 //Minimap - BONUS
 void	launch_minimap(t_game *game);
 //RE
-void	cast_rays(t_game *data, double step);
+void	rays_minimap_cone(t_game *game, double step);
+void	rays_minimap_line(t_game *game, double step);
 void	move(t_game *game, double angle);
 void	rotate_vector(double v[2], double angle);
 void	rotate(t_game *data, int direction);

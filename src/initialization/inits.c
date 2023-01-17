@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:46:07 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/11 16:52:44 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:02:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void init_mlx(t_game *game)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
-void	init_camera_plane(t_game *data)
+void	init_camera_plane(t_game *game)
 {
-	data->player->camplane[X] = 0.5 * data->player->x_scalar;
-	data->player->camplane[Y] = 0.5 * data->player->y_scalar;
-	rotate_vector(data->player->camplane, 0.5 * M_PI);
+	game->player->camplane[X] = 0.5 * game->player->x_scalar;
+	game->player->camplane[Y] = 0.5 * game->player->y_scalar;
+	rotate_vector(game->player->camplane, 0.5 * M_PI);
 }

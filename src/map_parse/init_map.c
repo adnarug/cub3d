@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 10:13:35 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:06:22 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DEBUG 1
+
 #include "../../include/cub3D.h"
 
 /* Counting the newlines */
@@ -263,12 +263,12 @@ the player looks, through the position of the player,
 then every point of the line is the sum of the position of the player, 
 and a multiple of the direction vector
 */
-static void	init_camera_plane(t_game *data)
+static void	init_camera_plane(t_game *game)
 {
-	data->player->camplane[X] = 0.5 * data->player->x_scalar;
+	game->player->camplane[X] = 0.5 * game->player->x_scalar;
 	
-	data->player->camplane[Y] = 0.5 * data->player->y_scalar;
-	rotate_vector(data->player->camplane, 0.5 * M_PI);
+	game->player->camplane[Y] = 0.5 * game->player->y_scalar;
+	rotate_vector(game->player->camplane, 0.5 * M_PI);
 }
 /*Angles in rad, 1 rad = 57 degrees*/
 void	init_player_angle(t_game *game)
@@ -291,9 +291,11 @@ int	find_player(t_game *game)
 	int		i;
 	int		j;
 	char	**map;
-
+	int		one_pl_found;
+	
 	i = 0;
 	j = 0;
+	one_pl_found = 0;
 	map = game->map->map_filled;
 	while(map[i] != NULL)
 	{
@@ -302,17 +304,22 @@ int	find_player(t_game *game)
 		{
 			if (ft_strchr(PLAYER_POS, map[i][j]) != NULL)
 			{
+				if (one_pl_found == 1)
+					return (EXIT_FAILURE);
+				one_pl_found = 1;
 				game->player->x_pos = i;
 				game->player->y_pos = j;
 				game->player->dir = map[i][j];
 				init_player_angle(game);
-				return (EXIT_SUCCESS);
 			}
 			j++;
 		}
 		i++;
 	}
-	return (EXIT_FAILURE);
+	if (one_pl_found == 1)
+		return (EXIT_SUCCESS);
+	else
+		return (EXIT_FAILURE);
 }
 
 int	init_map(t_game *game)
@@ -339,7 +346,7 @@ int	init_map(t_game *game)
 		error("Error\nMap is invalid\n");
 	if (find_player(game) == EXIT_FAILURE)
 	{
-		error("Error\nPlayer not found\n");
+		error("Error\nPlayer not found or too many players\n");
 		exit(1);
 	}
 	if (DEBUG == 1)

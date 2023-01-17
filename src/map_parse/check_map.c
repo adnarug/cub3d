@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/06 15:34:43 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:05:48 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define DEBUG 1
+
 #include "../../include/cub3D.h"
 
 int	check_holes(char *s)
