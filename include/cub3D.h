@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/18 14:44:21 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/18 15:50:03 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
+# define TEX_WIDTH	64
+# define TEX_HEIGHT	64
 #define  STEP        0.1
 # define ROTATE_RIGHT 1
 # define ROTATE_LEFT  -1

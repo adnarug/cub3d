@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:16:23 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/18 14:49:53 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/18 16:14:55 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	cast_ray(t_game *game, double dir_x, double dir_y, int win_x)
 {
 	double	pos[2];
 	double	ray[2];
-	double	factor[2];
+	int		step[2];
 	double	deltaDist[2];
 	double	map_pos[2];
 	double	sideDist[2];
 	double	wallDist;
 	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
 
 	pos[X] = game->player->x_pos;
 	pos[Y] = game->player->y_pos;
@@ -33,22 +36,22 @@ void	cast_ray(t_game *game, double dir_x, double dir_y, int win_x)
 	ray[Y] = (double)map_pos[Y];
 	if (dir_x < 0)
 	{
-		factor[X] = -0.01;
+		step[X] = -1;
 		sideDist[X] = (pos[X] - map_pos[X]) * deltaDist[X];
 	}
 	else
     {
-		factor[X] = 0.01;
+		step[X] = 1;
 		sideDist[X] = (map_pos[X] + 1.0 - pos[X]) * deltaDist[X];
     }
 	if (dir_y < 0)
 	{
-		factor[Y] = -0.01;
+		step[Y] = -1;
 		sideDist[Y] = (pos[Y] - map_pos[Y]) * deltaDist[Y];
 	}
 	else
     {
-		factor[Y] = 0.01;
+		step[Y] = 1;
 		sideDist[Y] = (map_pos[Y] + 1.0 - pos[Y]) * deltaDist[Y];
     }
 	while (1)
@@ -56,13 +59,13 @@ void	cast_ray(t_game *game, double dir_x, double dir_y, int win_x)
 		if (sideDist[X]< sideDist[Y])
         {
         	sideDist[X] += deltaDist[X];
-        	ray[X] += factor[X];
+        	ray[X] += step[X];
 			side = 0;
         }
 		else
         {
         	sideDist[Y] += deltaDist[Y];
-        	ray[Y] += factor[Y];
+        	ray[Y] += step[Y];
 			side = 1;
 		}
 		if (game->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
@@ -73,14 +76,14 @@ void	cast_ray(t_game *game, double dir_x, double dir_y, int win_x)
 	else
 		wallDist = sideDist[Y] - deltaDist[Y];
 
-	int lineHeight = (int)(HEIGHT / wallDist);
+	lineHeight = (int)(HEIGHT / wallDist);
 
-    int drawStart = -lineHeight / 2 + 64 / 2;
-    if(drawStart < 0)
+    drawStart = (-lineHeight / 2) + (HEIGHT / 2);
+    if (drawStart < 0)
 		drawStart = 0;
-    int drawEnd = lineHeight / 2 + 64 / 2;
-    if(drawEnd >= 64)
-		drawEnd = 64 - 1;
+    drawEnd = (lineHeight / 2) + (HEIGHT / 2);
+    if (drawEnd >= HEIGHT)
+		drawEnd = HEIGHT - 1;
 	while (drawStart < drawEnd)
 	{
 		if (side == 0)
@@ -88,6 +91,44 @@ void	cast_ray(t_game *game, double dir_x, double dir_y, int win_x)
 		else
 			mlx_put_pixel(game->img, win_x, drawStart, 0x6E2020FF);
 		drawStart++;
+	}
+}
+
+void	fill_ceiling(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (x < WIDTH)
+	{
+		while (y < HEIGHT / 2)
+		{
+			mlx_put_pixel(game->img, x, y, 0x438B8CFF);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+}
+
+void	fill_floor(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = HEIGHT / 2;
+	while (x < WIDTH)
+	{
+		while (y < HEIGHT)
+		{
+			mlx_put_pixel(game->img, x, y, 0x433C5CFF);
+			y++;
+		}
+		y = HEIGHT / 2;
+		x++;
 	}
 }
 
@@ -101,7 +142,9 @@ void	raycaster(t_game *game)
 
 	i = -0.5;
 	win_x = 0;
-	while (i < 0.5)
+	fill_ceiling(game);
+	fill_floor(game);
+	while (win_x < WIDTH)
 	{
 		ray_angle = game->player->angle;
 		ray_angle += i;
