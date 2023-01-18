@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 12:01:18 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:57:58 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ typedef struct s_vector
 
 typedef struct s_player
 {
-	double		x_pos;
+	double		x_pos;//position
 	double		y_pos;
-	double		x_scalar;
+	double		x_scalar;//direction
 	double		y_scalar;
-	double		camplane[2];
-	double		direc[2];
-	t_vector	*direction;
+	double		camplane[2];//camera plane
+	double		direc[2];//to remove
+	t_vector	*direction;//to remove
 	double		angle;
-	double		angle_rad;
+	// double		angle_rad;
 	char		dir;
 }	t_player;
 
@@ -45,7 +45,7 @@ typedef struct s_map
 	int		max_len;
 }	t_map;
 
-typedef struct s_tex_rgb
+typedef struct s_tex_rgb //rgb a
 {
 	int			r;
 	int			g;

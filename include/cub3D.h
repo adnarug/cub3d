@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:07:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:23:22 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
-#define  STEP        0.1
+#define  STEP        0.5
 # define ROTATE_RIGHT 1
 # define ROTATE_LEFT  -1
 

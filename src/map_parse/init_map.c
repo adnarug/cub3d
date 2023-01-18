@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:06:22 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:52:27 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,8 @@ char	**dup_matrix(t_game *game)
 			printf("max len %d written len %d last char %c \n", game->map->max_len, written_len, new_map[i][written_len - 1]);
 		if (written_len < game->map->max_len)
 		{
-			written_len--;
+			if (i != game->map->map_clean_lines - 1)
+				written_len--;
 			while (written_len < game->map->max_len - 1)
 			{
 				new_map[i][written_len] = '-';
@@ -343,16 +344,19 @@ int	init_map(t_game *game)
 	game->map->map_filled = dup_matrix(game);
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
 	if (map_isvalid(game) == EXIT_FAILURE)
-		error("Error\nMap is invalid\n");
-	if (find_player(game) == EXIT_FAILURE)
 	{
-		error("Error\nPlayer not found or too many players\n");
+		error("Error\nMap is invalid\n");
 		exit(1);
 	}
+	if (find_player(game) == EXIT_FAILURE)
+	{
 	if (DEBUG == 1)
 	{
 		print_2d_array(game->map->map_filled);
 		// printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
+	}
+		error("Error\nPlayer not found or too many players\n");
+		exit(1);
 	}
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
