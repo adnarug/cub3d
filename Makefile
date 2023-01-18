@@ -4,7 +4,7 @@ OBJ_DIR = obj/
 #-fsanitize=address
 FLAGS = -Wall -Wextra -g -fsanitize=address #-Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
 LIBMLX = lib/libmlx42.a
-LIBS = $(LIBMLX) -lglfw -framework OpenGL -framework AppKit
+LIBS = $(LIBMLX) -lglfw -L $$HOME/.brew/Cellar/glfw/3.3.8/lib/ -framework OpenGL -framework AppKit
 LIBFT = libft/
 CC = gcc
 SRC_FILES = utils/args_check \
@@ -22,6 +22,7 @@ SRC_FILES = utils/args_check \
 			movement/move_rotate \
 			initialization/inits \
 			initialization/free \
+			raycasting/raycaster \
 			main
 DEF_COLOR = \033[0;80m
 GREEN = \033[0;92m
@@ -49,6 +50,7 @@ $(OBJF):
 	@mkdir -p obj/initialization/
 	@mkdir -p obj/mini_map/
 	@mkdir -p obj/movement/
+	@mkdir -p obj/raycasting/
 
 clean:
 	@rm -r $(OBJ_DIR)

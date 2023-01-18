@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:07:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:44:21 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define cub3D_H
 
 // MENU
-#define VIS_RAYS 0 //turn on the cone of rays in Field of View in minimap, by default a line
-#define DEBUG 1 //if 1 debug mode for the map
+#define VIS_RAYS 1 //turn on the cone of rays in Field of View in minimap, by default a line
+#define DEBUG 0 //if 1 debug mode for the map
 
 # include "../lib/include/MLX42/MLX42.h"
 # include <stdio.h>
@@ -92,5 +92,7 @@ void	rotate(t_game *data, int direction);
 bool	check_collisions(t_game	*data, double new_v[2]);
 void	read_keys(mlx_key_data_t keycode, void *param);
 bool	check_collisions(t_game	*data, double new_v[2]);
+
+void	raycaster(t_game *game);
 
 #endif 
