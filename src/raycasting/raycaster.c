@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:16:23 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/19 16:23:18 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/19 16:44:50 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	raycaster(t_game *game)
 	extract_hex_color(game);
 	fill_ceiling(game);
 	fill_floor(game);
-	printf("%f\n", game->player->camplane[X]);
 	while (win_x < WIDTH)
 	{
 		camera[X] = 2 * win_x / (double)WIDTH - 1;

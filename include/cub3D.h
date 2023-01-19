@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 13:02:45 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:45:38 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
-#define  STEP        0.1
+#define  STEP        0.09
 # define ROTATE_RIGHT 1
 # define ROTATE_LEFT  -1
 
@@ -94,5 +94,6 @@ void	read_keys(mlx_key_data_t keycode, void *param);
 bool	check_collisions(t_game	*data, double new_v[2]);
 void    extract_hex_color(t_game *game);
 void	raycaster(t_game *game);
+void	init_camera_plane(t_game *game);
 
 #endif 

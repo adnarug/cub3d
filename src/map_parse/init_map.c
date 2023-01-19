@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/18 12:52:27 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:46:16 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,13 +264,6 @@ the player looks, through the position of the player,
 then every point of the line is the sum of the position of the player, 
 and a multiple of the direction vector
 */
-static void	init_camera_plane(t_game *game)
-{
-	game->player->camplane[X] = 0.5 * game->player->x_scalar;
-	
-	game->player->camplane[Y] = 0.5 * game->player->y_scalar;
-	rotate_vector(game->player->camplane, 0.5 * M_PI);
-}
 /*Angles in rad, 1 rad = 57 degrees*/
 void	init_player_angle(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/18 15:06:38 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/19 16:42:26 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ static void	draw_minimap(t_game *game)
 
 void	update_minimap(t_game *game)
 {
+	init_camera_plane(game);
 	draw_minimap(game);
 	mlx_image_to_window(game->mlx, game->mini->img, 0, 0);
 }
