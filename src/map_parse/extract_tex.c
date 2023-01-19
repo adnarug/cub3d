@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 11:26:37 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:49:49 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_abbr(char *str)
 }
 
 /*-Space after NO*/
-char *extract_tex_helper(char *str_raw, char *tex_id)
+char *extract_tex_helper(char *str_raw)
 {
 	char	*tex;
 	char	**str_spl;
@@ -54,7 +54,6 @@ char *extract_tex_helper(char *str_raw, char *tex_id)
 	j = 0;
 	len = 0;
 	str_spl = ft_split(str_raw, ' ');
-	print_2d_array(str_spl);
 	if (str_spl == NULL || *str_spl[0] == ' ')
 		return (NULL);
 	if (check_abbr(str_spl[0]) != 0)
@@ -124,13 +123,13 @@ char *extract_tex(t_game *game)
 	while (i < game->map->map_clean_start)
 	{
 		if ((ft_strnstr(game->map->map_raw[i], "NO ", ft_strlen(game->map->map_raw[i]))) != NULL)
-			game->tex->no = extract_tex_helper(game->map->map_raw[i], "NO");
+			game->tex->no = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "SO ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->so = extract_tex_helper(game->map->map_raw[i], "SO");
+			game->tex->so = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "WE ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->we = extract_tex_helper(game->map->map_raw[i], "WE");
+			game->tex->we = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "EA ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->ea = extract_tex_helper(game->map->map_raw[i], "EA");
+			game->tex->ea = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "F ", ft_strlen(game->map->map_raw[i])) != NULL)
 		{
 			game->tex->f->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "F");

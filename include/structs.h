@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/18 11:57:58 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:23:41 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_tex_rgb //rgb a
 	int			g;
 	int			b;
 	char	**rgb;
+	int			color;
 }	t_tex_rgb;
 
 typedef struct s_textures
