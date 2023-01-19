@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/18 12:23:22 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:18:43 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@
 # define I	0
 # define J	1
 
-# define NAVY	0x0000FF55
-# define BLACK  0x00000000
-# define GREEN	0x00FF00FF
-# define NAVY	0x0000FF55
-# define RED	   0xFF0000FF
-#define GREEN_WALL 0x385b66FF
-# define VAMP   0xc0C0C0FF
-# define BACKG   0x8FC9AEFF
+# define NAVY		0x0000FF55
+# define BLACK		0x00000000
+# define GREEN		0x00FF00FF
+# define NAVY		0x0000FF55
+# define RED		0xFF0000FF
+#define GREEN_WALL	0x385b66FF
+# define VAMP		0xc0C0C0FF
+# define BACKG		0x8FC9AEFF
 # define ROTATION_RADIANS 0.1
 //WINDOW SIZE
 # define WIDTH		1080

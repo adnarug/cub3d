@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:05:48 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:20:07 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	check_holes(char *s)
 	int	i;
 
 	i = 0;
-	// if (DEBUG == 1)
-	//  printf("stirng to check %s\n", s);
+	if (DEBUG == 1)
+	 printf("stirng to check %s\n", s);
 	if (s[0] == '0')
 		return (EXIT_FAILURE);
 	while (s[i] != '\0')

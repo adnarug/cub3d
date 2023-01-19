@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:06:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:15:29 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,46 @@ static char	**extract_tex_rgb_helper(char *str, char *tex_id)
 	return (rgb);
 }
 
-/*-Space after NO*/
-char *extract_tex_helper(char *str, char *tex_id)
+int	check_abbr(char *str)
 {
-	char *tex;
-	char *start;
-	int	len;
-	int i;
-	int j;
+	if ((ft_strncmp(str, "NO", 2) == 0) || (ft_strncmp(str, "SO", 2) == 0) || \
+	(ft_strncmp(str, "EA", 2) == 0) ||(ft_strncmp(str, "WE", 2) == 0))
+		return (0);
+	else
+		return (1);
+}
+
+/*-Space after NO*/
+char *extract_tex_helper(char *str_raw, char *tex_id)
+{
+	char	*tex;
+	char	**str_spl;
+	char	*start;
+	int		i;
+	int		j;
+	int		len;
 
 	i = 0;
 	j = 0;
 	len = 0;
-	str = ft_strnstr(str, tex_id, ft_strlen(str));
-	if (str == NULL)
+	str_spl = ft_split(str_raw, ' ');
+	print_2d_array(str_spl);
+	if (str_spl == NULL || *str_spl[0] == ' ')
 		return (NULL);
-	start = ft_strnstr(str, "./", ft_strlen(str));
-	if (start == NULL)
-		return (NULL);
+	if (check_abbr(str_spl[0]) != 0)
+	{
+		error("Error\nTextures input is incorrect\n");
+		exit (1);
+	}
+	if (ft_strchr(str_spl[1], '/') == NULL)
+	{
+		error("Error\nTextures input is incorrect\n");
+		exit (1);
+	}
+	start = str_spl[1];
 	while (start[len] != '\0' && start[len] != ' ')
-		len++;
-	tex = malloc(sizeof(char) * (len));
+	len++;
+	tex = malloc(sizeof(char) * (len +1));
 	if (tex == NULL)
 		return (NULL);
 	while (len > 0)
@@ -65,6 +84,37 @@ char *extract_tex_helper(char *str, char *tex_id)
 	tex[j] = '\0';
 	return (tex);
 }
+	
+	// char *tex;
+	// char *start;
+	// int	len;
+	// int i;
+	// int j;
+
+	// i = 0;
+	// j = 0;
+	// len = 0;
+	// str = ft_strnstr(str, tex_id, ft_strlen(str));
+	// if (str == NULL)
+	// 	return (NULL);
+	// start = ft_strnstr(str, "./", ft_strlen(str));
+	// if (start == NULL)
+	// 	return (NULL);
+	// while (start[len] != '\0' && start[len] != ' ')
+	// 	len++;
+	// tex = malloc(sizeof(char) * (len));
+	// if (tex == NULL)
+	// 	return (NULL);
+	// while (len > 0)
+	// {
+	// 	tex[j] = start[i];
+	// 	i++;
+	// 	j++;
+	// 	len--;
+	// }
+	// tex[j] = '\0';
+// 	return (tex);
+// }
 
 void	extract_rgb(t_game *game, char c)
 {
