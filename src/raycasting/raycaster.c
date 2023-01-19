@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:16:23 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/19 14:06:17 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:23:18 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,25 +134,20 @@ void	fill_floor(t_game *game)
 
 void	raycaster(t_game *game)
 {
-	double	i;
-	double	dir_x;
-	double	dir_y;
-	double	ray_angle;
+	double	camera[2];
 	int		win_x;
 
-	i = -0.5;
 	win_x = 0;
 	extract_hex_color(game);
 	fill_ceiling(game);
 	fill_floor(game);
+	printf("%f\n", game->player->camplane[X]);
 	while (win_x < WIDTH)
 	{
-		ray_angle = game->player->angle;
-		ray_angle += i;
-		dir_x = sin(ray_angle);
-		dir_y = -1 * cos(ray_angle);
-		cast_ray(game, dir_x, dir_y, win_x);
+		camera[X] = 2 * win_x / (double)WIDTH - 1;
+      	double rayDirX = game->player->x_scalar + game->player->camplane[X] * camera[X];
+      	double rayDirY = game->player->y_scalar + game->player->camplane[Y] * camera[X];
+		cast_ray(game, rayDirX, rayDirY, win_x);
 		win_x++;
-		i += 0.001;
 	}
 }
