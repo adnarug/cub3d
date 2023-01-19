@@ -6,17 +6,14 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 14:51:11 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:42:36 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
-
-/*ToDo: 
-- fish eye
-- split in tex - free
-- getting close to the wall on top and left, bottom and right staying a step away*/
+/*ToDo:
+1. Fish eye check
+2. Access */
 int	main(int argc, char **argv)
 {
 	t_game	game;
