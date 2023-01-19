@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   upd_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:04:56 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:06:38 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	rays_minimap_cone(t_game *game, double step)
 	double	factor;
 	double	ray[2];
 	int		pixel[2];
-	double		i;
+	double	i;
 	double	ray_x_scalar;
 	double	ray_angle;
 	double	ray_y_scalar;
@@ -200,7 +200,7 @@ static void	draw_minimap(t_game *game)
 		rays_minimap_cone(game, step);
 	else
 		rays_minimap_line(game, step);
-
+	raycaster(game);
 }
 
 void	update_minimap(t_game *game)

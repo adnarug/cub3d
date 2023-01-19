@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 11:31:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:02:45 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define cub3D_H
 
 // MENU
-#define VIS_RAYS 0 //turn on the cone of rays in Field of View in minimap, by default a line
-#define DEBUG 0 //if 1 debug mode for the map
+#define VIS_RAYS 1 //turn on the cone of rays in Field of View in minimap, by default a line
+#define DEBUG 0//if 1 debug mode for the map
 
 # include "../lib/include/MLX42/MLX42.h"
 # include <stdio.h>
@@ -41,10 +41,10 @@
 # define I	0
 # define J	1
 
-# define NAVY	0x0000FF55
+# define NAVY	0x0000FFFF
 # define BLACK  0x00000000
 # define GREEN	0x00FF00FF
-# define NAVY	0x0000FF55
+# define NAVY	0x0000FFFF
 # define RED	   0xFF0000FF
 #define GREEN_WALL 0x385b66FF
 # define VAMP   0xc0C0C0FF
@@ -53,7 +53,7 @@
 //WINDOW SIZE
 # define WIDTH		1080
 # define HEIGHT		720
-#define  STEP        0.5
+#define  STEP        0.1
 # define ROTATE_RIGHT 1
 # define ROTATE_LEFT  -1
 
@@ -92,5 +92,7 @@ void	rotate(t_game *data, int direction);
 bool	check_collisions(t_game	*data, double new_v[2]);
 void	read_keys(mlx_key_data_t keycode, void *param);
 bool	check_collisions(t_game	*data, double new_v[2]);
+void    extract_hex_color(t_game *game);
+void	raycaster(t_game *game);
 
 #endif 

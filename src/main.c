@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 12:52:33 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:56:20 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 
 /*ToDo: 
-- the last char in the last row is substitued with '-'
-- parsing of the textures without  "./" in the beginning
+- fish eye
+- split in tex - free
 - getting close to the wall on top and left, bottom and right staying a step away*/
 int	main(int argc, char **argv)
 {
