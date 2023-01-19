@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 14:47:12 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:10:28 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char *extract_tex_helper(t_game *game, char *str_raw)
 		len--;
 	}
 	tex[j] = '\0';
-	system("leaks cub3D");
+	free_2d(str_spl);
 	return (tex);
 }
 

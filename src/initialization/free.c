@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 14:24:50 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:11:03 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		free_game(t_game *game)
 	free(game->tex->so);
 	free(game->tex->we);
 	free(game->tex->ea);
-	free_2d(game->tex->tex_spl);
+	// free_2d(game->tex->tex_spl);
 	free(game->tex);
 	free_2d(game->map->map_raw);
 	free_2d(game->map->map_filled);
