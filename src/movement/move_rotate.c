@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:42:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:03:47 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:06:44 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ void	move(t_game *game, double angle)
 	new_v_world[Y] = game->player->y_pos + new_v[Y];
 	if (check_collisions(game, new_v_world) == true)
 		return ;
-	// game->player->x_pos += angle;
 	game->player->x_pos = new_v_world[X];
 	game->player->y_pos = new_v_world[Y];
-	// render(game);
 	update_minimap(game);
 }
 

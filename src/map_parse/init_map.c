@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/18 12:52:27 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:08:17 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,8 +215,8 @@ char	**dup_matrix(t_game *game)
 		if (new_map[i] == NULL)
 			return (NULL);
 		written_len = ft_strlcpy(new_map[i], game->map->map_clean[i], game->map->max_len);
-		if (DEBUG == 1)
-			printf("max len %d written len %d last char %c \n", game->map->max_len, written_len, new_map[i][written_len - 1]);
+		// if (DEBUG == 1)
+		// 	printf("max len %d written len %d last char %c \n", game->map->max_len, written_len, new_map[i][written_len - 1]);
 		if (written_len < game->map->max_len)
 		{
 			if (i != game->map->map_clean_lines - 1)

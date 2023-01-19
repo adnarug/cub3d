@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 12:56:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:47:12 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_abbr(char *str)
 }
 
 /*-Space after NO*/
-char *extract_tex_helper(char *str_raw)
+char *extract_tex_helper(t_game *game, char *str_raw)
 {
 	char	*tex;
 	char	**str_spl;
@@ -55,7 +55,10 @@ char *extract_tex_helper(char *str_raw)
 	len = 0;
 	str_spl = ft_split(str_raw, ' ');
 	if (str_spl == NULL || *str_spl[0] == ' ')
-		return (NULL);
+	{
+		error("Error\nTextures input is incorrect\n");
+		exit (1);
+	}
 	if (check_abbr(str_spl[0]) != 0)
 	{
 		error("Error\nTextures input is incorrect\n");
@@ -66,10 +69,12 @@ char *extract_tex_helper(char *str_raw)
 		error("Error\nTextures input is incorrect\n");
 		exit (1);
 	}
+	game->tex->tex_spl = str_spl;
+	print_2d_array(game->tex->tex_spl);
 	start = str_spl[1];
 	while (start[len] != '\0' && start[len] != ' ')
-	len++;
-	tex = malloc(sizeof(char) * (len +1));
+		len++;
+	tex = malloc(sizeof(char) * (len + 1));
 	if (tex == NULL)
 		return (NULL);
 	while (len > 0)
@@ -80,8 +85,10 @@ char *extract_tex_helper(char *str_raw)
 		len--;
 	}
 	tex[j] = '\0';
+	system("leaks cub3D");
 	return (tex);
 }
+
 void	extract_rgb(t_game *game, char c)
 {
 	if (c == 'F')
@@ -121,7 +128,8 @@ static int  convert_rgb_to_hex(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 0xFF);
 }
-void    extract_hex_color(t_game *game)
+
+void	extract_hex_color(t_game *game)
 {
 	game->tex->c->color = convert_rgb_to_hex(game->tex->c->r, game->tex->c->g, game->tex->c->b);
 	game->tex->f->color = convert_rgb_to_hex(game->tex->f->r, game->tex->f->g, game->tex->f->b);
@@ -138,13 +146,13 @@ char *extract_tex(t_game *game)
 	while (i < game->map->map_clean_start)
 	{
 		if ((ft_strnstr(game->map->map_raw[i], "NO ", ft_strlen(game->map->map_raw[i]))) != NULL)
-			game->tex->no = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->no = extract_tex_helper(game, game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "SO ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->so = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->so = extract_tex_helper(game, game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "WE ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->we = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->we = extract_tex_helper(game, game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "EA ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->ea = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->ea = extract_tex_helper(game, game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "F ", ft_strlen(game->map->map_raw[i])) != NULL)
 		{
 			game->tex->f->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "F");
