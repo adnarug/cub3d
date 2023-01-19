@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:42:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:26:00 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/19 16:57:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	move(t_game *game, double angle)
 	// game->player->x_pos += angle;
 	game->player->x_pos = new_v_world[X];
 	game->player->y_pos = new_v_world[Y];
-	// render(game);
 	update_minimap(game);
 }
 

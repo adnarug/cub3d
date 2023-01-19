@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   upd_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:42:26 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:17:16 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	rays_minimap_line(t_game *game, double step)
 	cam[X] = game->player->x_pos;
 	cam[Y] = game->player->y_pos;
 	factor = 0.01;
-	while (factor < game->mini->size)
+	while (factor < 4)
 	{
 
 			ray[X] = cam[X] + (game->player->x_scalar * factor);

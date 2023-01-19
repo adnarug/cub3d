@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:45:38 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:31:50 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define cub3D_H
 
 // MENU
-#define VIS_RAYS 1 //turn on the cone of rays in Field of View in minimap, by default a line
+#define VIS_RAYS 0//turn on the cone of rays in Field of View in minimap, by default a line
 #define DEBUG 0//if 1 debug mode for the map
 
 # include "../lib/include/MLX42/MLX42.h"
@@ -74,7 +74,7 @@ int		init_game(t_game *game);
 void    
 init_mlx(t_game *game);
 //Misc
-void	error(char *str);
+int	error(char *str);
 int		free_game(t_game *game);
 int		ft_line_count(char **array);
 void	free_2d(char **matrix);

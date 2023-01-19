@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:46:07 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:45:21 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:29:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ int		init_game(t_game *game)
 	game->map = malloc(sizeof(t_map));
 	if (game->map == NULL)
 		return (EXIT_FAILURE);
+	game->tex->is_no = 0;
+	game->tex->is_we = 0;
+	game->tex->is_ea = 0;
+	game->tex->is_so = 0;
+	game->tex->is_f = 0;
+	game->tex->is_c = 0;
 	game->tex->no = "../../assets/NO.xpm";
 	game->tex->so = "../../assets/SO.xpm";
 	game->tex->ea = "../../assets/EA.xpm";

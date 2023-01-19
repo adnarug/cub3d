@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 12:56:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:33:36 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,14 @@ static int  convert_rgb_to_hex(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 0xFF);
 }
-void    extract_hex_color(t_game *game)
+void	extract_hex_color(t_game *game)
 {
 	game->tex->c->color = convert_rgb_to_hex(game->tex->c->r, game->tex->c->g, game->tex->c->b);
 	game->tex->f->color = convert_rgb_to_hex(game->tex->f->r, game->tex->f->g, game->tex->f->b);
 }
 
 
-char *extract_tex(t_game *game)
+char	*extract_tex(t_game *game)
 {
 	int		i;
 
@@ -138,22 +138,48 @@ char *extract_tex(t_game *game)
 	while (i < game->map->map_clean_start)
 	{
 		if ((ft_strnstr(game->map->map_raw[i], "NO ", ft_strlen(game->map->map_raw[i]))) != NULL)
+		{
+			if (game->tex->is_no != 0)
+				exit (error("Error\n Multiple NO\n"));
 			game->tex->no = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->is_no = 1;
+		}
 		if (ft_strnstr(game->map->map_raw[i], "SO ", ft_strlen(game->map->map_raw[i])) != NULL)
+		{
+			if (game->tex->is_so != 0)
+				exit (error("Error\n Multiple SO\n"));
 			game->tex->so = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->is_so = 1;
+		}
 		if (ft_strnstr(game->map->map_raw[i], "WE ", ft_strlen(game->map->map_raw[i])) != NULL)
+		{
+			if (game->tex->is_we != 0)
+				exit (error("Error\n Multiple WE\n"));
 			game->tex->we = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->is_we = 1;
+		}
 		if (ft_strnstr(game->map->map_raw[i], "EA ", ft_strlen(game->map->map_raw[i])) != NULL)
+		{
+			if (game->tex->is_ea != 0)
+				exit (error("Error\n Multiple EA\n"));
 			game->tex->ea = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->is_ea = 1;
+		}
 		if (ft_strnstr(game->map->map_raw[i], "F ", ft_strlen(game->map->map_raw[i])) != NULL)
 		{
+			if (game->tex->is_f != 0)
+				exit (error("Error\n Multiple F\n"));
 			game->tex->f->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "F");
 			extract_rgb(game, 'F');
+			game->tex->is_f = 1;
 		}
 		if (ft_strnstr(game->map->map_raw[i], "C ",  ft_strlen(game->map->map_raw[i])) != NULL)
 		{
+			if (game->tex->is_c != 0)
+				exit (error("Error\n Multiple C\n"));
 			game->tex->c->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "C");
 			extract_rgb(game, 'C');
+			game->tex->is_c = 1;
 		}
 		i++;
 	}
