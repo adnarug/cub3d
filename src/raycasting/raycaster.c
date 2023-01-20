@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:16:23 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/19 16:44:50 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/20 18:14:55 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,42 @@ void	cast_ray(t_game *game, double dir_x, double dir_y, int win_x)
     drawEnd = (lineHeight / 2) + (HEIGHT / 2);
     if (drawEnd >= HEIGHT)
 		drawEnd = HEIGHT - 1;
+
+	//TEXTURISING
+	double	wallX;
+    if (side == 0)
+		wallX = game->player->y_pos + wallDist * dir_y;
+    else
+		wallX = game->player->x_pos + wallDist * dir_x;
+    wallX -= floor((wallX));
+	int texX = (int)(wallX * (double)(TEX_SCALE));
+    if (side == 0 && dir_x > 0)
+		texX = TEX_SCALE - texX - 1;
+    if (side == 1 && dir_y < 0)
+		texX = TEX_SCALE - texX - 1;
+	double tex_step = 1.0 * TEX_SCALE / lineHeight;
+	double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * tex_step;
 	while (drawStart < drawEnd)
 	{
+		int texY = (int)texPos & (TEX_SCALE - 1);
+		texPos += tex_step;
+		int byte = (texY * TEX_SCALE * 4) + (texX * 4);
 		if (side == 0)
-			mlx_put_pixel(game->img, win_x, drawStart, RED);
+		{
+			int r = game->tex->no_tex->pixels[byte];
+			int g = game->tex->no_tex->pixels[byte + 1];
+			int b = game->tex->no_tex->pixels[byte + 2];
+			int tex_color = convert_rgb_to_hex(r, g, b);
+			mlx_put_pixel(game->img, win_x, drawStart, tex_color);
+		}
 		else
-			mlx_put_pixel(game->img, win_x, drawStart, 0x6E2020FF);
+		{
+			int r = game->tex->ea_tex->pixels[byte];
+			int g = game->tex->ea_tex->pixels[byte + 1];
+			int b = game->tex->ea_tex->pixels[byte + 2];
+			int tex_color = convert_rgb_to_hex(r, g, b);
+			mlx_put_pixel(game->img, win_x, drawStart, tex_color);
+		}
 		drawStart++;
 	}
 }
@@ -132,12 +162,24 @@ void	fill_floor(t_game *game)
 	}
 }
 
+void	load_texture(t_game *game)
+{
+	xpm_t	*xpm;
+	xpm_t	*xpm2;
+
+	xpm = mlx_load_xpm42("assets/NO.xpm42");
+	game->tex->no_tex = &xpm->texture;
+	xpm2 = mlx_load_xpm42("assets/EA.xpm42");
+	game->tex->ea_tex = &xpm2->texture;
+}
+
 void	raycaster(t_game *game)
 {
 	double	camera[2];
 	int		win_x;
 
 	win_x = 0;
+	load_texture(game);
 	extract_hex_color(game);
 	fill_ceiling(game);
 	fill_floor(game);

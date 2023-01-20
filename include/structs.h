@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 12:23:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:11:38 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ typedef struct s_tex_rgb //rgb a
 typedef struct s_textures
 {
 	char			*no;
+	mlx_texture_t	*no_tex;
 	char			*so;
+	mlx_texture_t	*ea_tex;
 	char			*we;
 	char			*ea;
 	t_tex_rgb		*f;

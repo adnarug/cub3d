@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:45:38 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:57:55 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 #define  STEP        0.09
 # define ROTATE_RIGHT 1
 # define ROTATE_LEFT  -1
+# define TEX_SCALE	64
 
 # define VALID_CHAR "10 NEWS-\n"
 # define PLAYER_POS "NEWS"
@@ -96,4 +97,6 @@ void    extract_hex_color(t_game *game);
 void	raycaster(t_game *game);
 void	init_camera_plane(t_game *game);
 
-#endif 
+int  convert_rgb_to_hex(int r, int g, int b);
+
+#endif

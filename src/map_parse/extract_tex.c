@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 12:56:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:57:43 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	init_tex(t_game *game)
 	Separate colors and combine them back together with bit shifting method.
 	The RGB parameter is always an int, represented as HEX Value.
 */
-static int  convert_rgb_to_hex(int r, int g, int b)
+int  convert_rgb_to_hex(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 0xFF);
 }
