@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:46:16 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/20 17:33:11 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,13 +268,13 @@ and a multiple of the direction vector
 void	init_player_angle(t_game *game)
 {
 	if (game->player->dir == 'N')
-		game->player->angle = 0;
-	else if (game->player->dir == 'S')
-		game->player->angle = M_PI;
-	else if (game->player->dir == 'W')
 		game->player->angle = 1.5 * M_PI;
-	else if (game->player->dir == 'E')
+	else if (game->player->dir == 'S')
 		game->player->angle = 0.5 * M_PI;
+	else if (game->player->dir == 'W')
+		game->player->angle = 0;
+	else if (game->player->dir == 'E')
+		game->player->angle = M_PI;
 	game->player->x_scalar = sin(game->player->angle);
 	game->player->y_scalar = -1 * cos(game->player->angle);
 	init_camera_plane(game);

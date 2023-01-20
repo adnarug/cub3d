@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 17:17:16 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:50:27 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ bool	check_wall(t_game *game, int x, int y, double step)
 	if ((y_on_map - round(y_on_map) < 0.03 && y_on_map - \
 		round(y_on_map) > -0.03))
 		return (false);
-	if (x_on_map >= game->map->map_clean_lines)
+	if (y_on_map >= game->map->max_len)
 		return (false);
 	if (game->map->map_filled[(int)x_on_map][(int)y_on_map] == '1')
 	{
-				return (true);
+		return (true);
 	}
 	return (false);
 }
@@ -54,7 +54,7 @@ void	draw_line (t_game *game, double x, double y)
 
 	while (i > 0)
 	{
-		mlx_put_pixel(game->mini->img, (int)x++, (int)y, RED);
+		mlx_put_pixel(game->mini->img, (int)y++, (int)x, RED);
 		i--;
 	}
 }
@@ -79,7 +79,7 @@ void	draw_player(t_game *game, double step)
 			y_sqr = (pos[Y] - cam[Y]) * (pos[Y] - cam[Y]);
 			if (x_sqr + y_sqr < (r * r))
 			{
-				mlx_put_pixel(game->mini->img, pos[X], (pos[Y]), BLACK);
+				mlx_put_pixel(game->mini->img, pos[Y], (pos[X]), BLACK);
 			}
 			pos[X]++;
 		}
@@ -121,7 +121,7 @@ void	rays_minimap_line(t_game *game, double step)
 			if (pixel[X] >= game->mini->size || pixel[Y] >= game->mini->size
 				|| pixel[X] < 1 || pixel[Y] < 1)
 				break ;
-			mlx_put_pixel(game->mini->img, pixel[X], pixel[Y], RED);
+			mlx_put_pixel(game->mini->img, pixel[Y], pixel[X], RED);
 			factor += 0.01;
 	}
 }
@@ -181,19 +181,19 @@ static void	draw_minimap(t_game *game)
 	
 	step = (double)game->mini->size / MINIMAP_SCOPE;
 	set_offset(game);
-	y = 0;
-	while (y < game->mini->size)
+	x = 0;
+	while (x < game->mini->size)
 	{
-		x = 0;
-		while (x < game->mini->size)
+		y = 0;
+		while (y < game->mini->size)
 		{
 			if (check_wall(game, x, y, step) == true)
-				mlx_put_pixel(game->mini->img, x, y, GREEN_WALL);
+				mlx_put_pixel(game->mini->img, y, x, GREEN_WALL);
 			else
-				mlx_put_pixel(game->mini->img, x, y, BACKG);
-			x++;
+				mlx_put_pixel(game->mini->img, y, x, BACKG);
+			y++;
 		}
-		y++;
+		x++;
 	}
 	draw_player(game, step);
 	if (VIS_RAYS == 1)
