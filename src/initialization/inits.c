@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:46:07 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:45:21 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/22 12:55:43 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int		init_game(t_game *game)
 	game->map = malloc(sizeof(t_map));
 	if (game->map == NULL)
 		return (EXIT_FAILURE);
-	game->tex->no = "../../assets/NO.xpm";
-	game->tex->so = "../../assets/SO.xpm";
-	game->tex->ea = "../../assets/EA.xpm";
-	game->tex->we = "../../assets/WE.xpm";
+	game->tex->no_path = NULL;
+	game->tex->so_path = NULL;
+	game->tex->ea_path = NULL;
+	game->tex->we_path = NULL;
 	game->tex->f = malloc(sizeof(t_tex_rgb));
 	if (game->tex->f == NULL)
 		return (EXIT_FAILURE);

@@ -23,6 +23,7 @@ SRC_FILES = utils/args_check \
 			initialization/inits \
 			initialization/free \
 			raycasting/raycaster \
+			raycasting/textures \
 			main
 DEF_COLOR = \033[0;80m
 GREEN = \033[0;92m

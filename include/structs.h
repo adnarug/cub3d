@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/20 18:11:38 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/22 14:36:13 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ typedef struct s_tex_rgb //rgb a
 
 typedef struct s_textures
 {
-	char			*no;
-	mlx_texture_t	*no_tex;
-	char			*so;
-	mlx_texture_t	*ea_tex;
-	char			*we;
-	char			*ea;
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*we;
+	mlx_texture_t	*ea;
 	t_tex_rgb		*f;
 	t_tex_rgb		*c;
 }	t_textures;
@@ -83,5 +85,28 @@ typedef struct s_game
 	mlx_image_t	*img;
 	t_player	*player;
 }	t_game;
+
+typedef struct s_raycast
+{
+	double	dir[2];
+	double	ray_pos[2];
+	double	delta_dist[2];
+	double	side_dist[2];
+	double	wall_dist;
+	int		step[2];
+	int		line_height;
+	int		side;
+}	t_raycast;
+
+
+typedef	struct s_ray_tex
+{
+	int		tex[2];
+	double	step;
+	double	pos;
+	double	wall_x;
+}	t_ray_tex;
+
+
 
 #endif

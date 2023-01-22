@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/20 16:57:55 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/22 14:33:13 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ bool	check_collisions(t_game	*data, double new_v[2]);
 void    extract_hex_color(t_game *game);
 void	raycaster(t_game *game);
 void	init_camera_plane(t_game *game);
-
-int  convert_rgb_to_hex(int r, int g, int b);
+int 	convert_rgb_to_hex(int r, int g, int b);
+void	texturize(t_game *game, int win_x, t_raycast *ray);
+void	fill_ceiling(t_game *game);
+void	fill_floor(t_game *game);
 
 #endif

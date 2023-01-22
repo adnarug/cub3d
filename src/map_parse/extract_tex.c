@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/20 16:57:43 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/22 12:28:56 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ char *extract_tex_helper(char *str_raw)
 	start = str_spl[1];
 	while (start[len] != '\0' && start[len] != ' ')
 	len++;
-	tex = malloc(sizeof(char) * (len +1));
+	tex = malloc(sizeof(char) * (len + 1));
 	if (tex == NULL)
 		return (NULL);
+	len--;
 	while (len > 0)
 	{
 		tex[j] = start[i];
@@ -100,10 +101,10 @@ void	extract_rgb(t_game *game, char c)
 
 int	init_tex(t_game *game)
 {
-	game->tex->no = NULL;
-	game->tex->so = NULL;
-	game->tex->ea = NULL;
-	game->tex->we = NULL;
+	game->tex->no_path = NULL;
+	game->tex->so_path = NULL;
+	game->tex->ea_path = NULL;
+	game->tex->we_path = NULL;
 	game->tex->f = malloc(sizeof(t_tex_rgb));
 	if (game->tex->f == NULL)
 		return (EXIT_FAILURE);
@@ -127,6 +128,22 @@ void    extract_hex_color(t_game *game)
 	game->tex->f->color = convert_rgb_to_hex(game->tex->f->r, game->tex->f->g, game->tex->f->b);
 }
 
+void	load_textures(t_game *game)
+{
+	xpm_t	*no_xpm;
+	xpm_t	*so_xpm;
+	xpm_t	*ea_xpm;
+	xpm_t	*we_xpm;
+
+	no_xpm = mlx_load_xpm42(game->tex->no_path);
+	game->tex->no = &no_xpm->texture;
+	so_xpm = mlx_load_xpm42(game->tex->so_path);
+	game->tex->so = &so_xpm->texture;
+	ea_xpm = mlx_load_xpm42(game->tex->ea_path);
+	game->tex->ea = &ea_xpm->texture;
+	we_xpm = mlx_load_xpm42(game->tex->we_path);
+	game->tex->we = &we_xpm->texture;
+}
 
 char *extract_tex(t_game *game)
 {
@@ -138,13 +155,13 @@ char *extract_tex(t_game *game)
 	while (i < game->map->map_clean_start)
 	{
 		if ((ft_strnstr(game->map->map_raw[i], "NO ", ft_strlen(game->map->map_raw[i]))) != NULL)
-			game->tex->no = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->no_path = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "SO ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->so = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->so_path = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "WE ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->we = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->we_path = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "EA ", ft_strlen(game->map->map_raw[i])) != NULL)
-			game->tex->ea = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->ea_path = extract_tex_helper(game->map->map_raw[i]);
 		if (ft_strnstr(game->map->map_raw[i], "F ", ft_strlen(game->map->map_raw[i])) != NULL)
 		{
 			game->tex->f->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "F");
@@ -159,10 +176,10 @@ char *extract_tex(t_game *game)
 	}
 	if (DEBUG == 1)
 	{
-		printf("\nno: %s\n", game->tex->no);
-		printf("so: %s\n", game->tex->so);
-		printf("we: %s\n", game->tex->we);
-		printf("ea: %s\n", game->tex->ea);
+		printf("\nno: %s\n", game->tex->no_path);
+		printf("so: %s\n", game->tex->so_path);
+		printf("we: %s\n", game->tex->we_path);
+		printf("ea: %s\n", game->tex->ea_path);
 		printf("f - r: %d\n", game->tex->f->r);
 		printf("f - g: %d\n", game->tex->f->g);
 		printf("f - b: %d\n", game->tex->f->b);
@@ -170,5 +187,6 @@ char *extract_tex(t_game *game)
 		printf("c - g: %d\n", game->tex->c->g);
 		printf("c - b: %d\n", game->tex->c->b);
 	}
+	load_textures(game);
 	return (NULL);
 }
