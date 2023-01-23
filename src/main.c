@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/22 12:23:38 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:19:39 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 	init_map(&game);
 	launch_minimap(&game);
 	mlx_key_hook(game.mlx, &read_keys, (void *)&game);
-	// launch(&game, argv);
 	// mlx_hook(game.window, 2, 0, input, &game);
 	// mlx_loop_hook(game.mlx, update, &game);
 	mlx_loop(game.mlx);

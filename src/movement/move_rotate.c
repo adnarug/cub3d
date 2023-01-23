@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:42:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:26:00 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:23:17 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ bool	check_collisions(t_game	*game, double new_v[2])
 
 	old_xmap = game->player->x_pos;
 	old_ymap = game->player->y_pos;
-	if (game->map->map_filled[(int)new_v[X]][(int)new_v[Y]] == '1')
+	if (game->map->map_filled[(int)new_v[Y]][(int)new_v[X]] == '1')
 		return (true);
-	if (game->map->map_filled[(int)new_v[X]][old_ymap] == '1'
-		&& game->map->map_filled[old_xmap][(int)new_v[Y]] == '1')
+	if (game->map->map_filled[(int)new_v[Y]][old_xmap] == '1'
+		&& game->map->map_filled[old_ymap][(int)new_v[X]] == '1')
 		return (true);
 	return (false);
 }

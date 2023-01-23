@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:16:23 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/22 14:32:43 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:21:11 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	calculate_side_dist(t_game *game, t_raycast *ray)
 			ray->side = 1;
 		}
 		if (game->map->map_filled \
-			[(int)ray->ray_pos[X]][(int)ray->ray_pos[Y]] == '1')
+			[(int)ray->ray_pos[Y]][(int)ray->ray_pos[X]] == '1')
 			break ;
 	}
 }

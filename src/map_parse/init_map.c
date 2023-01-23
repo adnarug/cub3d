@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:46:16 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:59:02 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,8 +301,8 @@ int	find_player(t_game *game)
 				if (one_pl_found == 1)
 					return (EXIT_FAILURE);
 				one_pl_found = 1;
-				game->player->x_pos = i;
-				game->player->y_pos = j;
+				game->player->x_pos = j;
+				game->player->y_pos = i;
 				game->player->dir = map[i][j];
 				init_player_angle(game);
 			}
@@ -336,6 +336,11 @@ int	init_map(t_game *game)
 	game->map->map_clean_lines = ft_line_count(game->map->map_clean);
 	game->map->map_filled = dup_matrix(game);
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
+	if (DEBUG == 1)
+	{
+		print_2d_array(game->map->map_filled);
+		// printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
+	}
 	if (map_isvalid(game) == EXIT_FAILURE)
 	{
 		error("Error\nMap is invalid\n");
@@ -343,11 +348,6 @@ int	init_map(t_game *game)
 	}
 	if (find_player(game) == EXIT_FAILURE)
 	{
-	if (DEBUG == 1)
-	{
-		print_2d_array(game->map->map_filled);
-		// printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
-	}
 		error("Error\nPlayer not found or too many players\n");
 		exit(1);
 	}

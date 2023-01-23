@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/22 14:33:13 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:58:45 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // MENU
 #define VIS_RAYS 1 //turn on the cone of rays in Field of View in minimap, by default a line
-#define DEBUG 0//if 1 debug mode for the map
+#define DEBUG 1//if 1 debug mode for the map
 
 # include "../lib/include/MLX42/MLX42.h"
 # include <stdio.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   upd_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 16:42:26 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:20:31 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	set_offset(t_game *game)
 {
 	game->mini->x_offset = (int)game->player->x_pos - MINIMAP_SCOPE / 2;
-	game->mini->y_offset = (int)game->player->y_pos  - MINIMAP_SCOPE / 2;
-	if (game->mini->x_offset + MINIMAP_SCOPE > game->map->map_clean_lines)
-		game->mini->x_offset = game->map->map_clean_lines - MINIMAP_SCOPE;
+	game->mini->y_offset = (int)game->player->y_pos - MINIMAP_SCOPE / 2;
+	if (game->mini->x_offset + MINIMAP_SCOPE > game->map->max_len)
+		game->mini->x_offset = game->map->max_len - MINIMAP_SCOPE;
 	if (game->mini->x_offset < 0)
 		game->mini->x_offset = 0;
-	if (game->mini->y_offset + MINIMAP_SCOPE > game->map->max_len)
-		game->mini->y_offset = game->map->max_len - MINIMAP_SCOPE;
+	if (game->mini->y_offset + MINIMAP_SCOPE > game->map->map_clean_lines)
+		game->mini->y_offset = game->map->map_clean_lines - MINIMAP_SCOPE;
 	if (game->mini->y_offset < 0)
 		game->mini->y_offset = 0;
 }
@@ -39,9 +39,9 @@ bool	check_wall(t_game *game, int x, int y, double step)
 	if ((y_on_map - round(y_on_map) < 0.03 && y_on_map - \
 		round(y_on_map) > -0.03))
 		return (false);
-	if (x_on_map >= game->map->map_clean_lines)
+	if (x_on_map >= game->map->max_len)
 		return (false);
-	if (game->map->map_filled[(int)x_on_map][(int)y_on_map] == '1')
+	if (game->map->map_filled[(int)y_on_map][(int)x_on_map] == '1')
 	{
 				return (true);
 	}
@@ -158,7 +158,7 @@ void	rays_minimap_cone(t_game *game, double step)
 				if (ray[X] >= game->mini->size || ray[Y] >= game->mini->size
 					|| ray[X] < 0 || ray[Y] < 0)
 					break ;
-				if (game->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
+				if (game->map->map_filled[(int)ray[Y]][(int)ray[X]] == '1')
 					break ;
 				pixel[X] = cast_ray_world_to_map(game->mini->x_offset, ray[X] , step);
 				pixel[Y] = cast_ray_world_to_map(game->mini->y_offset, ray[Y], step);
