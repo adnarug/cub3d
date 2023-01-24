@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 14:56:00 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:22:29 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,27 +317,30 @@ int	find_player(t_game *game)
 		return (EXIT_FAILURE);
 }
 
-int	check_8_dir(t_game *game)
+void	check_8_dir(t_game *game)
 {
 	char **map;
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
+	i = 1;
+	j = 1;
 	map = game->map->map_filled;
-	while(i < game->map->map_clean_lines)
+	while(map[i + 1] != NULL)
 	{
-		while(j < game->map->max_len)
+		j = 0;
+		while(map[i][j] != '\0')
 		{
-			if (map[i][j] == '0' && (map[i][j++] == '-' || map[i++][j] == '-' || \
-			map[i][j--] == '-' || map[i][j--] == '-' || map[i++][j++] == '-' || map[i--][j--] == '-'))
-				exit(error("Error\nThe map is not closed\n"));
+			if (map[i][j] == '0' && ((map[i - 1][j + 1] == '-') || (map[i + 1][j - 1] == '-') || (map[i + 1][j + 1] == '-') || (map[i - 1][j - 1] == '-')))
+			{
+				free_game(game, false);
+				exit(error("Error\nThe map is not closed diagonally\n"));
+			}
 			j++;
 		}
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return;
 }
 
 
@@ -362,7 +365,6 @@ int	init_map(t_game *game)
 	game->map->map_clean_lines = ft_line_count(game->map->map_clean);
 	game->map->map_filled = dup_matrix(game);
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
-	// check_8_dir(game);
 	if (DEBUG == 1)
 	{
 		print_2d_array(game->map->map_filled);
@@ -370,7 +372,7 @@ int	init_map(t_game *game)
 	}
 	if (find_player(game) == EXIT_FAILURE)
 	{
-		error("Error\nPlayer not found or too many players\n");
+		error("Error\nInvalid map\n");
 		exit(1);
 	}
 	if (map_isvalid(game) == EXIT_FAILURE)
@@ -378,6 +380,7 @@ int	init_map(t_game *game)
 		error("Error\nMap is invalid\n");
 		exit(1);
 	}
+	check_8_dir(game);
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }

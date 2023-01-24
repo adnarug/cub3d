@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:04:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:31:23 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include "error.h"
+
 # include "struct.h"
 #include <stdio.h>
 #include <memory.h>
@@ -76,7 +76,7 @@ void
 init_mlx(t_game *game);
 //Misc
 int 	error(char *str);
-int		free_game(t_game *game);
+int		free_game(t_game *game, bool img_flg);
 int		ft_line_count(char **array);
 void	free_2d(char **matrix);
 void	create_minimap(t_game *game);
@@ -100,5 +100,6 @@ int 	convert_rgb_to_hex(int r, int g, int b);
 void	texturize(t_game *game, int win_x, t_raycast *ray);
 void	fill_ceiling(t_game *game);
 void	fill_floor(t_game *game);
+
 
 #endif

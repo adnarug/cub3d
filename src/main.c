@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:04:10 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:30:46 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	main(int argc, char **argv)
 	init_map(&game);
 	launch_minimap(&game);
 	mlx_key_hook(game.mlx, &read_keys, (void *)&game);
-	// mlx_hook(game.window, 2, 0, input, &game);
-	// mlx_loop_hook(game.mlx, update, &game);
 	mlx_loop(game.mlx);
-	free_game(&game);
-	// system("leaks cub3D");
+	free_game(&game, true);
 	return (0);
 }

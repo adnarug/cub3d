@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 14:36:18 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:32:15 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
 
 typedef struct s_vector
 {
@@ -22,15 +21,13 @@ typedef struct s_vector
 
 typedef struct s_player
 {
-	double		x_pos;//position
+	double		x_pos;
 	double		y_pos;
-	double		x_scalar;//direction
+	double		x_scalar;
 	double		y_scalar;
-	double		camplane[2];//camera plane
-	double		direc[2];//to remove
-	t_vector	*direction;//to remove
+	double		camplane[2];
 	double		angle;
-	// double		angle_rad;
+
 	char		dir;
 }	t_player;
 
@@ -45,13 +42,13 @@ typedef struct s_map
 	int		max_len;
 }	t_map;
 
-typedef struct s_tex_rgb //rgb a
+typedef struct s_tex_rgb
 {
-	int			r;
-	int			g;
-	int			b;
+	int		r;
+	int		g;
+	int		b;
 	char	**rgb;
-	int			color;
+	int		color;
 }	t_tex_rgb;
 
 typedef struct s_textures

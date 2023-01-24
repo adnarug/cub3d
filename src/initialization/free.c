@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 14:50:13 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:21:05 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void free_2d(char **matrix)
 	matrix = NULL;
 }
 
-int		free_game(t_game *game)
+int		free_game(t_game *game, bool img_flag)
 {
 	
 	free_2d(game->tex->f->rgb);
@@ -46,8 +46,11 @@ int		free_game(t_game *game)
 	free_2d(game->map->map_raw);
 	free_2d(game->map->map_filled);
 	free(game->map);
-	mlx_delete_image(game->mlx, game->img);
-	mlx_delete_image(game->mlx, game->mini->img);
+	if (img_flag == true)
+	{
+		mlx_delete_image(game->mlx, game->img);
+		mlx_delete_image(game->mlx, game->mini->img);
+	}
 	free(game->mini);
 	free(game->player);
 	mlx_terminate(game->mlx);
