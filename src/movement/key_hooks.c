@@ -6,25 +6,27 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:02 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:21:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:19:26 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	check_WASD(t_game *game, mlx_key_data_t keycode)
+static void	check_wasd(t_game *game, mlx_key_data_t keycode)
 {
-	if (keycode.key == MLX_KEY_W && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+	if (keycode.key == MLX_KEY_W
+		&& (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
 		move(game, 0);
-	else if (keycode.key == MLX_KEY_S && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+	else if (keycode.key == MLX_KEY_S
+		&& (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
 		move(game, M_PI);
-	else if (keycode.key == MLX_KEY_A && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+	else if (keycode.key == MLX_KEY_A
+		&& (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
 		move(game, 1.5 * M_PI);
-	else if (keycode.key == MLX_KEY_D && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
+	else if (keycode.key == MLX_KEY_D
+		&& (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
 		move(game, 0.5 * M_PI);
-
 }
-
 
 static void	check_rotate(t_game *game, mlx_key_data_t keycode)
 {
@@ -51,7 +53,7 @@ void	read_keys(mlx_key_data_t keycode, void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	check_WASD(game, keycode);
+	check_wasd(game, keycode);
 	check_rotate(game, keycode);
 	// check_mouse_keys(game, keycode);
 	check_esc(keycode, game);

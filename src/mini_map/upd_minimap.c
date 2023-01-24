@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 14:35:39 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:20:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,10 +198,7 @@ static void	draw_minimap(t_game *game)
 		y++;
 	}
 	draw_player(game, step);
-	if (VIS_RAYS == 1)
-		rays_minimap_cone(game, step);
-	else
-		rays_minimap_line(game, step);
+	rays_minimap_line(game, step);
 	raycaster(game);
 }
 

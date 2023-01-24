@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 15:53:41 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/13 15:29:20 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:09:30 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	start_minimap(t_game *game)
 	game->mini->img = mlx_new_image(game->mlx, \
 		game->mini->size, game->mini->size);
 }
-
 
 void	launch_minimap(t_game *game)
 {
