@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 12:33:15 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:37:35 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,13 @@ void	load_textures(t_game *game)
 	xpm_t	*we_xpm;
 
 	no_xpm = mlx_load_xpm42(game->tex->no_path);
-	game->tex->no = &no_xpm->texture;
+	game->tex->no = no_xpm;
 	so_xpm = mlx_load_xpm42(game->tex->so_path);
-	game->tex->so = &so_xpm->texture;
+	game->tex->so = so_xpm;
 	ea_xpm = mlx_load_xpm42(game->tex->ea_path);
-	game->tex->ea = &ea_xpm->texture;
+	game->tex->ea = ea_xpm;
 	we_xpm = mlx_load_xpm42(game->tex->we_path);
-	game->tex->we = &we_xpm->texture;
+	game->tex->we = we_xpm;
 }
 
 void	check_miss_tex(t_game *game)

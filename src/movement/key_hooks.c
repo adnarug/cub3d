@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:02 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 12:25:38 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:45:07 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ static void	check_rotate(t_game *game, mlx_key_data_t keycode)
 		rotate(game, ROTATE_RIGHT);
 }
 
-static void	check_esc(mlx_key_data_t keycode)
+static void	check_esc(mlx_key_data_t keycode, t_game *game)
 {
 	if (keycode.key == MLX_KEY_ESCAPE && keycode.action == MLX_PRESS)
 	{
-		system("leaks cub3D");
+		free_game(game);
+		// system("leaks cub3D");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -53,5 +54,5 @@ void	read_keys(mlx_key_data_t keycode, void *param)
 	check_WASD(game, keycode);
 	check_rotate(game, keycode);
 	// check_mouse_keys(game, keycode);
-	check_esc(keycode);
+	check_esc(keycode, game);
 }
