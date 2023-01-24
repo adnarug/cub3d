@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 12:40:31 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:56:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,9 +301,10 @@ int	find_player(t_game *game)
 				if (one_pl_found == 1)
 					return (EXIT_FAILURE);
 				one_pl_found = 1;
-				game->player->x_pos = j;
-				game->player->y_pos = i;
+				game->player->x_pos = j + 0.5;
+				game->player->y_pos = i + 0.5;
 				game->player->dir = map[i][j];
+				map[i][j] =  '0';
 				init_player_angle(game);
 			}
 			j++;
@@ -336,6 +337,7 @@ int	check_8_dir(t_game *game)
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 
@@ -366,14 +368,14 @@ int	init_map(t_game *game)
 		print_2d_array(game->map->map_filled);
 		// printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
 	}
-	if (map_isvalid(game) == EXIT_FAILURE)
-	{
-		error("Error\nMap is invalid\n");
-		exit(1);
-	}
 	if (find_player(game) == EXIT_FAILURE)
 	{
 		error("Error\nPlayer not found or too many players\n");
+		exit(1);
+	}
+	if (map_isvalid(game) == EXIT_FAILURE)
+	{
+		error("Error\nMap is invalid\n");
 		exit(1);
 	}
 	// system("leaks cub3D");
