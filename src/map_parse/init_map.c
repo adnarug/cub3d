@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:48:08 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:56:38 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,8 +215,6 @@ char	**dup_matrix(t_game *game)
 		if (new_map[i] == NULL)
 			return (NULL);
 		written_len = ft_strlcpy(new_map[i], game->map->map_clean[i], game->map->max_len);
-		if (DEBUG == 1)
-			printf("max len %d written len %d last char %c \n", game->map->max_len, written_len, new_map[i][written_len - 1]);
 		if (written_len < game->map->max_len)
 		{
 			if (i != game->map->map_clean_lines - 1)
@@ -248,11 +246,7 @@ int	check_valid_chars(char **map)
 		while (map[i][j] != '\0')
 		{
 			if (ft_strchr(VALID_CHAR, map[i][j]) == NULL)
-			{
-				if (DEBUG == 1)
-					printf("Invalid chars found in: %s it is: %c\n", map[i], map[i][j]);
 				return (EXIT_FAILURE);
-			}
 			j++;
 		}
 		i++;
@@ -320,7 +314,6 @@ int	find_player(t_game *game)
 
 int	init_map(t_game *game)
 {
-
 	int		line_count;
 	char	**clean_map;
 
@@ -339,11 +332,6 @@ int	init_map(t_game *game)
 	game->map->map_clean_lines = ft_line_count(game->map->map_clean);
 	game->map->map_filled = dup_matrix(game);
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
-	if (DEBUG == 1)
-	{
-		print_2d_array(game->map->map_filled);
-		// printf("Starting position - x: %f y: %f\n", game->player->x_pos, game->player->y_pos);
-	}
 	if (find_player(game) == EXIT_FAILURE)
 	{
 		error("Error\nInvalid map\n");
@@ -354,7 +342,7 @@ int	init_map(t_game *game)
 		error("Error\nMap is invalid\n");
 		exit(1);
 	}
-	check_diag_hole(game);
+	check_diag_holes(game);
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }

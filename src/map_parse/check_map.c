@@ -6,13 +6,13 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:49:31 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:59:42 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	check_holes(char *s)
+static int	check_holes(char *s)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ int	check_holes(char *s)
 	return (EXIT_SUCCESS);
 }
 
-int	horiz_check(char **map)
+static int	horiz_check(char **map)
 {
 	int	i;
 	int	j;
@@ -50,7 +50,7 @@ int	horiz_check(char **map)
 	return (EXIT_SUCCESS);
 }
 
-char	*flip_col_to_row(char **map, int col, int last)
+static char	*flip_col_to_row(char **map, int col, int last)
 {
 	int		i;
 	int		j;
@@ -71,7 +71,7 @@ char	*flip_col_to_row(char **map, int col, int last)
 	return (flipped);
 }
 
-int	ver_check(t_game *game, char **map, int last)
+static int	ver_check(t_game *game, char **map, int last)
 {
 	int		col_num;
 	int		col;

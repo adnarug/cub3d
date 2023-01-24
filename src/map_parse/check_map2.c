@@ -6,9 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:47:13 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:49:49 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:58:34 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../include/cub3D.h"
 
 void	check_diag_holes(t_game *game)
 {

@@ -6,10 +6,9 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:12:39 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:12:20 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/cub3D.h"
 
@@ -32,59 +31,6 @@ static char	**extract_tex_rgb_helper(char *str, char *tex_id)
 	return (rgb);
 }
 
-int	check_abbr(char *str)
-{
-	if ((ft_strncmp(str, "NO", 2) == 0) || (ft_strncmp(str, "SO", 2) == 0) || \
-	(ft_strncmp(str, "EA", 2) == 0) ||(ft_strncmp(str, "WE", 2) == 0))
-		return (0);
-	else
-		return (1);
-}
-
-/*-Space after NO*/
-char *extract_tex_helper(char *str_raw)
-{
-	char	*tex;
-	char	**str_spl;
-	char	*start;
-	int		i;
-	int		j;
-	int		len;
-
-	i = 0;
-	j = 0;
-	len = 0;
-	str_spl = ft_split(str_raw, ' ');
-	if (str_spl == NULL || *str_spl[0] == ' ')
-		return (NULL);
-	if (check_abbr(str_spl[0]) != 0)
-	{
-		error("Error\nTextures input is incorrect\n");
-		exit (1);
-	}
-	if (ft_strchr(str_spl[1], '/') == NULL)
-	{
-		error("Error\nTextures input is incorrect\n");
-		exit (1);
-	}
-	start = str_spl[1];
-	while (start[len] != '\0' && start[len] != ' ')
-	len++;
-	tex = malloc(sizeof(char) * (len + 1));
-	if (tex == NULL)
-		return (NULL);
-	len--;
-	while (len > 0)
-	{
-		tex[j] = start[i];
-		i++;
-		j++;
-		len--;
-	}
-	tex[j] = '\0';
-	free_2d(str_spl);
-	return (tex);
-}
 void	extract_rgb(t_game *game, char c)
 {
 	if (c == 'F')
@@ -99,21 +45,6 @@ void	extract_rgb(t_game *game, char c)
 		game->tex->c->g = ft_atoi(game->tex->c->rgb[1]);
 		game->tex->c->b = ft_atoi(game->tex->c->rgb[2]);
 	}
-}
-
-int	init_tex(t_game *game)
-{
-	game->tex->no_path = NULL;
-	game->tex->so_path = NULL;
-	game->tex->ea_path = NULL;
-	game->tex->we_path = NULL;
-	game->tex->f = malloc(sizeof(t_tex_rgb));
-	if (game->tex->f == NULL)
-		return (EXIT_FAILURE);
-	game->tex->c = malloc(sizeof(t_tex_rgb));
-	if (game->tex->c == NULL)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
 /*
@@ -171,6 +102,7 @@ void	check_tex_ext(t_game *game, char *ext)
 	if (ft_strncmp(game->tex->ea_path + ft_strlen(game->tex->no_path) - len, ext, len) != 0)
 		exit(error("Error\nWrong texture extension\n"));
 }
+
 void	access_tex(t_game *game)
 {
 	if (access(game->tex->no_path, F_OK ) == -1)
@@ -209,7 +141,7 @@ char *extract_tex(t_game *game)
 		{
 			if (game->tex->north_found == true)
 				exit (error("Error\nDuplicate textures input\n"));
-			game->tex->no_path = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->no_path = extract_tex_helper(game, game->map->map_raw[i]);
 			if (access(game->tex->no_path, F_OK | R_OK ) == -1)
 				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->no_path != NULL)
@@ -219,7 +151,7 @@ char *extract_tex(t_game *game)
 		{
 			if (game->tex->south_found == true)
 				exit (error("Error\nDuplicate textures input\n"));
-			game->tex->so_path = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->so_path = extract_tex_helper(game, game->map->map_raw[i]);
 			if (access(game->tex->so_path, F_OK | R_OK ) == -1)
 				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->so_path != NULL)
@@ -229,7 +161,7 @@ char *extract_tex(t_game *game)
 		{
 			if (game->tex->west_found == true)
 				exit (error("Error\nDuplicate textures input\n"));
-			game->tex->we_path = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->we_path = extract_tex_helper(game, game->map->map_raw[i]);
 			if (access(game->tex->we_path, F_OK | R_OK) == -1)
 				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->we_path != NULL)
@@ -239,7 +171,7 @@ char *extract_tex(t_game *game)
 		{
 			if (game->tex->east_found == true)
 				exit (error("Error\nDuplicate textures input\n"));
-			game->tex->ea_path = extract_tex_helper(game->map->map_raw[i]);
+			game->tex->ea_path = extract_tex_helper(game, game->map->map_raw[i]);
 			if (access(game->tex->ea_path, F_OK | R_OK) == -1)
 				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->ea_path != NULL)
@@ -268,19 +200,6 @@ char *extract_tex(t_game *game)
 	check_tex_ext(game, ".xpm42");
 	check_miss_tex(game);
 	check_rgb(game);
-	if (DEBUG == 1)
-	{
-		printf("\nno: %s\n", game->tex->no_path);
-		printf("so: %s\n", game->tex->so_path);
-		printf("we: %s\n", game->tex->we_path);
-		printf("ea: %s\n", game->tex->ea_path);
-		printf("f - r: %d\n", game->tex->f->r);
-		printf("f - g: %d\n", game->tex->f->g);
-		printf("f - b: %d\n", game->tex->f->b);
-		printf("c - r: %d\n", game->tex->c->r);
-		printf("c - g: %d\n", game->tex->c->g);
-		printf("c - b: %d\n", game->tex->c->b);
-	}
 	load_textures(game);
 	return (NULL);
 }

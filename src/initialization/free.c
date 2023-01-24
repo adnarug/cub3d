@@ -6,15 +6,15 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:21:05 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:40:51 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void free_2d(char **matrix)
+void	free_2d(char **matrix)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (matrix[i] != NULL)
@@ -27,9 +27,8 @@ void free_2d(char **matrix)
 	matrix = NULL;
 }
 
-int		free_game(t_game *game, bool img_flag)
+int	free_game(t_game *game, bool img_flag)
 {
-	
 	free_2d(game->tex->f->rgb);
 	free_2d(game->tex->c->rgb);
 	free(game->tex->f);

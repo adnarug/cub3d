@@ -6,18 +6,18 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:32:15 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:55:44 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 typedef struct s_vector
 {
-	double x;
-	double y;
-} t_vector;
+	double	x;
+	double	y;
+}	t_vector;
 
 typedef struct s_player
 {
@@ -74,7 +74,7 @@ typedef struct s_textures
 
 typedef struct s_mini
 {
-	mlx_image_t *img;
+	mlx_image_t	*img;
 	int			size;
 	int			x_offset;
 	int			y_offset;
@@ -102,15 +102,12 @@ typedef struct s_raycast
 	int		side;
 }	t_raycast;
 
-
-typedef	struct s_ray_tex
+typedef struct s_ray_tex
 {
 	int		tex[2];
 	double	step;
 	double	pos;
 	double	wall_x;
 }	t_ray_tex;
-
-
 
 #endif
