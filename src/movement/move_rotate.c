@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:42:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/23 17:23:17 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:08:04 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	move(t_game *game, double angle)
 	update_minimap(game);
 }
 
-
 void	rotate(t_game *game, int direction)
 {
 	double	new_angle;
@@ -64,7 +63,6 @@ void	rotate(t_game *game, int direction)
 	game->player->camplane[Y] = game->player->y_scalar;
 	rotate_vector(game->player->camplane, 0.5 * M_PI);
 	update_minimap(game);
-
 }
 
 void	rotate_vector(double v[2], double angle)
