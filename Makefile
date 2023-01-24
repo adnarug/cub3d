@@ -14,7 +14,6 @@ SRC_FILES = utils/args_check \
 			utils/tools \
 			map_parse/init_map \
 			map_parse/extract_tex\
-			map_parse/extract_map \
 			map_parse/check_map \
 			mini_map/init_minimap \
 			mini_map/upd_minimap \

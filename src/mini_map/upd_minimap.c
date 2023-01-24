@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/23 17:20:31 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 10:43:32 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	rays_minimap_line(t_game *game, double step)
 	cam[X] = game->player->x_pos;
 	cam[Y] = game->player->y_pos;
 	factor = 0.01;
-	while (factor < game->mini->size)
+	while (factor < 0.5)
 	{
 
 			ray[X] = cam[X] + (game->player->x_scalar * factor);
@@ -114,7 +114,7 @@ void	rays_minimap_line(t_game *game, double step)
 			if (ray[X] >= game->mini->size || ray[Y] >= game->mini->size
 				|| ray[X] < 0 || ray[Y] < 0)
 				break ;
-			if (game->map->map_filled[(int)ray[X]][(int)ray[Y]] == '1')
+			if (game->map->map_filled[(int)ray[Y]][(int)ray[X]] == '1')
 				break ;
 			pixel[X] = cast_ray_world_to_map(game->mini->x_offset, ray[X] , step);
 			pixel[Y] = cast_ray_world_to_map(game->mini->y_offset, ray[Y], step);

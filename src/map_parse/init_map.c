@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/23 16:59:02 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:17:20 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	**malloc_rows(char *file, int *line_count)
 		error("could not read the file, it may not exist or the path is wrong\n");
 	map = malloc(sizeof(char *) * (*line_count + 1));
 	if (map == NULL)
-		error("malloc error, when creating the map\n");
+		exit (1);
 	return (map);
 }
 
@@ -113,8 +113,8 @@ static char	**read_map(char *file, int *line_count)
 	i = 0;
 	if (access(file, F_OK) == -1)
 	{
-		error("Error\nFile does not exist\n");
-		return (NULL);
+		error("Error\n File does not exist / not accessible\n");
+		exit (1);
 	}
 	map = malloc_rows(file, line_count);
 	num_lines = *line_count;
@@ -318,17 +318,18 @@ int	find_player(t_game *game)
 
 int	init_map(t_game *game)
 {
-	char	**map;
+
 	int		line_count;
 	char	**clean_map;
 
 	line_count = 1;
 	clean_map = NULL;
-	map = read_map(game->map->path, &line_count);
-	if (map == NULL)
+	game->map->map_raw = read_map(game->map->path, &line_count);
+	if (game->map->map_raw == NULL)
 		return (EXIT_FAILURE);
-	game->map->map_raw = map;
 	game->map->map_clean_start = find_map_start(game->map->map_raw);
+	if (game->map->map_clean_start  == NULL)
+		exit(error("Error\n The map file is incomplete\n"));
 	game->map->map_clean = game->map->map_raw + game->map->map_clean_start;
 	extract_tex(game);
 	game->map->max_len = find_longest(game->map->map_clean);

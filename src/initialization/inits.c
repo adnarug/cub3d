@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:46:07 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/22 12:55:43 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/24 10:51:25 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int		init_game(t_game *game)
 	game->tex->so_path = NULL;
 	game->tex->ea_path = NULL;
 	game->tex->we_path = NULL;
+	game->tex->north_found = false;
+	game->tex->south_found = false;
+	game->tex->east_found = false;
+	game->tex->west_found = false;
+	game->tex->floor_found = false;
+	game->tex->ceiling_found = false;
 	game->tex->f = malloc(sizeof(t_tex_rgb));
 	if (game->tex->f == NULL)
 		return (EXIT_FAILURE);

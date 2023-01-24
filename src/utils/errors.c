@@ -6,13 +6,14 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:46:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/02 15:53:17 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 10:50:54 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	error(char *str)
+int	error(char *str)
 {
 	write(2, str, ft_strlen(str));
+	return (1);
 }

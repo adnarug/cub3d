@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/23 16:58:45 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:00:07 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define cub3D_H
 
 // MENU
-#define VIS_RAYS 1 //turn on the cone of rays in Field of View in minimap, by default a line
+#define VIS_RAYS 0 //turn on the cone of rays in Field of View in minimap, by default a line
 #define DEBUG 1//if 1 debug mode for the map
 
 # include "../lib/include/MLX42/MLX42.h"
@@ -42,7 +42,7 @@
 # define J	1
 
 # define NAVY	0x0000FFFF
-# define BLACK  0x00000000
+# define BLACK  0x000000FF
 # define GREEN	0x00FF00FF
 # define NAVY	0x0000FFFF
 # define RED	   0xFF0000FF
@@ -75,7 +75,7 @@ int		init_game(t_game *game);
 void    
 init_mlx(t_game *game);
 //Misc
-void	error(char *str);
+int 	error(char *str);
 int		free_game(t_game *game);
 int		ft_line_count(char **array);
 void	free_2d(char **matrix);
