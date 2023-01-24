@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 14:37:35 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/24 15:12:39 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,22 +174,35 @@ void	check_tex_ext(t_game *game, char *ext)
 void	access_tex(t_game *game)
 {
 	if (access(game->tex->no_path, F_OK ) == -1)
-		exit(error("Error\nCould not access texture file(s)N\n"));
+		exit(error("Error\nCould not access texture file(s)\n"));
 	if (access(game->tex->so_path, F_OK ) == -1)
-		exit(error("Error\nCould not access texture file(s)S\n"));
+		exit(error("Error\nCould not access texture file(s)\n"));
 	if (access(game->tex->we_path, F_OK) == -1)
-		exit(error("Error\nCould not access texture file(s)W \n"));
+		exit(error("Error\nCould not access texture file(s)\n"));
 	if (access(game->tex->ea_path, F_OK) == -1)
-		exit(error("Error\nCould not access texture file(s)E\n"));
+		exit(error("Error\nCould not access texture file(s)\n"));
+}
+
+void	check_rgb(t_game *game)
+{
+	if (game->tex->c->r < 0 || game->tex->c->r > 255)
+		exit(error("Error\nInvalid RGB input\n"));
+	if (game->tex->c->g < 0 || game->tex->c->g > 255)
+		exit(error("Error\nInvalid RGB input\n"));
+	if (game->tex->c->b < 0 || game->tex->c->b > 255)
+		exit(error("Error\nInvalid RGB input\n"));
+	if (game->tex->f->r < 0 || game->tex->f->r > 255)
+		exit(error("Error\nInvalid RGB input\n"));
+	if (game->tex->f->g < 0 || game->tex->f->g > 255)
+		exit(error("Error\nInvalid RGB input\n"));
+	if (game->tex->f->b < 0 || game->tex->f->b > 255)
+		exit(error("Error\nInvalid RGB input\n"));
 }
 char *extract_tex(t_game *game)
 {
 	int		i;
 
 	i = 0;
-	// access_tex(game);
-	// if (init_tex(game) == EXIT_FAILURE)
-	// 	return (NULL);
 	while (i < game->map->map_clean_start)
 	{
 		if ((ft_strnstr(game->map->map_raw[i], "NO ", ft_strlen(game->map->map_raw[i]))) != NULL)
@@ -198,7 +211,7 @@ char *extract_tex(t_game *game)
 				exit (error("Error\nDuplicate textures input\n"));
 			game->tex->no_path = extract_tex_helper(game->map->map_raw[i]);
 			if (access(game->tex->no_path, F_OK | R_OK ) == -1)
-				exit(error("Error\nCould not access texture file(s)N\n"));
+				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->no_path != NULL)
 				game->tex->north_found = true;
 		}
@@ -208,7 +221,7 @@ char *extract_tex(t_game *game)
 				exit (error("Error\nDuplicate textures input\n"));
 			game->tex->so_path = extract_tex_helper(game->map->map_raw[i]);
 			if (access(game->tex->so_path, F_OK | R_OK ) == -1)
-				exit(error("Error\nCould not access texture file(s)S\n"));
+				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->so_path != NULL)
 				game->tex->south_found = true;
 		}
@@ -218,7 +231,7 @@ char *extract_tex(t_game *game)
 				exit (error("Error\nDuplicate textures input\n"));
 			game->tex->we_path = extract_tex_helper(game->map->map_raw[i]);
 			if (access(game->tex->we_path, F_OK | R_OK) == -1)
-				exit(error("Error\nCould not access texture file(s)W\n"));
+				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->we_path != NULL)
 				game->tex->west_found = true;
 		}
@@ -228,7 +241,7 @@ char *extract_tex(t_game *game)
 				exit (error("Error\nDuplicate textures input\n"));
 			game->tex->ea_path = extract_tex_helper(game->map->map_raw[i]);
 			if (access(game->tex->ea_path, F_OK | R_OK) == -1)
-				exit(error("Error\nCould not access texture file(s)E\n"));
+				exit(error("Error\nCould not access texture file(s)\n"));
 			if (game->tex->ea_path != NULL)
 				game->tex->east_found = true;
 		}
@@ -254,6 +267,7 @@ char *extract_tex(t_game *game)
 	}
 	check_tex_ext(game, ".xpm42");
 	check_miss_tex(game);
+	check_rgb(game);
 	if (DEBUG == 1)
 	{
 		printf("\nno: %s\n", game->tex->no_path);
