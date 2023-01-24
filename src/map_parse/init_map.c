@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:22:29 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:48:08 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,32 +317,6 @@ int	find_player(t_game *game)
 		return (EXIT_FAILURE);
 }
 
-void	check_8_dir(t_game *game)
-{
-	char **map;
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 1;
-	map = game->map->map_filled;
-	while(map[i + 1] != NULL)
-	{
-		j = 0;
-		while(map[i][j] != '\0')
-		{
-			if (map[i][j] == '0' && ((map[i - 1][j + 1] == '-') || (map[i + 1][j - 1] == '-') || (map[i + 1][j + 1] == '-') || (map[i - 1][j - 1] == '-')))
-			{
-				free_game(game, false);
-				exit(error("Error\nThe map is not closed diagonally\n"));
-			}
-			j++;
-		}
-		i++;
-	}
-	return;
-}
-
 
 int	init_map(t_game *game)
 {
@@ -380,7 +354,7 @@ int	init_map(t_game *game)
 		error("Error\nMap is invalid\n");
 		exit(1);
 	}
-	check_8_dir(game);
+	check_diag_hole(game);
 	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }

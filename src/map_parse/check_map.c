@@ -6,10 +6,9 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 12:34:36 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:49:31 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/cub3D.h"
 
@@ -18,8 +17,6 @@ int	check_holes(char *s)
 	int	i;
 
 	i = 0;
-	// if (DEBUG == 1)
-	//  printf("stirng to check %s\n", s);
 	if (s[0] == '0')
 		return (EXIT_FAILURE);
 	while (s[i] != '\0')
@@ -27,11 +24,7 @@ int	check_holes(char *s)
 		if (s[i] == '0')
 		{
 			if (i > 0 && (s[i - 1] == '-' || s[i + 1] == '-'))
-			{
-				if (DEBUG == 1)
-					printf("Failed trimmed: %s\n", s);
 				return (EXIT_FAILURE);
-			}
 		}
 		i++;
 	}
@@ -50,11 +43,7 @@ int	horiz_check(char **map)
 	while (map[i] != NULL)
 	{
 		if (check_holes(map[i]) == EXIT_FAILURE)
-		{
-			if (DEBUG == 1)
-				printf("Failed trimmed: %s\n", map[i]);
 			return (EXIT_FAILURE);
-		}
 		else
 			i++;
 	}
@@ -63,8 +52,8 @@ int	horiz_check(char **map)
 
 char	*flip_col_to_row(char **map, int col, int last)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*flipped;
 
 	i = 0;
@@ -74,8 +63,7 @@ char	*flip_col_to_row(char **map, int col, int last)
 		return (NULL);
 	while (last > 0)
 	{
-		//printf("i:%d col:%d\n", i, col);
-		flipped[i] = map[i][col];//TODO:seg here
+		flipped[i] = map[i][col];
 		i++;
 		last--;
 	}
@@ -96,8 +84,6 @@ int	ver_check(t_game *game, char **map, int last)
 		flipped = flip_col_to_row(map, col, last);
 		if (check_holes(flipped) == EXIT_FAILURE)
 		{
-			if (DEBUG == 1)
-				printf("Failed flipped: %s\n", flipped);
 			free(flipped);
 			return (EXIT_FAILURE);
 		}
@@ -108,27 +94,15 @@ int	ver_check(t_game *game, char **map, int last)
 	return (EXIT_SUCCESS);
 }
 
-
 int	perimeter_isvalid(t_game *game)
 {
-	if (ft_strchr(game->map->map_filled[game->map->map_clean_lines - 1], '0') != NULL)
+	if (ft_strchr(game->map->map_filled[game->map->map_clean_lines - 1], '0') \
+		!= NULL)
 		return (EXIT_FAILURE);
-	if (ver_check(game, game->map->map_filled, game->map->map_clean_lines) == EXIT_FAILURE)
+	if (ver_check(game, game->map->map_filled, game->map->map_clean_lines) \
+		== EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (horiz_check(game->map->map_filled) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-int	map_isvalid(t_game *game)
-{
-	if (check_valid_chars(game->map->map_clean) == EXIT_FAILURE)
-	{
-		if (DEBUG == 1)
-			error("Invalid chars\n");
-		return (EXIT_FAILURE);
-	}
-	if (perimeter_isvalid(game) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	// system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }
