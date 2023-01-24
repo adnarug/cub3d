@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/17 17:05:48 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:34:36 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int	perimeter_isvalid(t_game *game)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-
 int	map_isvalid(t_game *game)
 {
 	if (check_valid_chars(game->map->map_clean) == EXIT_FAILURE)

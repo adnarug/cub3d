@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 11:17:20 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:40:31 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,6 +316,29 @@ int	find_player(t_game *game)
 		return (EXIT_FAILURE);
 }
 
+int	check_8_dir(t_game *game)
+{
+	char **map;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	map = game->map->map_filled;
+	while(i < game->map->map_clean_lines)
+	{
+		while(j < game->map->max_len)
+		{
+			if (map[i][j] == '0' && (map[i][j++] == '-' || map[i++][j] == '-' || \
+			map[i][j--] == '-' || map[i][j--] == '-' || map[i++][j++] == '-' || map[i--][j--] == '-'))
+				exit(error("Error\nThe map is not closed\n"));
+			j++;
+		}
+		i++;
+	}
+}
+
+
 int	init_map(t_game *game)
 {
 
@@ -328,7 +351,7 @@ int	init_map(t_game *game)
 	if (game->map->map_raw == NULL)
 		return (EXIT_FAILURE);
 	game->map->map_clean_start = find_map_start(game->map->map_raw);
-	if (game->map->map_clean_start  == NULL)
+	if (game->map->map_clean_start == 0)
 		exit(error("Error\n The map file is incomplete\n"));
 	game->map->map_clean = game->map->map_raw + game->map->map_clean_start;
 	extract_tex(game);
@@ -337,6 +360,7 @@ int	init_map(t_game *game)
 	game->map->map_clean_lines = ft_line_count(game->map->map_clean);
 	game->map->map_filled = dup_matrix(game);
 	game->map->map_filled = fill_spaces(game, game->map->map_filled);
+	// check_8_dir(game);
 	if (DEBUG == 1)
 	{
 		print_2d_array(game->map->map_filled);

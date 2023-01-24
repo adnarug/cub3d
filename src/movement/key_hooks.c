@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:02 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/19 11:51:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:25:38 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,14 @@
 static void	check_WASD(t_game *game, mlx_key_data_t keycode)
 {
 	if (keycode.key == MLX_KEY_W && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-	{
-			move(game, 0);
-		// printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
-		// if (check_step(game, game->player->x_pos, game->player->y_pos - 0.3) == EXIT_SUCCESS)
-		// 	game->player->y_pos -= 0.3;
-	}
+		move(game, 0);
 	else if (keycode.key == MLX_KEY_S && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-	{
-			move(game, M_PI);
-		// printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
-		// if (check_step(game, game->player->x_pos, game->player->y_pos + 0.3) == EXIT_SUCCESS)
-		// 	game->player->y_pos += 0.3;
-	}
+		move(game, M_PI);
 	else if (keycode.key == MLX_KEY_A && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-	{
-			move(game, 1.5 * M_PI);
-		// printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
-		// if (check_step(game, game->player->x_pos - 0.3, game->player->y_pos) == EXIT_SUCCESS)
-		// 	game->player->x_pos -= 0.3;
-	}
+		move(game, 1.5 * M_PI);
 	else if (keycode.key == MLX_KEY_D && (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT))
-	{
-			move(game, 0.5 * M_PI);
-		// printf("Coordinates - x:%f y:%f\n", game->player->x_pos, game->player->y_pos);
-		// if (check_step(game, game->player->x_pos + 0.3, game->player->y_pos) == EXIT_SUCCESS)
-		// 	game->player->x_pos += 0.3;
-	}
-	// update_minimap(game);
+		move(game, 0.5 * M_PI);
+
 }
 
 
@@ -60,7 +40,7 @@ static void	check_esc(mlx_key_data_t keycode)
 {
 	if (keycode.key == MLX_KEY_ESCAPE && keycode.action == MLX_PRESS)
 	{
-		// system("leaks cub3D");
+		system("leaks cub3D");
 		exit(EXIT_SUCCESS);
 	}
 }

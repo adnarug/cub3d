@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 12:19:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:33:15 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char	**extract_tex_rgb_helper(char *str, char *tex_id)
 	rgb = ft_split(str, ',');
 	return (rgb);
 }
+
 int	check_abbr(char *str)
 {
 	if ((ft_strncmp(str, "NO", 2) == 0) || (ft_strncmp(str, "SO", 2) == 0) || \
@@ -81,6 +82,7 @@ char *extract_tex_helper(char *str_raw)
 		len--;
 	}
 	tex[j] = '\0';
+	free_2d(str_spl);
 	return (tex);
 }
 void	extract_rgb(t_game *game, char c)
