@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:56:45 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/24 14:38:22 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/24 17:50:02 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_ray_tex	*calc_helper(t_game *game,
 
 	tex = malloc(sizeof(t_ray_tex));
 	if (!tex)
-		exit(1);
+		return (free_game(game, true), exit(1), NULL);
 	*draw_start = (-ray->line_height / 2) + (HEIGHT / 2);
 	if (*draw_start < 0)
 		*draw_start = 0;
