@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/09 09:50:32 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:50:13 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,22 @@ int		free_game(t_game *game)
 	free_2d(game->tex->c->rgb);
 	free(game->tex->f);
 	free(game->tex->c);
-	free(game->tex->no);
-	free(game->tex->so);
-	free(game->tex->we);
-	free(game->tex->ea);
+	free(game->tex->no_path);
+	free(game->tex->so_path);
+	free(game->tex->we_path);
+	free(game->tex->ea_path);
+	mlx_delete_xpm42(game->tex->no);
+	mlx_delete_xpm42(game->tex->so);
+	mlx_delete_xpm42(game->tex->we);
+	mlx_delete_xpm42(game->tex->ea);
 	free(game->tex);
 	free_2d(game->map->map_raw);
 	free_2d(game->map->map_filled);
 	free(game->map);
+	mlx_delete_image(game->mlx, game->img);
+	mlx_delete_image(game->mlx, game->mini->img);
+	free(game->mini);
+	free(game->player);
+	mlx_terminate(game->mlx);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 11:01:25 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:36:18 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ typedef struct s_textures
 	bool			west_found;
 	bool			floor_found;
 	bool			ceiling_found;
-	mlx_texture_t	*no;
-	mlx_texture_t	*so;
-	mlx_texture_t	*we;
-	mlx_texture_t	*ea;
+	xpm_t			*no;
+	xpm_t			*so;
+	xpm_t			*we;
+	xpm_t			*ea;
 	t_tex_rgb		*f;
 	t_tex_rgb		*c;
 }	t_textures;

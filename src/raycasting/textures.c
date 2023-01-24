@@ -6,7 +6,7 @@
 /*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:56:45 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/22 15:03:15 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:38:22 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ void	texturize(t_game *game, int win_x, t_raycast *ray)
 		screen[X] = win_x;
 		screen[Y] = draw_start;
 		if (ray->side == 0 && ray->step[X] == 1)
-			put_tex_pixel(game, byte, game->tex->ea, screen);
+			put_tex_pixel(game, byte, &game->tex->ea->texture, screen);
 		else if (ray->side == 0)
-			put_tex_pixel(game, byte, game->tex->we, screen);
+			put_tex_pixel(game, byte, &game->tex->we->texture, screen);
 		else if (ray->side == 1 && ray->step[Y] == -1)
-			put_tex_pixel(game, byte, game->tex->so, screen);
+			put_tex_pixel(game, byte, &game->tex->so->texture, screen);
 		else
-			put_tex_pixel(game, byte, game->tex->no, screen);
+			put_tex_pixel(game, byte, &game->tex->no->texture, screen);
 		draw_start++;
 	}
 	free(tex);
