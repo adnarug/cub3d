@@ -2,7 +2,7 @@ NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
 #-fsanitize=address
-FLAGS = -Wall -Wextra -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
+FLAGS = -Wall -Wextra -fsanitize=address #-Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++ #-fsanitize=address #-Werror 
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -L $$HOME/.brew/Cellar/glfw/3.3.8/lib/ -framework OpenGL -framework AppKit
 LIBFT = libft/
@@ -13,8 +13,12 @@ SRC_FILES = utils/args_check \
 			utils/errors \
 			utils/tools \
 			map_parse/init_map \
+			map_parse/init_map2 \
+			map_parse/init_map3 \
 			map_parse/extract_tex\
 			map_parse/extract_tex2\
+			map_parse/extract_tex3\
+			map_parse/extract_tex4\
 			map_parse/check_map \
 			map_parse/check_map2 \
 			mini_map/init_minimap \

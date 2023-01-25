@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:07:21 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:07:56 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,20 @@ int	ft_line_count(char **array)
 		i++;
 	}
 	return (i);
+}
+
+int	assign_player(t_game *game, int i, int j, int *one_pl_found)
+{
+	if (ft_strchr(PLAYER_POS, game->map->map_filled[i][j]) != NULL)
+	{
+		if (*one_pl_found == 1)
+			return (EXIT_FAILURE);
+		*one_pl_found = 1;
+		game->player->x_pos = j + 0.5;
+		game->player->y_pos = i + 0.5;
+		game->player->dir = game->map->map_filled[i][j];
+		game->map->map_filled[i][j] = '0';
+		init_player_angle(game);
+	}
+	return (EXIT_SUCCESS);
 }

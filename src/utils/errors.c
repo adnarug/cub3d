@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:46:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:07:28 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/25 12:43:31 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,3 +17,19 @@ int	error(char *str)
 	write(2, str, ft_strlen(str));
 	return (1);
 }
+
+void	error_free_f_exit(t_game *game, char *str)
+{
+	free_game(game, false);
+	write(2, str, ft_strlen(str));
+	exit(1);
+}
+
+void	error_free_t_exit(t_game *game, char *str)
+{
+	free_game(game, true);
+	write(2, str, ft_strlen(str));
+	exit(1);
+}
+
+
