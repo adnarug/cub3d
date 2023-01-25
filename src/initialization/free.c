@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 12:21:45 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:23:10 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ void	free_2d(char **matrix)
 
 int	free_game(t_game *game, bool img_flag)
 {
-	free_2d(game->tex->f->rgb);
-	free_2d(game->tex->c->rgb);
+	// free_2d(game->tex->f->rgb);
+	// free_2d(game->tex->c->rgb);
 	free(game->tex->f);
 	free(game->tex->c);
 	free(game->tex->no_path);
 	free(game->tex->so_path);
 	free(game->tex->we_path);
 	free(game->tex->ea_path);
-	mlx_delete_xpm42(game->tex->no);
-	mlx_delete_xpm42(game->tex->so);
-	mlx_delete_xpm42(game->tex->we);
-	mlx_delete_xpm42(game->tex->ea);
+	// mlx_delete_xpm42(game->tex->no);
+	// mlx_delete_xpm42(game->tex->so);
+	// mlx_delete_xpm42(game->tex->we);
+	// mlx_delete_xpm42(game->tex->ea);
 	free(game->tex);
-	free_2d(game->map->map_raw);
-	free_2d(game->map->map_filled);
+	// free_2d(game->map->map_raw);
+	// free_2d(game->map->map_filled);
 	free(game->map);
 	if (img_flag == true)
 	{

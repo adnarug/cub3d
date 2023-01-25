@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 15:53:41 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:09:30 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/25 15:02:40 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-/*Creating a spaceholder for the minimap*/
 void	start_minimap(t_game *game)
 {
 	game->mini = malloc(sizeof(t_mini));

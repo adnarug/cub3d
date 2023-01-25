@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 12:22:50 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:38:34 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*extract_tex(t_game *game)
 	int		i;
 
 	i = 0;
+	wrong_key_tex(game);
 	while (i < game->map->map_clean_start)
 	{
 		run_extract_tex_no(game, "NO", i);

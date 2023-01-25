@@ -6,13 +6,59 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 12:23:11 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:46:41 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-char	*extract_tex_helper(t_game *game, char *str_raw)
+int	check_validity(char *to_check)
+{
+	int	i;
+	char *valid_keys[8];
+
+	i = 0;
+	valid_keys[0] = "NO";
+	valid_keys[1] = "SO";
+	valid_keys[2] = "EA";
+	valid_keys[3] = "WE";
+	valid_keys[4] = "C";
+	valid_keys[5] = "F";
+	valid_keys[7] = NULL;
+	while (valid_keys[i] != NULL)
+	{
+		if (ft_strncmp(to_check, valid_keys[i], 2) == 0)
+			return (EXIT_SUCCESS) ;
+		i++;
+	}
+	return (EXIT_FAILURE);
+}
+
+int	wrong_key_tex(t_game *game)
+{
+	int		j;
+	char	**str_spl;
+
+	j = 0;
+	while (j < game->map->map_clean_start)
+	{
+		str_spl = ft_split(game->map->map_raw[j], ' ');
+		printf("%s\n", str_spl[0]);
+		if (str_spl && str_spl[0] && ft_isalnum(*str_spl[0]) == 1)
+		{
+			if (check_validity(str_spl[0]) == EXIT_FAILURE)
+			{
+				free_2d(str_spl);
+				error_free_f_exit(game, "Error\n Misconfigured texture\n");
+			}
+		}
+		free_2d(str_spl);
+		j++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+char	*extract_tex_helper(t_game *game, char *str_raw, char *dir)
 {
 	char	*tex;
 	char	**str_spl;
@@ -25,6 +71,8 @@ char	*extract_tex_helper(t_game *game, char *str_raw)
 	len = 0;
 	str_spl = ft_split(str_raw, ' ');
 	if (str_spl == NULL || *str_spl[0] == ' ')
+		return (NULL);
+	if (ft_strncmp(dir, str_spl[0], 2) != 0)
 		return (NULL);
 	check_if_path(game, str_spl);
 	while (str_spl[1][len] != '\0' && str_spl[1][len] != ' ')
@@ -45,8 +93,8 @@ void	run_extract_c(t_game *game, int i)
 		ft_strlen(game->map->map_raw[i])) != NULL)
 	{
 		if (game->tex->ceiling_found == true)
-			exit (error("Error\nDuplicate textures input\n"));
-		game->tex->c->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "C");
+			error_free_f_exit(game, "Error\nDuplicate textures input\n");
+		game->tex->c->rgb = extract_tex_rgb_helper(game, game->map->map_raw[i], "C");
 		extract_rgb(game, 'C');
 		if (game->tex->c->rgb != NULL)
 			game->tex->ceiling_found = true;
@@ -59,15 +107,15 @@ void	run_extract_f(t_game *game, int i)
 		ft_strlen(game->map->map_raw[i])) != NULL)
 	{
 		if (game->tex->floor_found == true)
-			exit (error("Error\nDuplicate textures input\n"));
-		game->tex->f->rgb = extract_tex_rgb_helper(game->map->map_raw[i], "F");
+			error_free_f_exit(game, "Error\nDuplicate textures input\n");
+		game->tex->f->rgb = extract_tex_rgb_helper(game, game->map->map_raw[i], "F");
 		extract_rgb(game, 'F');
 		if (game->tex->f->rgb != NULL)
 			game->tex->floor_found = true;
 	}
 }
 
-char	**extract_tex_rgb_helper(char *str, char *tex_id)
+char	**extract_tex_rgb_helper(t_game *game, char *str, char *tex_id)
 {
 	char	**rgb;
 	int		len;
