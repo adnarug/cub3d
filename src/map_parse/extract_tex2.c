@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:05:45 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 12:22:53 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:36:43 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,26 @@ void	check_tex_ext(t_game *game, char *ext)
 
 void	access_tex(t_game *game)
 {
-	if (access(game->tex->no_path, F_OK) == -1)
+	int	fd;
+
+	fd = open(game->tex->no_path, O_RDONLY);
+	if (fd < 0)
 		exit(error("Error\nCould not access texture file(s)\n"));
-	if (access(game->tex->so_path, F_OK) == -1)
+	else
+		close(fd);
+	fd = open(game->tex->so_path, O_RDONLY);
+	if (fd < 0)
 		exit(error("Error\nCould not access texture file(s)\n"));
-	if (access(game->tex->we_path, F_OK) == -1)
+	else
+		close(fd);
+	fd = open(game->tex->we_path, O_RDONLY);
+	if (fd < 0)
 		exit(error("Error\nCould not access texture file(s)\n"));
-	if (access(game->tex->ea_path, F_OK) == -1)
+	else
+		close(fd);
+	fd = open(game->tex->ea_path, O_RDONLY);
+	if (fd < 0)
 		exit(error("Error\nCould not access texture file(s)\n"));
+	else
+		close(fd);
 }

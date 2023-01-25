@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:25:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 12:55:07 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:42:37 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,11 @@ char	**read_map(t_game *game, char *file, int *line_count)
 	int		num_lines;
 
 	i = 0;
-	if (access(file, F_OK) == -1)
-		error_free_f_exit(game, "Error\n File does not exist / not accessible\n");
 	map = malloc_rows(file, line_count);
 	num_lines = *line_count;
 	fd = open(file, O_RDONLY, 0644);
 	if (fd < 0)
-		return (NULL);
+		error_free_f_exit(game, "Error\n File does not exist / not accessible\n");
 	while (num_lines > 0)
 	{
 		map[i] = get_next_line(fd);
