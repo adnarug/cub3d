@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 17:46:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:08:53 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	wrong_key_tex(t_game *game)
 	while (j < game->map->map_clean_start)
 	{
 		str_spl = ft_split(game->map->map_raw[j], ' ');
-		printf("%s\n", str_spl[0]);
 		if (str_spl && str_spl[0] && ft_isalnum(*str_spl[0]) == 1)
 		{
 			if (check_validity(str_spl[0]) == EXIT_FAILURE)
@@ -72,8 +71,9 @@ char	*extract_tex_helper(t_game *game, char *str_raw, char *dir)
 	str_spl = ft_split(str_raw, ' ');
 	if (str_spl == NULL || *str_spl[0] == ' ')
 		return (NULL);
+	// printf("str_spl%s dir%s\n", str_spl[0], dir);
 	if (ft_strncmp(dir, str_spl[0], 2) != 0)
-		return (NULL);
+		error("Warning\nPotential misconfig of textures\n");
 	check_if_path(game, str_spl);
 	while (str_spl[1][len] != '\0' && str_spl[1][len] != ' ')
 		len++;
