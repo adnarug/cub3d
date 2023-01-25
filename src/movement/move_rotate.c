@@ -6,13 +6,13 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:42:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 13:45:32 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:57:45 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-bool	check_collisions(t_game	*game, double new_v[2])
+static bool	check_collisions(t_game	*game, double new_v[2])
 {
 	int	old_xmap;
 	int	old_ymap;
