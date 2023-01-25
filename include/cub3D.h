@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 13:08:46 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:43:01 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int		check_valid_chars(char **map);
 int		find_map_start(char **map);
 int		assign_player(t_game *game, int i, int j, int *one_pl_found);
 void	init_player_angle(t_game *game);
+void	rays_minimap_line(t_game *game, double step);
+
 //Err
 void	error_free_t_exit(t_game *game, char *str);
 void	error_free_f_exit(t_game *game, char *str);

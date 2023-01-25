@@ -23,6 +23,7 @@ SRC_FILES = utils/args_check \
 			map_parse/check_map2 \
 			mini_map/init_minimap \
 			mini_map/upd_minimap \
+			mini_map/minimap_tools \
 			movement/key_hooks \
 			movement/move_rotate \
 			initialization/inits \

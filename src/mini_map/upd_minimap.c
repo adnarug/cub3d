@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:48:31 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 17:20:00 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:43:32 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,6 @@ bool	check_wall(t_game *game, int x, int y, double step)
 	return (false);
 }
 
-void	draw_line (t_game *game, double x, double y)
-{
-	int i = 15;
-
-	while (i > 0)
-	{
-		mlx_put_pixel(game->mini->img, (int)x++, (int)y, RED);
-		i--;
-	}
-}
 void	draw_player(t_game *game, double step)
 {
 	double	cam[2];
@@ -89,98 +79,12 @@ void	draw_player(t_game *game, double step)
 	}
 }
 
-static int	cast_ray_world_to_map(double offset, double ray, double step)
-{
-	double	ray_on_screen;
-
-	ray_on_screen = (ray - offset) * step;
-	return ((int)round(ray_on_screen));
-}
-
-void	rays_minimap_line(t_game *game, double step)
-{
-	double	cam[2];
-	double	factor;
-	double	ray[2];
-	int		pixel[2];
-
-
-	cam[X] = game->player->x_pos;
-	cam[Y] = game->player->y_pos;
-	factor = 0.01;
-	while (factor < 0.5)
-	{
-
-			ray[X] = cam[X] + (game->player->x_scalar * factor);
-			ray[Y] = cam[Y] + (game->player->y_scalar * factor);
-			if (ray[X] >= game->mini->size || ray[Y] >= game->mini->size
-				|| ray[X] < 0 || ray[Y] < 0)
-				break ;
-			if (game->map->map_filled[(int)ray[Y]][(int)ray[X]] == '1')
-				break ;
-			pixel[X] = cast_ray_world_to_map(game->mini->x_offset, ray[X] , step);
-			pixel[Y] = cast_ray_world_to_map(game->mini->y_offset, ray[Y], step);
-			if (pixel[X] >= game->mini->size || pixel[Y] >= game->mini->size
-				|| pixel[X] < 1 || pixel[Y] < 1)
-				break ;
-			mlx_put_pixel(game->mini->img, pixel[X], pixel[Y], RED);
-			factor += 0.01;
-	}
-}
-
-/*Support function*/
-void	rays_minimap_cone(t_game *game, double step)
-{
-	double	cam[2];
-	double	factor;
-	double	ray[2];
-	int		pixel[2];
-	double	i;
-	double	ray_x_scalar;
-	double	ray_angle;
-	double	ray_y_scalar;
-	i = -0.5;
-
-	cam[X] = game->player->x_pos;
-	cam[Y] = game->player->y_pos;
-	factor = 0.01;
-	while (i < 0.5)
-	{
-		ray_angle = game->player->angle;
-		ray_angle += i;
-		ray_x_scalar = sin(ray_angle);
-		ray_y_scalar = -1 * cos(ray_angle);
-		factor = 0.01;
-		while (factor < game->mini->size)
-		{
-
-				ray[X] = cam[X] + (ray_x_scalar * factor);
-				ray[Y] = cam[Y] + (ray_y_scalar * factor);
-				// printf("cam _x %f x_scalar %f ray x %f cam x %f \n cam_y %f y_scalar %f ray_yy %f cam_y %f\n", cam[X], game->player->x_scalar, ray[X], cam[X], cam[Y], game->player->y_scalar, ray[Y], cam[Y]);
-				if (ray[X] >= game->mini->size || ray[Y] >= game->mini->size
-					|| ray[X] < 0 || ray[Y] < 0)
-					break ;
-				if (game->map->map_filled[(int)ray[Y]][(int)ray[X]] == '1')
-					break ;
-				pixel[X] = cast_ray_world_to_map(game->mini->x_offset, ray[X] , step);
-				pixel[Y] = cast_ray_world_to_map(game->mini->y_offset, ray[Y], step);
-				if (pixel[X] >= game->mini->size || pixel[Y] >= game->mini->size
-					|| pixel[X] < 1 || pixel[Y] < 1)
-					break ;
-				mlx_put_pixel(game->mini->img, pixel[X], pixel[Y], RED);
-				factor += 0.01;
-		}
-		i += 0.001;
-
-	}
-}
-
-static void	draw_minimap(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	int		x;
 	int		y;
 	double	step;
-	
+
 	step = (double)game->mini->size / MINIMAP_SCOPE;
 	set_offset(game);
 	y = 0;

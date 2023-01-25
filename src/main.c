@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:30:46 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:36:08 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	
+
 	init_game(&game);
 	init_mlx(&game);
 	if (args_check(&game, argc, argv) == EXIT_FAILURE)
