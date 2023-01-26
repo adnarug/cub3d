@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 18:08:53 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:06:45 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	wrong_key_tex(t_game *game)
 			if (check_validity(str_spl[0]) == EXIT_FAILURE)
 			{
 				free_2d(str_spl);
-				error_free_f_exit(game, "Error\n Misconfigured texture\n");
+				error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 			}
 		}
 		free_2d(str_spl);
@@ -68,51 +68,44 @@ char	*extract_tex_helper(t_game *game, char *str_raw, char *dir)
 	i = 0;
 	j = 0;
 	len = 0;
-	str_spl = ft_split(str_raw, ' ');
-	if (str_spl == NULL || *str_spl[0] == ' ')
-		return (NULL);
+	// str_spl = ft_split(str_raw, ' ');
+
+	// if (str_spl == NULL || *str_spl[0] == ' ')
+	// 	return (NULL);
 	// printf("str_spl%s dir%s\n", str_spl[0], dir);
-	if (ft_strncmp(dir, str_spl[0], 2) != 0)
-		error("Warning\nPotential misconfig of textures\n");
-	check_if_path(game, str_spl);
-	while (str_spl[1][len] != '\0' && str_spl[1][len] != ' ')
+	// if (ft_strncmp(dir, str_spl[0], 2) != 0)
+	// 	error("Warning\nPotential misconfig of textures\n");
+	check_if_path(game, str_raw);
+	while (str_raw[len] != '\0' && str_raw[len] != ' ')
 		len++;
 	tex = malloc(sizeof(char) * (len + 1));
 	if (tex == NULL)
 		return (NULL);
 	while (--len > 0)
-		tex[j++] = str_spl[1][i++];
+		tex[j++] = str_raw[i++];
 	tex[j] = '\0';
-	free_2d(str_spl);
+	// free_2d(str_spl);
 	return (tex);
 }
 
-void	run_extract_c(t_game *game, int i)
+void	run_extract_c(t_game *game, char **str)
 {
-	if (ft_strnstr(game->map->map_raw[i], "C ", \
-		ft_strlen(game->map->map_raw[i])) != NULL)
-	{
 		if (game->tex->ceiling_found == true)
-			error_free_f_exit(game, "Error\nDuplicate textures input\n");
-		game->tex->c->rgb = extract_tex_rgb_helper(game, game->map->map_raw[i], "C");
+			error_free_prs_exit(game, "Error\nDuplicate textures input\n");
+		game->tex->c->rgb = str;
 		extract_rgb(game, 'C');
 		if (game->tex->c->rgb != NULL)
 			game->tex->ceiling_found = true;
-	}
 }
 
-void	run_extract_f(t_game *game, int i)
+void	run_extract_f(t_game *game, char **str)
 {
-	if (ft_strnstr(game->map->map_raw[i], "F ", \
-		ft_strlen(game->map->map_raw[i])) != NULL)
-	{
-		if (game->tex->floor_found == true)
-			error_free_f_exit(game, "Error\nDuplicate textures input\n");
-		game->tex->f->rgb = extract_tex_rgb_helper(game, game->map->map_raw[i], "F");
-		extract_rgb(game, 'F');
-		if (game->tex->f->rgb != NULL)
-			game->tex->floor_found = true;
-	}
+	if (game->tex->floor_found == true)
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
+	game->tex->f->rgb = str;
+	extract_rgb(game, 'F');
+	if (game->tex->f->rgb != NULL)
+		game->tex->floor_found = true;
 }
 
 char	**extract_tex_rgb_helper(t_game *game, char *str, char *tex_id)

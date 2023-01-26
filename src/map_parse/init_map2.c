@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:25:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 17:42:37 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/26 12:54:17 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ static char	**malloc_rows(char *file, int *line_count)
 
 	*line_count = file_linecount(file);
 	if (*line_count <= 0)
-		error("Error\ncould not read the file, \
-			it may not exist or the path is wrong\n");
+	{
+		error("Error\ncould not read the file\n");
+		exit(1);
+	}
 	map = malloc(sizeof(char *) * (*line_count + 1));
 	if (map == NULL)
 		exit (1);
