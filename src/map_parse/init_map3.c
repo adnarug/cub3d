@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:50:20 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 12:05:49 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:42:55 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,6 @@ int	find_player(t_game *game)
 		return (EXIT_FAILURE);
 }
 
-
-// int double_check_map(char **map)
-// {
-// 	int	i;
-// 	int len;
-
-// 	i = 0;
-// 	len = 0;
-// 	while (map[len] != NULL)
-// 		len++;
-// 	while (ft_strchr("01", *map[len]) != NULL)
-// 		len--;
-// }
 int	find_map_start(char **map)
 {
 	int		i;
@@ -79,7 +66,6 @@ int	find_map_start(char **map)
 		{
 			free(trimmed);
 			trimmed = NULL;
-			// double_check_map(char **map)
 			return (i);
 		}
 		else

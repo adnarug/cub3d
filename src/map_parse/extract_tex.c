@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 13:15:45 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:58:16 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ void	extract_rgb(t_game *game, char c)
 		game->tex->c->g = ft_atoi(game->tex->c->rgb[2]);
 		game->tex->c->b = ft_atoi(game->tex->c->rgb[3]);
 	}
-}
-
-void	extract_hex_color(t_game *game)
-{
-	game->tex->c->color = \
-		convert_rgb_to_hex(game->tex->c->r, game->tex->c->g, game->tex->c->b);
-	game->tex->f->color = \
-		convert_rgb_to_hex(game->tex->f->r, game->tex->f->g, game->tex->f->b);
 }
 
 static void	load_textures(t_game *game)
@@ -56,13 +48,13 @@ static void	load_textures(t_game *game)
 void	check_n_extract(t_game *game, char **str)
 {
 	if (ft_strncmp (str[0], "NO", 2) == 0)
-		run_extract_tex_no(game, "NO", str[1]);
+		run_extract_tex_no(game, str[1]);
 	if (ft_strncmp (str[0], "SO", 2) == 0)
-		run_extract_tex_so(game, "SO", str[1]);
+		run_extract_tex_so(game, str[1]);
 	if (ft_strncmp (str[0], "WE", 2) == 0)
-		run_extract_tex_we(game, "WE", str[1]);
+		run_extract_tex_we(game, str[1]);
 	if (ft_strncmp (str[0], "EA", 2) == 0)
-		run_extract_tex_ea(game, "EA", str[1]);
+		run_extract_tex_ea(game, str[1]);
 	if (ft_strncmp (str[0], "F", 1) == 0)
 		run_extract_f(game, str);
 	if (ft_strncmp (str[0], "C", 1) == 0)
@@ -78,6 +70,7 @@ void	run_extraction(t_game *game)
 	while (j < game->map->map_clean_start)
 	{
 		str_spl = ft_split(game->map->map_raw[j], ' ');
+		game->tex->raw_path = str_spl;
 		if (str_spl && str_spl[0] && ft_isalnum(*str_spl[0]) == 1)
 			check_n_extract(game, str_spl);
 		j++;
@@ -92,16 +85,6 @@ char	*extract_tex(t_game *game)
 	i = 0;
 	wrong_key_tex(game);
 	run_extraction(game);
-	printf("\nno: %s\n", game->tex->no_path);
-	printf("so: %s\n", game->tex->so_path);
-	printf("we: %s\n", game->tex->we_path);
-	printf("ea: %s\n", game->tex->ea_path);
-	printf("f - r: %d\n", game->tex->f->r);
-	printf("f - g: %d\n", game->tex->f->g);
-	printf("f - b: %d\n", game->tex->f->b);
-	printf("c - r: %d\n", game->tex->c->r);
-	printf("c - g: %d\n", game->tex->c->g);
-	printf("c - b: %d\n", game->tex->c->b);
 	check_tex_ext(game, ".xpm42");
 	check_miss_tex(game);
 	check_rgb(game);

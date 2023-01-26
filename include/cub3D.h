@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 15:38:04 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:48:58 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,24 @@ void	fill_ceiling(t_game *game);
 void	fill_floor(t_game *game);
 void	check_diag_holes(t_game *game);
 int		perimeter_isvalid(t_game *game);
-char	*extract_tex_helper(t_game *game, char *str_raw, char *dir);
+char	*extract_tex_helper(t_game *game, char *str_raw);
 //Extraction of tex
-void	run_extract_tex_no(t_game *game, char *dir, int i);
-void	run_extract_tex_so(t_game *game, char *dir, int i);
-void	run_extract_tex_ea(t_game *game, char *dir, int i);
-void	run_extract_tex_we(t_game *game, char *dir, int i);
-void	run_extract_c(t_game *game, int i);
-void	run_extract_f(t_game *game, int i);
+void	run_extract_tex_no(t_game *game, char *str);
+void	run_extract_tex_so(t_game *game, char *str);
+void	run_extract_tex_ea(t_game *game, char *str);
+void	run_extract_tex_we(t_game *game, char *str);
+void	run_extract_c(t_game *game, char **str);
+void	run_extract_f(t_game *game, char **str);
 void	extract_hex_color(t_game *game);
 void	extract_rgb(t_game *game, char c);
 char	*extract_tex(t_game *game);
 void	access_tex(t_game *game);
 void	check_tex_ext(t_game *game, char *ext);
 void	check_miss_tex(t_game *game);
-void	check_if_path(t_game *game, char **str_spl);
+void	check_if_path(t_game *game, char *str_spl);
 int		check_abbr(char *str);
 void	check_rgb(t_game *game);
-char	**extract_tex_rgb_helper(t_game *game, char *str, char *tex_id);
+char	**extract_tex_rgb_helper(char *str, char *tex_id);
 char	**dup_matrix(t_game *game);
 char	**read_map(t_game *game, char *file, int *line_count);
 int		file_linecount(char *file);
@@ -107,9 +107,11 @@ int		find_map_start(char **map);
 int		assign_player(t_game *game, int i, int j, int *one_pl_found);
 void	init_player_angle(t_game *game);
 void	rays_minimap_line(t_game *game, double step);
-int	    wrong_key_tex(t_game *game);
+int		wrong_key_tex(t_game *game);
+int		free_game_prs(t_game *game);
 //Err
 int		error(char *str);
 void	error_free_t_exit(t_game *game, char *str);
 void	error_free_f_exit(t_game *game, char *str);
+void	error_free_prs_exit(t_game *game, char *str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:05:10 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:55:44 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:57:44 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_textures
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
-
+	char			**raw_path;
 	bool			north_found;
 	bool			south_found;
 	bool			east_found;

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:02 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 13:44:22 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:08:18 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	check_esc(mlx_key_data_t keycode, t_game *game)
 	if (keycode.key == MLX_KEY_ESCAPE && keycode.action == MLX_PRESS)
 	{
 		free_game(game, true);
-		// system("leaks cub3D");
+		system("leaks cub3D");
 		exit(EXIT_SUCCESS);
 	}
 }
