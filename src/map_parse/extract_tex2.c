@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:05:45 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 13:04:24 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:18:27 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@ void	check_if_path(t_game *game, char *str_spl)
 void	check_miss_tex(t_game *game)
 {
 	if (game->tex->ceiling_found == false || game->tex->floor_found == false)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
+	{
+		error("Error\nMap file is misconfigured\n");
+		system("leaks cub3D");
+		exit (1);
+	}
 	if (game->tex->north_found == false || game->tex->south_found == false || \
 		game->tex->south_found == false || game->tex->west_found == false)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
+	{
+		error("Error\nMap file is misconfigured\n");
+		system("leaks cub3D");
+		exit (1);
+	}
 }
 
 void	check_tex_ext(t_game *game, char *ext)

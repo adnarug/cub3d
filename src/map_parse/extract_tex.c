@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 13:58:16 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:10:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ char	*extract_tex(t_game *game)
 	i = 0;
 	wrong_key_tex(game);
 	run_extraction(game);
-	check_tex_ext(game, ".xpm42");
 	check_miss_tex(game);
+	check_tex_ext(game, ".xpm42");
 	check_rgb(game);
 	load_textures(game);
 	return (NULL);

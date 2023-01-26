@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 13:59:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:16:05 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	free_game_prs(t_game *game)
 	free(game->tex->so_path);
 	free(game->tex->we_path);
 	free(game->tex->ea_path);
+	free_2d(game->map->map_raw);
+	free_2d(game->tex->raw_path);
 	free(game->tex);
 	free(game->map);
 	free(game->player);
-	free_2d(game->tex->raw_path);
-	free_2d(game->map->map_raw);
 	mlx_terminate(game->mlx);
 	return (EXIT_SUCCESS);
 }

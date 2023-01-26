@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:46:07 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:42:25 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:16:15 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	init_game(t_game *game)
 	if (game->tex->c == NULL)
 		return (EXIT_FAILURE);
 	game->player = malloc(sizeof(t_player));
-	init_tex(game);
 	if (game->player == NULL)
 		return (EXIT_FAILURE);
+	init_tex(game);
 	return (EXIT_SUCCESS);
 }
 

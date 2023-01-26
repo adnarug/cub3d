@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 13:49:36 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:06:40 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ int	wrong_key_tex(t_game *game)
 	while (j < game->map->map_clean_start)
 	{
 		str_spl = ft_split(game->map->map_raw[j], ' ');
+		game->tex->raw_path = str_spl;
 		if (str_spl && str_spl[0] && ft_isalnum(*str_spl[0]) == 1)
 		{
 			if (check_validity(str_spl[0]) == EXIT_FAILURE)
-			{
-				free_2d(str_spl);
 				error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
-			}
 		}
 		free_2d(str_spl);
 		j++;
