@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 15:41:46 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:28:51 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	init_player_angle(t_game *game);
 void	rays_minimap_line(t_game *game, double step);
 int		wrong_key_tex(t_game *game);
 int		free_game_prs(t_game *game);
+void	init_rgb(char **rgb);
+void	check_rgb_null(char **rgb);
 //Err
 int		error(char *str);
 void	error_free_t_exit(t_game *game, char *str);

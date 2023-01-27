@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 12:05:20 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:16:47 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ void	run_extract_c(t_game *game, char **str)
 	// 	printf("LINES: %d\n", ft_line_count(str));
 	// 	error_free_prs_exit(game, "Error\nMisconfigured textures\n");
 	// }
-	extract_rgb(game, 'C');	
-
+	extract_rgb(game, 'C');
 	if (game->tex->c->rgb != NULL)
 		game->tex->ceiling_found = true;
 }
@@ -104,7 +103,6 @@ void	run_extract_f(t_game *game, char **str)
 	// 	error_free_prs_exit(game, "Error\nMisconfigured textures\n");
 	// }
 	extract_rgb(game, 'F');
-
 	if (game->tex->f->rgb != NULL)
 		game->tex->floor_found = true;
 }

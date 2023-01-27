@@ -1,7 +1,7 @@
 NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
-FLAGS = -Wall -Wextra #-fsanitize=address #-Werror
+FLAGS = -Wall -Wextra -fsanitize=address #-Werror
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -L $$HOME/.brew/Cellar/glfw/3.3.8/lib/ -framework OpenGL -framework AppKit
 LIBFT = libft/
@@ -11,6 +11,7 @@ SRC_FILES = utils/args_check \
 			utils/get_next_line_utils \
 			utils/errors \
 			utils/tools \
+			utils/rgb_utils \
 			map_parse/init_map \
 			map_parse/init_map2 \
 			map_parse/init_map3 \

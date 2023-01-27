@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 12:06:01 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:27:53 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,6 @@ void	extract_hex_color(t_game *game)
 		convert_rgb_to_hex(game->tex->c->r, game->tex->c->g, game->tex->c->b);
 	game->tex->f->color = \
 		convert_rgb_to_hex(game->tex->f->r, game->tex->f->g, game->tex->f->b);
-}
-
-void	check_rgb(t_game *game)
-{
-	if (game->tex->c->r < 0 || game->tex->c->r > 255)
-		exit(error("Error\nInvalid RGB input\n"));
-	if (game->tex->c->g < 0 || game->tex->c->g > 255)
-		exit(error("Error\nInvalid RGB input\n"));
-	if (game->tex->c->b < 0 || game->tex->c->b > 255)
-		exit(error("Error\nInvalid RGB input\n"));
-	if (game->tex->f->r < 0 || game->tex->f->r > 255)
-		exit(error("Error\nInvalid RGB input\n"));
-	if (game->tex->f->g < 0 || game->tex->f->g > 255)
-		exit(error("Error\nInvalid RGB input\n"));
-	if (game->tex->f->b < 0 || game->tex->f->b > 255)
-		exit(error("Error\nInvalid RGB input\n"));
 }
 
 // char	**extract_tex_rgb_helper(char **str)
@@ -110,9 +94,9 @@ void	check_rgb(t_game *game)
 // 	return (rgb);
 // }
 
-void print_2d_array(char **array)
+void	print_2d_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i] != NULL)
@@ -122,61 +106,23 @@ void print_2d_array(char **array)
 	}
 }
 
-void	init_rgb(char **rgb)
+char	**extract_tex_rgb_helper(char **str)
 {
-	rgb[0] = NULL;
-	rgb[1] = NULL;
-	rgb[2] = NULL;
-	rgb[3] = NULL;
-}
-
-void	check_rgb_valid_char(char *rgb)
-{
-	int i;
-	bool	digit_found;
-
-	i = 0;
-	digit_found	= false;
-	while (rgb[i] != '\0')
-	{
-		if (ft_isdigit(rgb[i]) == 1)
-			digit_found = true;
-		if (ft_isdigit(rgb[i]) != 1 && rgb[i] != ' ' && rgb[i] != ',' && rgb[i] != '\t' && rgb[i] != '\n')
-			exit(error("Error\nRGB misconfig\n"));
-		i++;
-	}
-	if (digit_found == false)
-		exit(error("Error\nRGB misconfig\n"));
-}
-
-void	check_rgb_null(char **rgb)
-{
-	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
-		exit(error("Error\nRGB misconfig\n"));
-	check_rgb_valid_char(rgb[0]);
-	check_rgb_valid_char(rgb[1]);
-	check_rgb_valid_char(rgb[2]);
-	
-}
-
-char **extract_tex_rgb_helper(char **str)
-{
-	char **rgb;
-	char **split_res;
-	char *clean_str;
-	int i;
-	int j;
+	char	**rgb;
+	char	**split_res;
+	char	*clean_str;
+	int		i;
+	int		j;
 
 	i = 1;
 	j = 0;
-	rgb = malloc(sizeof(char*) * 4);
+	rgb = malloc(sizeof(char *) * 4);
 	if (rgb == NULL)
 		exit(error("Error\nMalloc failed\n"));
 	init_rgb(rgb);
 	while (i < 4 && str[i] != NULL)
 	{
 		split_res = ft_split(str[i], ',');
-
 		if (split_res == NULL)
 			exit(error("Error\nRGB misconfig\n"));
 		if (ft_line_count(split_res) == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:05:45 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 12:05:06 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:22:57 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_abbr(char *str)
 
 void	check_if_path(t_game *game, char *str_spl)
 {
+	if (!str_spl || !str_spl[0])
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (str_spl && ft_strchr(str_spl, '/') == NULL)
 		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (str_spl && ft_strchr(str_spl, '.') == NULL)
@@ -70,7 +72,6 @@ void	check_tex_ext(t_game *game, char *ext)
 	if (ft_strncmp(game->tex->ea_path + \
 	ft_strlen(game->tex->ea_path) - len, ext, len) != 0)
 		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
-
 }
 
 void	access_tex(t_game *game)
