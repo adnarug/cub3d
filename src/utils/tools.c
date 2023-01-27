@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 14:00:54 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:51:04 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,152 @@ void	check_rgb(t_game *game)
 		exit(error("Error\nInvalid RGB input\n"));
 }
 
-char	**extract_tex_rgb_helper(char *str, char *tex_id)
+// char	**extract_tex_rgb_helper(char **str)
+// {
+// 	char	**rgb;
+// 	char	*clean_str;
+// 	int		len;
+// 	int		i;
+// 	int		j;
+
+// 	i = 1;
+// 	j = 0;
+// 	rgb = malloc(sizeof(char*) * 3);
+// 	while (str[i] != NULL)
+// 	{
+// 		j = 0;
+// 		rgb[i] = NULL;
+// 		if (i > 2)
+// 		{
+// 			error("Error\nRGB misconfigured\n");
+// 			exit(1);
+// 		}
+// 		clean_str = ft_strtrim(str[i], " ");
+// 		printf("str: %s\n", clean_str);
+// 		while(clean_str[j]!= '\0')
+// 		{
+// 			len = 0;
+// 			while (ft_isdigit(clean_str[j]) == 0)
+// 				j++;
+// 			while (ft_isdigit(clean_str[j]) == 1)
+// 			{
+// 				len++;
+// 				j++;
+// 			}
+// 			j--;
+// 			printf("2: %s\n", &clean_str[j - len]);
+// 			rgb[i] = malloc(sizeof(char) * len + 1);
+// 			ft_strlcpy(rgb[i], &clean_str[j - len], len);
+// 			printf("3: %s\n", rgb[i]);
+// 			while (clean_str[j] != '\0' && clean_str[j] != ',')
+// 				j++;
+// 		}
+// 		free(clean_str);
+// 		i++;
+// 	}
+// 	return (rgb);
+// }
+
+void print_2d_array(char **array)
 {
-	char	**rgb;
-	int		len;
-	int		i;
-	int		j;
+	int i;
 
 	i = 0;
+	while (array[i] != NULL)
+	{
+		printf("%s\n", array[i]);
+		i++;
+	}
+}
+
+void	init_rgb(char **rgb)
+{
+	rgb[0] = NULL;
+	rgb[1] = NULL;
+	rgb[2] = NULL;
+	rgb[3] = NULL;
+}
+
+void	check_rgb_valid_char(char *rgb)
+{
+	int i;
+	bool	digit_found;
+
+	i = 0;
+	digit_found	= false;
+	while (rgb[i] != '\0')
+	{
+		if (ft_isdigit(rgb[i]) == 1)
+			digit_found = true;
+		if (ft_isdigit(rgb[i]) != 1 && rgb[i] != ' ' && rgb[i] != ',' && rgb[i] != '\t' && rgb[i] != '\n')
+			exit(error("Error\nRGB misconfig\n"));
+		i++;
+	}
+	if (digit_found == false)
+		exit(error("Error\nRGB misconfig\n"));
+}
+
+void	check_rgb_null(char **rgb)
+{
+	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+		exit(error("Error\nRGB misconfig\n"));
+	check_rgb_valid_char(rgb[0]);
+	check_rgb_valid_char(rgb[1]);
+	check_rgb_valid_char(rgb[2]);
+	
+}
+
+char **extract_tex_rgb_helper(char **str)
+{
+	char **rgb;
+	char **split_res;
+	char *clean_str;
+	int i;
+	int j;
+
+	i = 1;
 	j = 0;
-	len = 0;
-	str = ft_strnstr(str, tex_id, ft_strlen(str));
-	if (str == NULL)
-		return (NULL);
-	while (ft_isdigit(*str) == 0)
-		str++;
-	rgb = ft_split(str, ',');
+
+	printf("Input\n");
+	print_2d_array(str);
+	rgb = malloc(sizeof(char*) * 4);
 	if (rgb == NULL)
-		return (NULL);
+		exit(error("Error\nMalloc failed\n"));
+	init_rgb(rgb);
+	while (i < 4 && str[i] != NULL)
+	{
+		split_res = ft_split(str[i], ',');
+		printf("After split\n");
+		print_2d_array(split_res);
+		if (split_res == NULL)
+			exit(error("Error\nRGB misconfig\n"));
+		if (ft_line_count(split_res) == 1)
+		{
+			printf("Before strdup %d\n", i);
+			if (j == 0)
+				rgb[i - 1] = ft_strdup(split_res[0]);
+			if (j != 0)
+				rgb[i] = ft_strdup(split_res[0]);
+			free_2d(split_res);
+			i++;
+		}
+		else
+		{
+			while (split_res[j] != NULL)
+			{
+				rgb[i - 1] = ft_strdup(split_res[j]);
+				printf("rgb[i]: %s i: %d j: %d\n", rgb[i - 1], i, j);
+				j++;
+				i++;
+			}
+			printf("After while\n");
+			print_2d_array(rgb);
+			printf("i: %d j:%d\n",	i, j);
+		if (i - 1 != 3)
+			i = j;
+		}	
+		}
+	check_rgb_null(rgb);
+	print_2d_array(rgb);
 	return (rgb);
 }

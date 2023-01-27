@@ -1,7 +1,7 @@
 NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra #-fsanitize=address #-Werror
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -L $$HOME/.brew/Cellar/glfw/3.3.8/lib/ -framework OpenGL -framework AppKit
 LIBFT = libft/

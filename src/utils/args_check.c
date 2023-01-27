@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:44:29 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 15:07:26 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/27 12:03:21 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_file_extension(char **argv)
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
 	{
 		write(2, "Error\nWrong file extension - check the parameters\n", 50);
-		return (EXIT_FAILURE);
+		exit(1);
 	}
 	return (EXIT_SUCCESS);
 }

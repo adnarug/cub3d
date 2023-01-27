@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 14:10:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:44:11 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	extract_rgb(t_game *game, char c)
 {
 	if (c == 'F')
 	{
-		game->tex->f->r = ft_atoi(game->tex->f->rgb[1]);
-		game->tex->f->g = ft_atoi(game->tex->f->rgb[2]);
-		game->tex->f->b = ft_atoi(game->tex->f->rgb[3]);
+		game->tex->f->r = ft_atoi(game->tex->f->rgb[0]);
+		game->tex->f->g = ft_atoi(game->tex->f->rgb[1]);
+		game->tex->f->b = ft_atoi(game->tex->f->rgb[2]);
 	}
 	if (c == 'C')
 	{
-		game->tex->c->r = ft_atoi(game->tex->c->rgb[1]);
-		game->tex->c->g = ft_atoi(game->tex->c->rgb[2]);
-		game->tex->c->b = ft_atoi(game->tex->c->rgb[3]);
+		game->tex->c->r = ft_atoi(game->tex->c->rgb[0]);
+		game->tex->c->g = ft_atoi(game->tex->c->rgb[1]);
+		game->tex->c->b = ft_atoi(game->tex->c->rgb[2]);
 	}
 }
 
