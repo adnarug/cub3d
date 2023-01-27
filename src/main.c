@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 13:39:59 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:55:29 by jtsizik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	if (argc != 2)
+		return (error("Error\nWrong input - check the parameters\n"));
 	init_game(&game);
 	init_mlx(&game);
 	if (args_check(&game, argc, argv) == EXIT_FAILURE)
