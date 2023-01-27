@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 16:30:04 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:59:57 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	check_miss_tex(t_game *game);
 void	check_if_path(t_game *game, char *str_spl);
 int		check_abbr(char *str);
 void	check_rgb(t_game *game);
-char	**extract_tex_rgb_helper(char **str);
+char	**extract_tex_rgb_helper(t_game *game, char **str);
 char	**dup_matrix(t_game *game);
 char	**read_map(t_game *game, char *file, int *line_count);
 int		file_linecount(char *file);
@@ -110,8 +110,9 @@ void	rays_minimap_line(t_game *game, double step);
 int		wrong_key_tex(t_game *game);
 int		free_game_prs(t_game *game);
 void	init_rgb(char **rgb);
-void	check_rgb_null(char **rgb);
-void	check_rgb_valid_char(char *rgb);
+void	check_rgb_null(t_game *game, char **rgb);
+void	check_rgb_valid_char(t_game *game, char *rgb);
+void	check_commas(t_game *game, char **rgb);
 //Err
 int		error(char *str);
 void	error_free_t_exit(t_game *game, char *str);

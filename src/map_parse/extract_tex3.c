@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 13:16:47 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/27 17:25:10 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,7 @@ void	run_extract_c(t_game *game, char **str)
 {
 	if (game->tex->ceiling_found == true)
 		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
-	game->tex->c->rgb = extract_tex_rgb_helper(str);
-	// if (ft_line_count(str) != 3)
-	// {
-	// 	printf("LINES: %d\n", ft_line_count(str));
-	// 	error_free_prs_exit(game, "Error\nMisconfigured textures\n");
-	// }
+	game->tex->c->rgb = extract_tex_rgb_helper(game, str);
 	extract_rgb(game, 'C');
 	if (game->tex->c->rgb != NULL)
 		game->tex->ceiling_found = true;
@@ -96,12 +91,7 @@ void	run_extract_f(t_game *game, char **str)
 {
 	if (game->tex->floor_found == true)
 		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
-	game->tex->f->rgb = extract_tex_rgb_helper(str);
-	// if (ft_line_count(str) != 3)
-	// {
-	// 	printf("LINES: %d\n", ft_line_count(str));
-	// 	error_free_prs_exit(game, "Error\nMisconfigured textures\n");
-	// }
+	game->tex->f->rgb = extract_tex_rgb_helper(game, str);
 	extract_rgb(game, 'F');
 	if (game->tex->f->rgb != NULL)
 		game->tex->floor_found = true;

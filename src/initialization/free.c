@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 14:54:24 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/27 17:24:35 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_2d(char **matrix)
 
 int	free_game(t_game *game, bool img_flag)
 {
+	free_2d(game->tex->c->rgb);
+	free_2d(game->tex->f->rgb);
 	free(game->tex->f);
 	free(game->tex->c);
 	free(game->tex->no_path);
@@ -56,6 +58,8 @@ int	free_game(t_game *game, bool img_flag)
 
 int	free_game_prs(t_game *game)
 {
+	free_2d(game->tex->c->rgb);
+	free_2d(game->tex->f->rgb);
 	free(game->tex->f);
 	free(game->tex->c);
 	free(game->tex->no_path);
