@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 13:27:53 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:30:48 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char	**extract_tex_rgb_helper(char **str)
 	init_rgb(rgb);
 	while (i < 4 && str[i] != NULL)
 	{
+		check_rgb_valid_char(str[i]);
 		split_res = ft_split(str[i], ',');
 		if (split_res == NULL)
 			exit(error("Error\nRGB misconfig\n"));

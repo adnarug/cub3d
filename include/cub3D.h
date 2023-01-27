@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 13:28:51 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:30:04 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int		wrong_key_tex(t_game *game);
 int		free_game_prs(t_game *game);
 void	init_rgb(char **rgb);
 void	check_rgb_null(char **rgb);
+void	check_rgb_valid_char(char *rgb);
 //Err
 int		error(char *str);
 void	error_free_t_exit(t_game *game, char *str);
