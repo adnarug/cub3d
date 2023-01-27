@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:26:59 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/27 19:32:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:37:17 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ void	check_rgb_valid_char(t_game *game, char *rgb)
 		if (ft_isdigit(rgb[i]) != 1 && rgb[i] != ' '
 			&& rgb[i] != ',' && rgb[i] != '\t' && rgb[i] != '\n')
 			error_free_prs_exit(game, "Error\nRGB misconfig1\n");
-		if (digit_found == true && ft_isdigit(rgb[i]) != 1)
-			one_number = true;
-		if (one_number == true && ft_isdigit(rgb[i]) == 1)
-			error_free_prs_exit(game, "Error\nRGB misconfig1--\n");
+		if (rgb[i + 1] != '\0' && rgb[i] == ' ' && ft_isdigit(rgb[i + 1]) == 1)
+			error_free_prs_exit(game, "Error\nRGB misconfig1\n");
 		i++;
 	}
 	if (digit_found == false)
