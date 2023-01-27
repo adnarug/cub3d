@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:05:45 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 12:01:00 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:05:06 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	check_tex_ext(t_game *game, char *ext)
 	if (ft_strncmp(game->tex->ea_path + \
 	ft_strlen(game->tex->ea_path) - len, ext, len) != 0)
 		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
-	printf("checking ext\n");
+
 }
 
 void	access_tex(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 11:51:04 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:06:01 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,9 +169,6 @@ char **extract_tex_rgb_helper(char **str)
 
 	i = 1;
 	j = 0;
-
-	printf("Input\n");
-	print_2d_array(str);
 	rgb = malloc(sizeof(char*) * 4);
 	if (rgb == NULL)
 		exit(error("Error\nMalloc failed\n"));
@@ -179,13 +176,11 @@ char **extract_tex_rgb_helper(char **str)
 	while (i < 4 && str[i] != NULL)
 	{
 		split_res = ft_split(str[i], ',');
-		printf("After split\n");
-		print_2d_array(split_res);
+
 		if (split_res == NULL)
 			exit(error("Error\nRGB misconfig\n"));
 		if (ft_line_count(split_res) == 1)
 		{
-			printf("Before strdup %d\n", i);
 			if (j == 0)
 				rgb[i - 1] = ft_strdup(split_res[0]);
 			if (j != 0)
@@ -198,18 +193,13 @@ char **extract_tex_rgb_helper(char **str)
 			while (split_res[j] != NULL)
 			{
 				rgb[i - 1] = ft_strdup(split_res[j]);
-				printf("rgb[i]: %s i: %d j: %d\n", rgb[i - 1], i, j);
 				j++;
 				i++;
 			}
-			printf("After while\n");
-			print_2d_array(rgb);
-			printf("i: %d j:%d\n",	i, j);
 		if (i - 1 != 3)
 			i = j;
 		}	
 		}
 	check_rgb_null(rgb);
-	print_2d_array(rgb);
 	return (rgb);
 }
