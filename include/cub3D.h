@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 16:59:57 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:14:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	init_player_angle(t_game *game);
 void	rays_minimap_line(t_game *game, double step);
 int		wrong_key_tex(t_game *game);
 int		free_game_prs(t_game *game);
-void	init_rgb(char **rgb);
+char	**init_rgb(t_game *game);
 void	check_rgb_null(t_game *game, char **rgb);
 void	check_rgb_valid_char(t_game *game, char *rgb);
 void	check_commas(t_game *game, char **rgb);

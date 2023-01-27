@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/25 12:54:41 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:54:18 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	init_map(t_game *game)
 		return (EXIT_FAILURE);
 	game->map->map_clean_start = find_map_start(game->map->map_raw);
 	if (game->map->map_clean_start == 0)
-		exit(error("Error\n The map file is incomplete\n"));
+		error_free_f_exit(game, "Error\nMap is invalid\n");
 	game->map->map_clean = game->map->map_raw + game->map->map_clean_start;
 	extract_tex(game);
 	game->map->max_len = find_longest(game->map->map_clean);
