@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:25:44 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/26 12:54:17 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:32:18 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ char	**dup_matrix(t_game *game)
 {
 	char	**new_map;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	new_map = malloc(sizeof(char *) * (game->map->map_clean_lines + 1));
 	if (new_map == NULL)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 10:39:42 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:32:27 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,6 @@ void	run_extraction(t_game *game)
 
 char	*extract_tex(t_game *game)
 {
-	int		i;
-
-	i = 0;
 	wrong_key_tex(game);
 	run_extraction(game);
 	check_miss_tex(game);

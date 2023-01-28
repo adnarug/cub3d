@@ -6,7 +6,7 @@
 /*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 11:26:57 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:31:30 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 	int i;
 	int	j;
 	int len;
-	bool incr_happened;
 	
 	i = 0;
 	j = 0;
@@ -90,7 +89,6 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 		error_free_prs_exit(game, "Error\nRGB misconfig\n");
 	while (str[i] != '\0' && j < 3)
 	{
-	incr_happened = false;
 		printf("c %s\n", str);
 		if (ft_isdigit(str[i]) == 0)
 			i++;
@@ -117,7 +115,6 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 		{
 			if (rgb[j] == NULL)
 				error_free_prs_exit(game, "Error\nRGB misconfig5\n");
-			incr_happened = true;
 			j++;
 		}
 		i++;

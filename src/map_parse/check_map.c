@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:15:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/24 16:59:42 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:32:52 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,8 @@ static int	check_holes(char *s)
 static int	horiz_check(char **map)
 {
 	int	i;
-	int	j;
-	int	len;
 
 	i = 0;
-	j = 0;
-	len = 0;
 	while (map[i] != NULL)
 	{
 		if (check_holes(map[i]) == EXIT_FAILURE)
@@ -53,11 +49,9 @@ static int	horiz_check(char **map)
 static char	*flip_col_to_row(char **map, int col, int last)
 {
 	int		i;
-	int		j;
 	char	*flipped;
 
 	i = 0;
-	j = 0;
 	flipped = malloc(sizeof(char) * (last + 1));
 	if (flipped == NULL)
 		return (NULL);

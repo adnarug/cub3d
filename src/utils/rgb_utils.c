@@ -6,7 +6,7 @@
 /*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:26:59 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/28 10:59:43 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:31:39 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,10 @@ char	**init_rgb(t_game *game)
 void	check_rgb_valid_char(t_game *game, char *rgb)
 {
 	int		i;
-	bool	digit_found;
-	bool	one_number;
 
 	i = 0;
-	digit_found = false;
-	one_number = false;
 	while (rgb[i] != '\0')
 	{
-		if (ft_isdigit(rgb[i]) == 1)
-			digit_found = true;
 		if (ft_isdigit(rgb[i]) != 1 && rgb[i] != ' '
 			&& rgb[i] != ',' && rgb[i] != '\t' && rgb[i] != '\n')
 			error_free_prs_exit(game, "Error\nRGB misconfig1\n");
@@ -48,11 +42,6 @@ void	check_rgb_valid_char(t_game *game, char *rgb)
 
 void	check_rgb_null(t_game *game, char **rgb)
 {
-	int	i;
-	int	no_commas;
-
-	no_commas = 0;
-	i = 0;
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
 		error_free_prs_exit(game, "Error\nRGB misconfig3\n");
 	check_rgb_valid_char(game, rgb[0]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:05:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 17:54:18 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:32:01 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,14 @@ int	find_longest(char **map)
 {
 	int	i;
 	int	max;
-	int	pos_max;
 
 	i = 0;
-	pos_max = 0;
 	max = ft_strlen(map[i]);
 	while (map[i] != NULL)
 	{
 		if (max < ft_strlen_nl(map[i]))
 		{
 			max = ft_strlen_nl(map[i]);
-			pos_max = i;
 		}
 		i++;
 	}
@@ -72,7 +69,6 @@ void	replace_nl(t_game *game, char **map)
 {
 	int		i;
 	int		max;
-	char	*string;
 
 	max = game->map->max_len;
 	i = 0;
@@ -80,7 +76,6 @@ void	replace_nl(t_game *game, char **map)
 	{
 		if (ft_strlen(map[i]) == max)
 			map[i][max - 1] = '-';
-		string = map[i];
 		i++;
 	}
 }
@@ -88,10 +83,8 @@ void	replace_nl(t_game *game, char **map)
 int	init_map(t_game *game)
 {
 	int		line_count;
-	char	**clean_map;
 
 	line_count = 1;
-	clean_map = NULL;
 	game->map->map_raw = read_map(game, game->map->path, &line_count);
 	if (game->map->map_raw == NULL)
 		return (EXIT_FAILURE);
