@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:44:29 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 12:03:21 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:02:38 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ static int	check_file_extension(char **argv)
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
 	{
 		write(2, "Error\nWrong file extension - check the parameters\n", 50);
-		exit(1);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	args_check(t_game *game, int argc, char **argv)
+int	args_check(int argc, char **argv)
 {
 	if (args_num(argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_file_extension(argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	game->map->path = argv[1];
 	return (EXIT_SUCCESS);
 }

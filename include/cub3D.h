@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 12:55:25 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:20:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define MINIMAP_SCALE	5
 # define MINIMAP_SCOPE	10
 
-int		args_check(t_game *data, int argc, char **argv);
+int		args_check(int argc, char **argv);
 int		init_map(t_game *game);
 char	*extract_tex(t_game *game);
 int		map_isvalid(t_game *game);
@@ -86,7 +86,8 @@ void	run_extract_tex_we(t_game *game, char *str);
 void	run_extract_c(t_game *game, char **str, char *one_str);
 void	run_extract_f(t_game *game, char **str, char *one_str);
 void	extract_hex_color(t_game *game);
-void	extract_rgb(t_game *game, char c);
+void	extract_rgb_c(t_game *game, char c);
+void	extract_rgb_f(t_game *game, char f);
 char	*extract_tex(t_game *game);
 void	access_tex(t_game *game);
 void	check_tex_ext(t_game *game, char *ext);

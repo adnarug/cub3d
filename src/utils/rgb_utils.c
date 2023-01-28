@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:26:59 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/28 12:54:27 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:24:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	**init_rgb(t_game *game)
 {
-	char	**rgb;
-
 	rgb = malloc(sizeof(char *) * 4);
 	if (rgb == NULL)
 		error_free_prs_exit(game, "Error\nRGB misconfig\n");

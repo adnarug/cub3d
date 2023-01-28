@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 12:53:53 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:27:07 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,15 @@ int	dup_values(char **rgb, char **split_res, int i, int j)
 
 char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 {
-	char **rgb;
-	int i;
-	int	j;
-	int len;
+	char	**rgb;
+	int		i;
+	int		j;
+	int		len;
 
 	i = 0;
 	j = 0;
+	rgb = init_rgb(game);
 	check_commas(game, d_str);
-	rgb = malloc(sizeof(char *) * 4);
-	rgb[0] = NULL;
-	rgb[1] = NULL;
-	rgb[2] = NULL;
-	rgb[3] = NULL;
-	if (rgb == NULL)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
 	while (str[i] != '\0' && j < 3)
 	{
 		if (ft_isdigit(str[i]) == 0)
