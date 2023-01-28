@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtsizik <jtsizik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:05:45 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 13:22:57 by jtsizik          ###   ########.fr       */
+/*   Updated: 2023/01/28 11:09:44 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	check_if_path(t_game *game, char *str_spl)
 
 void	check_miss_tex(t_game *game)
 {
+	printf("f r%d\n", game->tex->f->r);
+	printf("f g%d\n", game->tex->f->g);
+	printf("f b%d\n", game->tex->f->b);
+	printf("c r%d\n", game->tex->c->r);
+	printf("c g%d\n", game->tex->c->g);
+	printf("c b%d\n", game->tex->c->b);
 	if (game->tex->no_path == NULL || game->tex->so_path == NULL || \
 		game->tex->ea_path == NULL || game->tex->we_path == NULL)
 	{
