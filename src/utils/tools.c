@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 12:48:23 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:53:53 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 	rgb[2] = NULL;
 	rgb[3] = NULL;
 	if (rgb == NULL)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
+		error_free_prs_exit(game, "Error\nRGB misconfig\n");
 	while (str[i] != '\0' && j < 3)
 	{
 		if (ft_isdigit(str[i]) == 0)
@@ -90,7 +90,7 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 		while (str[i] != '\0' && str[i] != ',')
 		{
 			if(ft_isdigit(str[i]) == 1)
-				error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
+				error_free_prs_exit(game, "Error\nRGB misconfig\n");
 			i++;
 		}
 		if (j == 2)
@@ -99,7 +99,7 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 		if (str[i] == ',')
 		{
 			if (rgb[j] == NULL)
-				error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
+				error_free_prs_exit(game, "Error\nRGB misconfig\n");
 			j++;
 		}
 		i++;

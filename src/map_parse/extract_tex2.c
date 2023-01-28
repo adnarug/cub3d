@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:05:45 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 12:48:37 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:55:33 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	check_abbr(char *str)
 void	check_if_path(t_game *game, char *str_spl)
 {
 	if (!str_spl || !str_spl[0])
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (str_spl && ft_strchr(str_spl, '/') == NULL)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (str_spl && ft_strchr(str_spl, '.') == NULL)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 }
 
 void	check_miss_tex(t_game *game)
@@ -62,16 +62,16 @@ void	check_tex_ext(t_game *game, char *ext)
 	len = ft_strlen(ext);
 	if (ft_strncmp(game->tex->no_path + \
 		ft_strlen(game->tex->no_path) - len, ext, len) != 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (ft_strncmp(game->tex->so_path + \
 	ft_strlen(game->tex->so_path) - len, ext, len) != 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (ft_strncmp(game->tex->we_path + \
 	ft_strlen(game->tex->we_path) - len, ext, len) != 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	if (ft_strncmp(game->tex->ea_path + \
 	ft_strlen(game->tex->ea_path) - len, ext, len) != 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 }
 
 void	access_tex(t_game *game)
@@ -80,22 +80,22 @@ void	access_tex(t_game *game)
 
 	fd = open(game->tex->no_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	else
 		close(fd);
 	fd = open(game->tex->so_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	else
 		close(fd);
 	fd = open(game->tex->we_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	else
 		close(fd);
 	fd = open(game->tex->ea_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+		error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 	else
 		close(fd);
 }

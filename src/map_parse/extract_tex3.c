@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 12:36:42 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:54:38 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	wrong_key_tex(t_game *game)
 		if (str_spl && str_spl[0] && ft_isalnum(*str_spl[0]) == 1)
 		{
 			if (check_validity(str_spl[0]) == EXIT_FAILURE)
-				error_free_prs_exit(game, "Error\nMap file is misconfigured\n", false);
+				error_free_prs_exit(game, "Error\nMap file is misconfigured\n");
 		}
 		free_2d(str_spl);
 		j++;
@@ -80,7 +80,7 @@ char	*extract_tex_helper(t_game *game, char *str_raw)
 void	run_extract_c(t_game *game, char **str, char *one_str)
 {
 	if (game->tex->ceiling_found == true)
-		error_free_prs_exit(game, "Error\nDuplicate textures input\n", false);
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
 	game->tex->c->rgb = extract_tex_rgb_helper(game, str, one_str);
 	extract_rgb(game, 'C');
 	if (game->tex->c->rgb != NULL)
@@ -90,7 +90,7 @@ void	run_extract_c(t_game *game, char **str, char *one_str)
 void	run_extract_f(t_game *game, char **str, char *one_str)
 {
 	if (game->tex->floor_found == true)
-		error_free_prs_exit(game, "Error\nDuplicate textures input\n", false);
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
 	game->tex->f->rgb = extract_tex_rgb_helper(game, str, one_str);
 	extract_rgb(game, 'F');
 	if (game->tex->f->rgb != NULL)

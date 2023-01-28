@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:22:27 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 12:37:02 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:55:41 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	run_extract_tex_no(t_game *game, char *str)
 	int	fd;
 
 	if (game->tex->north_found == true)
-		error_free_prs_exit(game, "Error\nDuplicate textures input\n", false);
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
 	game->tex->no_path = extract_tex_helper(game, str);
 	fd = open(game->tex->no_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n", false);
+		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n");
 	else
 		close(fd);
 	if (game->tex->no_path != NULL)
@@ -33,11 +33,11 @@ void	run_extract_tex_so(t_game *game, char *str)
 	int	fd;
 
 	if (game->tex->south_found == true)
-		error_free_prs_exit(game, "Error\nDuplicate textures input\n", false);
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
 	game->tex->so_path = extract_tex_helper(game, str);
 	fd = open(game->tex->so_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n", false);
+		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n");
 	else
 		close(fd);
 	if (game->tex->so_path != NULL)
@@ -49,11 +49,11 @@ void	run_extract_tex_we(t_game *game, char *str)
 	int	fd;
 
 	if (game->tex->west_found == true)
-		error_free_prs_exit(game, "Error\nDuplicate textures input\n", false);
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
 	game->tex->we_path = extract_tex_helper(game, str);
 	fd = open(game->tex->we_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n", false);
+		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n");
 	else
 		close(fd);
 	if (game->tex->we_path != NULL)
@@ -65,11 +65,11 @@ void	run_extract_tex_ea(t_game *game, char *str)
 	int	fd;
 
 	if (game->tex->east_found == true)
-		error_free_prs_exit(game, "Error\nDuplicate textures input\n", false);
+		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
 	game->tex->ea_path = extract_tex_helper(game, str);
 	fd = open(game->tex->ea_path, O_RDONLY);
 	if (fd < 0)
-		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n",false);
+		error_free_prs_exit(game, "Error\nCould not access texture file(s)\n");
 	else
 		close(fd);
 	if (game->tex->ea_path != NULL)
