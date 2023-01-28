@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:54:19 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 17:25:10 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:40:28 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,21 @@ char	*extract_tex_helper(t_game *game, char *str_raw)
 	return (tex);
 }
 
-void	run_extract_c(t_game *game, char **str)
+void	run_extract_c(t_game *game, char **str, char *one_str)
 {
 	if (game->tex->ceiling_found == true)
 		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
-	game->tex->c->rgb = extract_tex_rgb_helper(game, str);
+	game->tex->c->rgb = extract_tex_rgb_helper(game, str, one_str);
 	extract_rgb(game, 'C');
 	if (game->tex->c->rgb != NULL)
 		game->tex->ceiling_found = true;
 }
 
-void	run_extract_f(t_game *game, char **str)
+void	run_extract_f(t_game *game, char **str, char *one_str)
 {
 	if (game->tex->floor_found == true)
 		error_free_prs_exit(game, "Error\nDuplicate textures input\n");
-	game->tex->f->rgb = extract_tex_rgb_helper(game, str);
+	game->tex->f->rgb = extract_tex_rgb_helper(game, str, one_str);
 	extract_rgb(game, 'F');
 	if (game->tex->f->rgb != NULL)
 		game->tex->floor_found = true;

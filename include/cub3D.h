@@ -6,7 +6,7 @@
 /*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 10:09:31 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:30:17 by pasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	run_extract_tex_no(t_game *game, char *str);
 void	run_extract_tex_so(t_game *game, char *str);
 void	run_extract_tex_ea(t_game *game, char *str);
 void	run_extract_tex_we(t_game *game, char *str);
-void	run_extract_c(t_game *game, char **str);
-void	run_extract_f(t_game *game, char **str);
+void	run_extract_c(t_game *game, char **str, char *one_str);
+void	run_extract_f(t_game *game, char **str, char *one_str);
 void	extract_hex_color(t_game *game);
 void	extract_rgb(t_game *game, char c);
 char	*extract_tex(t_game *game);
@@ -94,7 +94,7 @@ void	check_miss_tex(t_game *game);
 void	check_if_path(t_game *game, char *str_spl);
 int		check_abbr(char *str);
 void	check_rgb(t_game *game);
-char	**extract_tex_rgb_helper(t_game *game, char **str);
+char	**extract_tex_rgb_helper(t_game *game, char **str, char *one_str);
 char	**dup_matrix(t_game *game);
 char	**read_map(t_game *game, char *file, int *line_count);
 int		file_linecount(char *file);
