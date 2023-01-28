@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:47:36 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 19:23:19 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:39:24 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	free_game(t_game *game, bool img_flag)
 	return (EXIT_SUCCESS);
 }
 
-int	free_game_prs(t_game *game)
+int	free_game_prs(t_game *game, bool flag)
 {
 	free(game->tex->f);
 	free(game->tex->c);

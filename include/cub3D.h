@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 10:30:17 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 12:47:47 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	check_tex_ext(t_game *game, char *ext);
 void	check_miss_tex(t_game *game);
 void	check_if_path(t_game *game, char *str_spl);
 int		check_abbr(char *str);
-void	check_rgb(t_game *game);
 char	**extract_tex_rgb_helper(t_game *game, char **str, char *one_str);
 char	**dup_matrix(t_game *game);
 char	**read_map(t_game *game, char *file, int *line_count);
@@ -107,14 +106,15 @@ int		assign_player(t_game *game, int i, int j, int *one_pl_found);
 void	init_player_angle(t_game *game);
 void	rays_minimap_line(t_game *game, double step);
 int		wrong_key_tex(t_game *game);
-int		free_game_prs(t_game *game);
+int		free_game_prs(t_game *game, bool flag);
 char	**init_rgb(t_game *game);
+void	rgb_check(t_game *game);
 void	check_rgb_null(t_game *game, char **rgb);
-void	check_rgb_valid_char(t_game *game, char *rgb);
+void	check_rgb_valid_char(t_game *game, char  *rgb);
 void	check_commas(t_game *game, char **rgb);
 //Err
 int		error(char *str);
 void	error_free_t_exit(t_game *game, char *str);
 void	error_free_f_exit(t_game *game, char *str);
-void	error_free_prs_exit(t_game *game, char *str);
+void	error_free_prs_exit(t_game *game, char *str, bool flag);
 #endif

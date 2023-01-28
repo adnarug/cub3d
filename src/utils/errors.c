@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:46:48 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 17:57:38 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:36:25 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	error_free_t_exit(t_game *game, char *str)
 	exit(1);
 }
 
-void	error_free_prs_exit(t_game *game, char *str)
+void	error_free_prs_exit(t_game *game, char *str, bool flag)
 {
 	write(2, str, ft_strlen(str));
-	free_game_prs(game);
+	free_game_prs(game, flag);
 	system("leaks cub3D");
 	exit(1);
 }

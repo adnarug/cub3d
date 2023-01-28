@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:01:15 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/27 17:25:00 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:43:43 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	init_mlx(&game);
 	if (args_check(&game, argc, argv) == EXIT_FAILURE)
 	{
-		free_game_prs(&game);
+		free_game_prs(&game, false);
 		system("leaks cub3D");
 		exit(1);
 	}

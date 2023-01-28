@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 11:31:30 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 12:48:23 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,6 @@ int	dup_values(char **rgb, char **split_res, int i, int j)
 	i++;
 	return (i);
 }
-void print_2d(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array[i] != NULL)
-	{
-		printf("%s\n", array[i]);
-		i++;
-	}
-}
 
 char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 {
@@ -76,7 +65,7 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 	int i;
 	int	j;
 	int len;
-	
+
 	i = 0;
 	j = 0;
 	check_commas(game, d_str);
@@ -86,10 +75,9 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 	rgb[2] = NULL;
 	rgb[3] = NULL;
 	if (rgb == NULL)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 	while (str[i] != '\0' && j < 3)
 	{
-		printf("c %s\n", str);
 		if (ft_isdigit(str[i]) == 0)
 			i++;
 		if (ft_isdigit(str[i]) == 1)
@@ -98,14 +86,11 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 			while (ft_isdigit(str[i + len]) == 1)
 				len++;
 			rgb[j] = ft_substr(str, i, len);
-		
-		printf("res %s j: %d\n", rgb[j], j);
 			i += len;
-			
 		while (str[i] != '\0' && str[i] != ',')
 		{
 			if(ft_isdigit(str[i]) == 1)
-				error_free_prs_exit(game, "Error\nRGB misconfig2\n");
+				error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 			i++;
 		}
 		if (j == 2)
@@ -114,41 +99,11 @@ char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
 		if (str[i] == ',')
 		{
 			if (rgb[j] == NULL)
-				error_free_prs_exit(game, "Error\nRGB misconfig5\n");
+				error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 			j++;
 		}
 		i++;
 	}
-	printf("check\n");
 	check_rgb_null(game, rgb);
-	print_2d(rgb);
 	return (rgb);
 }
-// char	**extract_tex_rgb_helper(t_game *game, char **str)
-// {
-// 	char	**rgb;
-// 	char	**split_res;
-// 	int		i;
-// 	int		j;
-
-// 	i = 1;
-// 	j = 0;
-// 	rgb = init_rgb(game);
-// 	check_commas(game, str);
-// 	while (i < 4 && str[i] != NULL)
-// 	{
-// 		split_res = ft_split(str[i], ',');
-// 		if (ft_line_count(split_res) == 1)
-// 			i = dup_values(rgb, split_res, i, j);
-// 		else
-// 		{
-// 			while (split_res[j] != NULL)
-// 				rgb[i++ - 1] = ft_strdup(split_res[j++]);
-// 			if (i - 1 != 3)
-// 				i = j;
-// 			free_2d(split_res);
-// 		}	
-// 	}
-// 	check_rgb_null(game, rgb);
-// 	return (rgb);
-// }

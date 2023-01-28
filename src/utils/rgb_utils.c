@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:26:59 by jtsizik           #+#    #+#             */
-/*   Updated: 2023/01/28 11:31:39 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 12:47:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**init_rgb(t_game *game)
 
 	rgb = malloc(sizeof(char *) * 4);
 	if (rgb == NULL)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 	rgb[0] = NULL;
 	rgb[1] = NULL;
 	rgb[2] = NULL;
@@ -35,7 +35,7 @@ void	check_rgb_valid_char(t_game *game, char *rgb)
 	{
 		if (ft_isdigit(rgb[i]) != 1 && rgb[i] != ' '
 			&& rgb[i] != ',' && rgb[i] != '\t' && rgb[i] != '\n')
-			error_free_prs_exit(game, "Error\nRGB misconfig1\n");
+			error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 		i++;
 	}
 }
@@ -43,7 +43,7 @@ void	check_rgb_valid_char(t_game *game, char *rgb)
 void	check_rgb_null(t_game *game, char **rgb)
 {
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
-		error_free_prs_exit(game, "Error\nRGB misconfig3\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 	check_rgb_valid_char(game, rgb[0]);
 	check_rgb_valid_char(game, rgb[1]);
 	check_rgb_valid_char(game, rgb[2]);
@@ -71,21 +71,21 @@ void	check_commas(t_game *game, char **rgb)
 		i++;
 	}
 	if (no_commas != 2)
-		error_free_prs_exit(game, "Error\nRGB misconfig7\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", false);
 }
 
-void	check_rgb(t_game *game)
+void	rgb_check(t_game *game)
 {
 	if (game->tex->c->r < 0 || game->tex->c->r > 255)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", true);
 	if (game->tex->c->g < 0 || game->tex->c->g > 255)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", true);
 	if (game->tex->c->b < 0 || game->tex->c->b > 255)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", true);
 	if (game->tex->f->r < 0 || game->tex->f->r > 255)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", true);
 	if (game->tex->f->g < 0 || game->tex->f->g > 255)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", true);
 	if (game->tex->f->b < 0 || game->tex->f->b > 255)
-		error_free_prs_exit(game, "Error\nRGB misconfig\n");
+		error_free_prs_exit(game, "Error\nRGB misconfig\n", true);
 }

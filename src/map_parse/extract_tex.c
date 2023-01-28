@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pasha <pasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:50:32 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 11:32:27 by pasha            ###   ########.fr       */
+/*   Updated: 2023/01/28 12:51:11 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	check_n_extract(t_game *game, char **str, char *one_str)
 		run_extract_f(game, str, one_str);
 	if (ft_strncmp (str[0], "C", 1) == 0)
 		run_extract_c(game, str, one_str);
+	rgb_check(game);
 }
 
 void	run_extraction(t_game *game)
@@ -84,7 +85,6 @@ char	*extract_tex(t_game *game)
 	run_extraction(game);
 	check_miss_tex(game);
 	check_tex_ext(game, ".xpm42");
-	check_rgb(game);
 	load_textures(game);
 	return (NULL);
 }
