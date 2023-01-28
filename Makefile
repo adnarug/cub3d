@@ -2,8 +2,11 @@ NAME = cub3D
 SRC_DIR = src/
 OBJ_DIR = obj/
 FLAGS = -Wall -Wextra #-fsanitize=address #-Werror
+LIB = -I /home/pasha/Desktop/42home_office/cub3d/lib/include/MLX42/MLX42.h
+CUB = -I /home/pasha/Desktop/42home_office/cub3d/include/cub3D.h
 LIBMLX = lib/libmlx42.a
 LIBS = $(LIBMLX) -lglfw -L $$HOME/.brew/Cellar/glfw/3.3.8/lib/ -framework OpenGL -framework AppKit
+LIBLIN = -ldl -lglfw -pthread -lm
 LIBFT = libft/
 CC = gcc
 SRC_FILES = utils/args_check \
@@ -43,7 +46,7 @@ OBJF = .cache_exists
 
 $(NAME): $(OBJ)
 	@make -C libft/
-	@$(CC) $(FLAGS) $(LIBS) $(LIBFT)/libft.a $(OBJ) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(LIB) $(LIBMLX) $(LIBLIN) $(CUB) $(LIBFT)/libft.a -o $(NAME)
 	@echo "$(GREEN)cub3D compiled$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c | $(OBJF)
