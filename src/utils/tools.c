@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:03:21 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 13:27:07 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 14:23:41 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,45 +59,28 @@ int	dup_values(char **rgb, char **split_res, int i, int j)
 	return (i);
 }
 
-char	**extract_tex_rgb_helper(t_game *game, char **d_str, char *str)
+void	extract_tex_rgb_helper(t_game *game, char **rgb, char *str)
 {
-	char	**rgb;
 	int		i;
 	int		j;
-	int		len;
 
 	i = 0;
 	j = 0;
-	rgb = init_rgb(game);
-	check_commas(game, d_str);
-	while (str[i] != '\0' && j < 3)
+	while (str[i++] != '\0' && j < 3)
 	{
-		if (ft_isdigit(str[i]) == 0)
-			i++;
 		if (ft_isdigit(str[i]) == 1)
 		{
-			len = 0;
-			while (ft_isdigit(str[i + len]) == 1)
-				len++;
-			rgb[j] = ft_substr(str, i, len);
-			i += len;
-		while (str[i] != '\0' && str[i] != ',')
-		{
-			if(ft_isdigit(str[i]) == 1)
-				error_free_prs_exit(game, "Error\nRGB misconfig\n");
-			i++;
-		}
-		if (j == 2)
-			break ;
+			rgb[j] = ft_substr(str, i, iter_loop(str, i));
+			i += iter_loop(str, i);
+			i = check_extra_digits(game, str, i);
+			if (j == 2)
+				break ;
 		}
 		if (str[i] == ',')
 		{
 			if (rgb[j] == NULL)
-				error_free_prs_exit(game, "Error\nRGB misconfig\n");
+				error_free_prs_exit(game, "Error\nRGB misconfig1\n");
 			j++;
 		}
-		i++;
 	}
-	check_rgb_null(game, rgb);
-	return (rgb);
 }

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 10:44:52 by pguranda          #+#    #+#             */
-/*   Updated: 2023/01/28 13:20:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2023/01/28 14:23:48 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ void	run_extract_tex_we(t_game *game, char *str);
 void	run_extract_c(t_game *game, char **str, char *one_str);
 void	run_extract_f(t_game *game, char **str, char *one_str);
 void	extract_hex_color(t_game *game);
-void	extract_rgb_c(t_game *game, char c);
-void	extract_rgb_f(t_game *game, char f);
+void	extract_rgb_c(t_game *game);
+void	extract_rgb_f(t_game *game);
 char	*extract_tex(t_game *game);
 void	access_tex(t_game *game);
 void	check_tex_ext(t_game *game, char *ext);
 void	check_miss_tex(t_game *game);
 void	check_if_path(t_game *game, char *str_spl);
 int		check_abbr(char *str);
-char	**extract_tex_rgb_helper(t_game *game, char **str, char *one_str);
+void	extract_tex_rgb_helper(t_game *game, char **rgb, char *one_str);
 char	**dup_matrix(t_game *game);
 char	**read_map(t_game *game, char *file, int *line_count);
 int		file_linecount(char *file);
@@ -113,6 +113,8 @@ void	rgb_check(t_game *game);
 void	check_rgb_null(t_game *game, char **rgb);
 void	check_rgb_valid_char(t_game *game, char  *rgb);
 void	check_commas(t_game *game, char **rgb);
+int		check_extra_digits(t_game *game, char *str, int i);
+int		iter_loop(char *str, int i);
 //Err
 int		error(char *str);
 void	error_free_t_exit(t_game *game, char *str);

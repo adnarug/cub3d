@@ -13,6 +13,7 @@ SRC_FILES = utils/args_check \
 			utils/errors \
 			utils/tools \
 			utils/rgb_utils \
+			utils/rgb_utils2 \
 			map_parse/init_map \
 			map_parse/init_map2 \
 			map_parse/init_map3 \
